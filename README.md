@@ -4,7 +4,7 @@
 
 ## Kiss Levente és Péter Máté
 
-Az oldalra felhasználók tölthetnek fel hirdetéseket, amelyekben egy termék megvásárlására és annak adott címre és időpontra való kiszállítására keresnek vállalkozókat általa előre meghatározott áron. Bármely beszerző elfogadhatja az ajánlatot, ezután az adott terméket megvásárolva és leszállítva a vevőnek megkapja a kiírt összeget.
+Az oldalra felhasználók tölthetnek fel hirdetéseket, amelyekben egy termék megvásárlására és annak adott címre és időpontra való kiszállítására keresnek vállalkozókat egy általuk  előre meghatározott áron. Bármely beszerző elfogadhatja az ajánlatot, ezután az adott terméket megvásárolva és leszállítva a vevőnek megkapja a kiírt összeget.
 
 ## Tartalomjegyzék
 * Funkcionális követelmények
@@ -32,4 +32,4 @@ Az oldal célja hogy a hírdetés feladója utánajárás nélkül, biztonságos
 |----------|----------------------------|
 | Látogató | Böngészheti a kirakott hirdetéseket |
 | Felhasználó | Hirdetést adhat fel, vagy kirakott ajánlatot fogadhat el. Pénzt tud befizetni, vagy kivenni. |
-| Admin    | Egy kitüntetett szerepkörrel rendelkező felhasználó aki látja az összes megrendelést, és ha úgy van tudja törölni azokat, avagy a jogosulatlan kifizetéseket kezelni és visszaállítani. |
+| Admin    | Egy kitüntetett szerepkörrel rendelkező felhasználó aki látja az összes megrendelést, és tudja törölni azokat.Ha jogosulatlan kifizetés történt lehetősége van visszaállítani azt. |
