@@ -4,16 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.springframework.data.repository.cdi.Eager;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "USERS")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Users extends BaseEntity{
+public class User extends BaseEntity{
+    @Id
+    @Column(name = "USER_ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id;
+
     @Column(nullable = false, unique = true)
     private String username;
 
@@ -24,10 +30,25 @@ public class Users extends BaseEntity{
     private float rating;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false)
     private Role role;
+
+    @Column
+    private int balance;
 
     private enum Role{
         ADMIN,USER,GUEST
     }
+
+    @JoinColumn
+    @OneToMany(targetEntity = Ad.class)
+    private List<Ad> ads;
+
+    @JoinColumn
+    @OneToMany(targetEntity = Payment.class)
+    private List<Payment> payments;
+
+    @JoinColumn
+    @OneToMany(targetEntity = Rating.class)
+    private List<Rating> ratings;
 }
