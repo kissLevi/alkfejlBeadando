@@ -31,13 +31,18 @@ public class User extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role;
+    private Role role = Role.USER;
 
     @Column
     private int balance;
 
-    private enum Role{
+    public enum Role{
         ADMIN,USER,GUEST
+    }
+
+    
+    public String getPublicData(){
+        return "Frida";
     }
 
     @JoinColumn

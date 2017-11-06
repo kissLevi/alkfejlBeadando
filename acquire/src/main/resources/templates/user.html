@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1>Users</h1>
+        <ul>
+            <li th:each="user : ${users}">
+                <span th:text="${user.getUsername()}"></span>
+                :
+                <span th:text="${user.getRating()}"></span>
+            </li>
+        </ul>
+    </body>
+</html>
