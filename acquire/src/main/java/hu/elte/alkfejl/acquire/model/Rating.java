@@ -15,14 +15,14 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 public class Rating extends BaseEntity{
     @JoinColumn(name = "RATER_ID")
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class,optional = false)
     private int rater_id;
 
     @JoinColumn(name = "RATED_ID")
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class,optional = false)
     private int rated_id;
 
-    @OneToOne(fetch=FetchType.LAZY)
+    @OneToOne(fetch=FetchType.LAZY,optional = false)
     @JoinColumn(name="AD_ID")
     private Ad ad_id;
 

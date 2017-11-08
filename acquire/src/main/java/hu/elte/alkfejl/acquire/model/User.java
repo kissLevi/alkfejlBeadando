@@ -36,15 +36,15 @@ public class User extends BaseEntity{
         ADMIN,USER,GUEST
     }
 
-    @JoinColumn
-    @OneToMany(targetEntity = Ad.class)
+//    @JoinColumn
+    @OneToMany(targetEntity = Ad.class,mappedBy = "costumer_id")
     private List<Ad> ads;
 
-    @JoinColumn
-    @OneToMany(targetEntity = Payment.class)
+    //@JoinColumn
+    @OneToMany(targetEntity = Payment.class,mappedBy = "payer_id")
     private List<Payment> payments;
 
-    @JoinColumn
-    @OneToMany(targetEntity = Rating.class)
+    //@JoinColumn
+    @OneToMany(targetEntity = Rating.class,mappedBy = "rated_id")
     private List<Rating> ratings;
 }

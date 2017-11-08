@@ -29,7 +29,7 @@ public class Ad extends BaseEntity {
     private Date deadline;
 
     @JoinColumn(name = "COSTUMER_ID")
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class,optional = false)
     private User costumer_id;
 
     @JoinColumn(name = "DELIVER_ID")

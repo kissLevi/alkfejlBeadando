@@ -15,15 +15,14 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 public class Payment extends BaseEntity {
     @JoinColumn(name = "PAYER_ID")
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class,optional = false)
     private int payer_id;
     
     @JoinColumn(name = "RECIEVER_ID")
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class,optional = false)
     private int reciever_id;
  
-    @OneToOne(fetch=FetchType.LAZY)
- 
+    @OneToOne(fetch=FetchType.LAZY,optional = false)
     @JoinColumn(name="AD_ID")
     private Ad ad_id;
  
