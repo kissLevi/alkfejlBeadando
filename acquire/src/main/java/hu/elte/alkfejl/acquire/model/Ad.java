@@ -15,10 +15,6 @@ import java.util.Date;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Ad extends BaseEntity {
-    @Id
-    @Column(name = "AD_ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
 
     @Column(nullable = false)
     private String description;

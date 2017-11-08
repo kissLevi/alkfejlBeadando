@@ -15,10 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity{
-    @Id
-    @Column(name = "USER_ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
 
     @Column(nullable = false, unique = true)
     private String username;

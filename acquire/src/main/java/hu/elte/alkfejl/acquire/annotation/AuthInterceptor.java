@@ -19,20 +19,20 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     private SessionService sessionService;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        // handle OPTION methods
+        if (!(handler instanceof HandlerMethod)) {
+            return true;
+        }
         List<User.Role> routeRoles = getRoles((HandlerMethod) handler);
         User user = sessionService.getCurrentUser();
 
         // when there are no restrictions, we let the user through
-        if((routeRoles.contains(User.Role.GUEST) && !routeRoles.contains(User.Role.ADMIN) && !routeRoles.contains(User.Role.USER)) && (user == null || (user != null && user.getRole()!= User.Role.ADMIN && user.getRole()!=User.Role.USER))){
-             return true;
+        if (routeRoles.isEmpty() || routeRoles.contains(User.Role.GUEST)) {
+            return true;
         }
-           
-//        if (routeRoles.isEmpty() || routeRoles.contains(User.Role.GUEST) && user.getRole() && !routeRoles.contains(User.Role.USER) ) {
-//            return true;
-//        }
         // check role
-        else if (user != null && routeRoles.contains(user.getRole())) {
+        if (sessionService.getCurrentUser() != null && routeRoles.contains(user.getRole())) {
             return true;
         }
         response.setStatus(401);
