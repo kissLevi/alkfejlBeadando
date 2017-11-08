@@ -35,16 +35,21 @@ public class User extends BaseEntity{
     public enum Role{
         ADMIN,USER,GUEST
     }
+    
+    public String toString(){
+        return "{"+ "\"username\": \"" + username + "\",\"rating\": " + rating +"}";
+    }
 
 //    @JoinColumn
-    @OneToMany(targetEntity = Ad.class,mappedBy = "costumer_id")
+//    @OneToMany(targetEntity = Ad.class,mappedBy = "costumer_id")
+    @OneToMany(mappedBy = "costumer_id",fetch = FetchType.LAZY)
     private List<Ad> ads;
 
-    //@JoinColumn
-    @OneToMany(targetEntity = Payment.class,mappedBy = "payer_id")
-    private List<Payment> payments;
-
-    //@JoinColumn
-    @OneToMany(targetEntity = Rating.class,mappedBy = "rated_id")
+//    //@JoinColumn
+//    @OneToMany(targetEntity = Payment.class,mappedBy = "payer_id")
+//    private List<Payment> payments;
+//
+//    //@JoinColumn
+    @OneToMany(mappedBy = "rated_id",fetch = FetchType.LAZY)
     private List<Rating> ratings;
 }

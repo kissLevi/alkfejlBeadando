@@ -12,6 +12,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Query("select u.username as usename, u.rating from User u")
     List<User> listPublicUserData();
     
+    Optional<User> findById(Long id);
     
 //    @Query("SELECT USERNAME,RATING FROM USER")
 //    List<User> listPublicUserData();

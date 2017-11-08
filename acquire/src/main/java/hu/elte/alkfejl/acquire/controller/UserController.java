@@ -2,7 +2,11 @@
 package hu.elte.alkfejl.acquire.controller;
 
 import hu.elte.alkfejl.acquire.annotation.Role;
+import hu.elte.alkfejl.acquire.model.Ad;
+import hu.elte.alkfejl.acquire.model.Rating;
 import hu.elte.alkfejl.acquire.model.User;
+import hu.elte.alkfejl.acquire.repository.AdvertisementRepository;
+import hu.elte.alkfejl.acquire.repository.RatingRepository;
 import hu.elte.alkfejl.acquire.repository.UserRepository;
 import hu.elte.alkfejl.acquire.service.SessionService;
 import java.util.List;
@@ -13,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +30,12 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private SessionService sessionService;
+    @Autowired
+    private RatingRepository ratings;
     
+    @Autowired
+    private AdvertisementRepository repo;
+
     
     @Role({User.Role.GUEST})
     @PostMapping("/registrate")
@@ -62,9 +72,43 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
     
-    @Role({User.Role.ADMIN, User.Role.USER})
+    //@Role({User.Role.ADMIN, User.Role.USER})
     @GetMapping("/users")
-    public ResponseEntity<Iterable<User>> getUsers(){
-        return ResponseEntity.ok(userRepository.listPublicUserData());
+    public ResponseEntity getUsers(){
+        return ResponseEntity.ok(userRepository.findAll());
     }
+    
+    @GetMapping("/users/{userID}")
+    public ResponseEntity getUser(@PathVariable int userID){
+        Optional<User> user = userRepository.findById(new Long(userID));
+        if(user.isPresent()){
+            return ResponseEntity.ok(userRepository.findOne(new Long(userID)).toString());
+        }
+        else{
+            return ResponseEntity.badRequest().build();
+        }
+        
+    }
+    @GetMapping("/users/{userID}/ads")
+    public ResponseEntity getAdsOfUser(@PathVariable int userID){
+        Optional<User> user = userRepository.findById(new Long(userID));
+        if(user.isPresent()){
+            return ResponseEntity.ok(userRepository.findOne(new Long(userID)).getAds());
+        }
+        else{
+            return ResponseEntity.badRequest().build();
+        }
+    }
+    @GetMapping("/users/{userID}/ratings")
+    public ResponseEntity getRatingsOfUser(@PathVariable int userID){
+        Optional<User> user = userRepository.findById(new Long(userID));
+        if(user.isPresent()){
+            return ResponseEntity.ok(userRepository.findOne(new Long(userID)).getRatings());
+        }
+        else{
+            return ResponseEntity.badRequest().build();
+        }
+    }
+    
+    
 }

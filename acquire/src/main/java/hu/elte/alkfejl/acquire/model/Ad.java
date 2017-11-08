@@ -29,11 +29,13 @@ public class Ad extends BaseEntity {
     private Date deadline;
 
     @JoinColumn(name = "COSTUMER_ID")
-    @ManyToOne(targetEntity = User.class,optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private User costumer_id;
+    
+    
 
     @JoinColumn(name = "DELIVER_ID")
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne
     private User deliver_id;
 
     @Enumerated(EnumType.STRING)
@@ -44,9 +46,21 @@ public class Ad extends BaseEntity {
         PENDING,ACCEPTED,DELETED
     }
 
-    @OneToOne(fetch=FetchType.LAZY, mappedBy="ad_id")
-    private Payment payment;
+//    @OneToOne(fetch=FetchType.LAZY, mappedBy="ad_id")
+//    private Payment payment;
+//
 
     @OneToOne(fetch=FetchType.LAZY, mappedBy="ad_id")
-    private Rating rating;
+    private Rating rating_id;
+    
+    public Long getRating_id(){
+        return rating_id.getId();
+    }
+    
+    public Long getCostumer_id(){
+        return costumer_id.getId();
+    }
+    public Long getDeliver_id(){
+        return deliver_id.getId();
+    }
 }

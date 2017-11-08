@@ -15,20 +15,24 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 public class Rating extends BaseEntity{
     @JoinColumn(name = "RATER_ID")
-    @ManyToOne(targetEntity = User.class,optional = false)
-    private int rater_id;
+    @ManyToOne(optional = false)
+    private User rater_id;
 
     @JoinColumn(name = "RATED_ID")
-    @ManyToOne(targetEntity = User.class,optional = false)
-    private int rated_id;
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    private User rated_id;
 
     @OneToOne(fetch=FetchType.LAZY,optional = false)
-    @JoinColumn(name="AD_ID")
     private Ad ad_id;
-
+    
+    
     @Column(nullable = false)
     private int rating;
 
     @Column
     private String description;
+    
+    public User getRated_id(){
+        return null;
+    }
 }
