@@ -40,11 +40,6 @@ public class User extends BaseEntity{
         ADMIN,USER,GUEST
     }
 
-    
-    public String getPublicData(){
-        return "Frida";
-    }
-
     @JoinColumn
     @OneToMany(targetEntity = Ad.class)
     private List<Ad> ads;

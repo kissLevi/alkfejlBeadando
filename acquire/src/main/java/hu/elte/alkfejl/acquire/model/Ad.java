@@ -44,7 +44,7 @@ public class Ad extends BaseEntity {
     @Column
     private Status status;
 
-    private enum Status{
+    public enum Status{
         PENDING,ACCEPTED,DELETED
     }
 
