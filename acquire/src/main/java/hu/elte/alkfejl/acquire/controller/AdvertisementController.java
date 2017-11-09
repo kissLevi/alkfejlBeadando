@@ -10,6 +10,7 @@ import hu.elte.alkfejl.acquire.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,5 +51,38 @@ public class AdvertisementController {
             
         }   
      
+    }
+    
+    @Role({User.Role.USER, User.Role.ADMIN})
+    @GetMapping("/{adId}")
+    public ResponseEntity<Ad> getAd(@PathVariable int adId)
+    {
+        Ad ad = adverisemets.findOne(new Long(adId));
+         if(ad == null){
+            return ResponseEntity.badRequest().build();
+        }
+        else{
+           return ResponseEntity.ok(ad);
+        }        
+        
+
+   
+     
+    }
+    
+    @Role({User.Role.USER, User.Role.ADMIN})
+    @PostMapping("{adId}/accept")
+    public ResponseEntity acceptAdvertisement(@PathVariable int adId){
+        Ad ad = adverisemets.findOne(new Long(adId));
+        if(ad == null){
+            return ResponseEntity.badRequest().build();
+        }
+        else{
+           ad.setDeliver_id(sessionService.getCurrentUser());
+           ad.setStatus(Ad.Status.ACCEPTED);
+           adverisemets.save(ad);
+           return ResponseEntity.ok().build();
+        
+        }        
     }
 }

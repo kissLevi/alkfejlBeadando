@@ -57,7 +57,7 @@ public class Ad extends BaseEntity {
     private Status status;
 
     public enum Status{
-        PENDING,ACCEPTED,DELETED
+        PENDING,ACCEPTED,DONE,UNRATED
     }
 
 //    @OneToOne(fetch=FetchType.LAZY, mappedBy="ad_id")
