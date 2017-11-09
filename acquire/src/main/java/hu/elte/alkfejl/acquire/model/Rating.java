@@ -22,9 +22,11 @@ public class Rating extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     private User rated_id;
 
-    @OneToOne(fetch=FetchType.LAZY,optional = false)
-    private Ad ad_id;
-    
+//    @OneToOne(fetch=FetchType.LAZY,optional = false)
+//    private Ad ad_id;
+    public Long getRater_id(){
+        return rater_id.getId();
+    }
     
     @Column(nullable = false)
     private int rating;
@@ -32,7 +34,11 @@ public class Rating extends BaseEntity{
     @Column
     private String description;
     
-    public User getRated_id(){
-        return null;
+//    public User getRated_id(){
+//        return null;
+//    }
+    
+    public Long getRated_id(){
+        return rated_id.getId();
     }
 }

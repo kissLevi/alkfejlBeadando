@@ -1,5 +1,7 @@
 package hu.elte.alkfejl.acquire.model;
 
+import hu.elte.alkfejl.acquire.model.post.NewAd;
+import java.text.SimpleDateFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Date;
 
+
 @Entity
 @Table(name = "ADS") //Nem engedi order-nek nevezni, nem jelenik meg a tábla, mert sql keyword
 @Data
@@ -15,7 +18,18 @@ import java.util.Date;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Ad extends BaseEntity {
-
+   
+    
+    public Ad(NewAd ad,User costumer){
+        description = ad.getDescription();
+        location = ad.getLocation();
+        price = ad.getPrice();
+        deadline = ad.getDeadline();
+        costumer_id = costumer;
+        deliver_id = costumer;
+        status = status.PENDING;
+    }
+    
     @Column(nullable = false)
     private String description;
 
@@ -50,13 +64,19 @@ public class Ad extends BaseEntity {
 //    private Payment payment;
 //
 
-    @OneToOne(fetch=FetchType.LAZY, mappedBy="ad_id")
-    private Rating rating_id;
+//    @OneToOne(fetch=FetchType.LAZY, mappedBy="ad_id")
+//    private Rating rating_id;
+//    
+//    public Long getRating_id(){
+//        return rating_id.getId();
+//    }
     
-    public Long getRating_id(){
-        return rating_id.getId();
+    public String getDeadline(){
+        SimpleDateFormat ft = 
+                new SimpleDateFormat ("E yyyy.MM.dd hh:mm:ss ");
+        return ft.format(deadline);
     }
-    
+//    
     public Long getCostumer_id(){
         return costumer_id.getId();
     }

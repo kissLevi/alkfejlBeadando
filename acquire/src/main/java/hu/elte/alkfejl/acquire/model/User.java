@@ -1,10 +1,10 @@
 package hu.elte.alkfejl.acquire.model;
 
+import hu.elte.alkfejl.acquire.model.post.PostUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,7 +15,14 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity{
-
+    public User(PostUser newUser){
+        username = newUser.getUsername();
+        password = newUser.getPassword();
+        rating = 0;
+        role = Role.USER;
+        balance = 0;
+    }
+    
     @Column(nullable = false, unique = true)
     private String username;
 
@@ -27,7 +34,7 @@ public class User extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role = Role.USER;
+    private Role role;
 
     @Column
     private int balance;

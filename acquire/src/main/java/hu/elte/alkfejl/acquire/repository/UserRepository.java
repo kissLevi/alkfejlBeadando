@@ -9,6 +9,9 @@ import org.springframework.data.repository.CrudRepository;
 public interface UserRepository extends CrudRepository<User, Long> {
     Optional<User> findByUsernameAndPassword(String username, String password);
     
+    Optional<User> findByUsername(String username);
+    
+    
     @Query("select u.username as usename, u.rating from User u")
     List<User> listPublicUserData();
     
