@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +30,7 @@ public class AdvertisementController {
     private SessionService sessionService;
     
     @GetMapping
-    public ResponseEntity<Iterable<Ad>> getAds(){
+    public ResponseEntity<Iterable<Ad>> getAviliableAds(){
         return ResponseEntity.ok(adverisemets.findAll());
     }
     
@@ -47,8 +48,7 @@ public class AdvertisementController {
             
             adverisemets.save(newAd);
             userRepository.save(currentUser);
-            return ResponseEntity.ok().build();
-            
+            return ResponseEntity.ok().build();    
         }   
      
     }
@@ -63,15 +63,11 @@ public class AdvertisementController {
         }
         else{
            return ResponseEntity.ok(ad);
-        }        
-        
-
-   
-     
+        } 
     }
     
     @Role({User.Role.USER, User.Role.ADMIN})
-    @PostMapping("{adId}/accept")
+    @PutMapping("{adId}/accept")
     public ResponseEntity acceptAdvertisement(@PathVariable int adId){
         Ad ad = adverisemets.findOne(new Long(adId));
         if(ad == null){
@@ -82,7 +78,23 @@ public class AdvertisementController {
            ad.setStatus(Ad.Status.ACCEPTED);
            adverisemets.save(ad);
            return ResponseEntity.ok().build();
-        
         }        
     }
+    
+    //@Role({User.Role.USER, User.Role.ADMIN})
+//    @PutMapping("{adId}/done")
+//    public ResponseEntity doneAdvertisement(@PathVariable int adId){
+//        Ad ad = adverisemets.findOne(new Long(adId));
+//        if(ad == null){
+//            return ResponseEntity.badRequest().build();
+//        }
+//        else{
+//           User deliver = ad.getDeliver();
+//           deliver.setBalance(deliver.getBalance()+ad.getPrice());
+//           ad.setStatus(Ad.Status.UNRATED);
+//           adverisemets.save(ad);
+//           userRepository.save(deliver);
+//           return ResponseEntity.ok().build();
+//        }        
+//    }
 }
