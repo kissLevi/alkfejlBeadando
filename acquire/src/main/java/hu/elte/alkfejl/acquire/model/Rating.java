@@ -1,5 +1,6 @@
 package hu.elte.alkfejl.acquire.model;
 
+import hu.elte.alkfejl.acquire.model.post.NewRating;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,11 +20,13 @@ public class Rating extends BaseEntity{
     private User rater_id;
 
     @JoinColumn(name = "RATED_ID")
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @ManyToOne(optional = false)
     private User rated_id;
 
-//    @OneToOne(fetch=FetchType.LAZY,optional = false)
-//    private Ad ad_id;
+    /*@JoinColumn(name = "AD_ID")
+    @OneToOne(fetch=FetchType.LAZY,optional = false)
+    private Ad ad_id;*/
+
     public Long getRater_id(){
         return rater_id.getId();
     }
@@ -40,5 +43,12 @@ public class Rating extends BaseEntity{
     
     public Long getRated_id(){
         return rated_id.getId();
+    }
+
+    public Rating(User rater, User rated, NewRating rating){
+        this.rater_id= rater;
+        this.rater_id=rated;
+        this.rating=rating.getRating();
+        this.description=rating.getDescription();
     }
 }

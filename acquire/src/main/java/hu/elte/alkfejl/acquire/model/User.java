@@ -39,6 +39,10 @@ public class User extends BaseEntity{
     @Column
     private int balance;
 
+    public void addBalance(int balance){
+        this.balance+=balance;
+    }
+
     public enum Role{
         ADMIN,USER,GUEST
     }
@@ -49,7 +53,7 @@ public class User extends BaseEntity{
 
 //    @JoinColumn
 //    @OneToMany(targetEntity = Ad.class,mappedBy = "costumer_id")
-    @OneToMany(mappedBy = "costumer_id",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "costumer_id",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Ad> ads;
 
 //    //@JoinColumn
@@ -57,6 +61,11 @@ public class User extends BaseEntity{
 //    private List<Payment> payments;
 //
 //    //@JoinColumn
-    @OneToMany(mappedBy = "rated_id",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "rated_id",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Rating> ratings;
+
+    public void clone(PostUser u){
+        this.username=u.getUsername();
+        this.password=u.getPassword();
+    }
 }

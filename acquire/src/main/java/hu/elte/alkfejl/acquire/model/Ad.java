@@ -12,7 +12,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "ADS") //Nem engedi order-nek nevezni, nem jelenik meg a tábla, mert sql keyword
+@Table(name = "ADS")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -58,6 +58,13 @@ public class Ad extends BaseEntity {
 
     public enum Status{
         PENDING,ACCEPTED,DONE,UNRATED
+    }
+
+    public void clone(NewAd ad){
+        this.description=ad.getDescription();
+        this.location=ad.getLocation();
+        this.deadline=ad.getDeadline();
+        this.price=ad.getPrice();
     }
 
 //    @OneToOne(fetch=FetchType.LAZY, mappedBy="ad_id")
