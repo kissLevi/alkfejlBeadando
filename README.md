@@ -40,6 +40,10 @@ Az oldal célja hogy a hírdetés feladója utánajárás nélkül, biztonságos
 
 ## Könyvtárstruktúra (backend)
 * `model` Adatbázis entitások és kapcsolataik
+  * `post` post metódusokhoz hasznalt tablaszerkezetek
+    * `NewAd` Új hírdetés
+    * `NewRating` Új értékelés
+    * `PostUser` Új user
   * `BaseEntity` Egy alap entitás származtatáshoz
   * `User` A felhasznalók táblája
   * `Ad` A hirdetések táblája
@@ -47,8 +51,18 @@ Az oldal célja hogy a hírdetés feladója utánajárás nélkül, biztonságos
   * `Rating` A hirdetésekhez tartozó értékelés
 * `view` Megjelenítést biztosítő fájlok
 * `controller` Végpontok, HTTP kérések kiszolgálása
-* `service` Felhasználók validálása
-* `repository` Adatbázissal való kommunikáció
+  * `AdvertisementController` Hirdetésekhez tartozó műveletek
+  * `RatingController` Értékeléseket kiszolgáló
+  * `UserController` Felhasznalókhoz kapcsolódó kérések
+* `service` Kérés és válasz közötti adat feldolgozása, adatbázissal való kommunikáció
+  * `AdService` Hirdetések lekérése, mentése
+  * `RatingService` Értékelések
+  * `SessionService` Aktuális munkamenetet feldolgozó service
+  * `UserService` Felhasznalók adatainak kezelése
+* `repository` Adatbázissal való kommunikáció, adatok mentése
+  * `AdvertisementRepository` Hirdetések mentése
+  * `RatingRepository` Értékelések tárolása
+  * `UserRepository`Felhasználók tárolása
 
 ## Fejlesztői környezet
 1. git verziókezelő telepítése
