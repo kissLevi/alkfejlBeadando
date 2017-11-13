@@ -37,12 +37,8 @@ public class RatingController {
         return ResponseEntity.ok(userRepository.findOne(sessionService.getCurrentUser().getId()).getPendigRatings());
 
     }
-//
-    @Role({User.Role.ADMIN, User.Role.USER})
-    @GetMapping("")
-    private ResponseEntity<List<Rating>> postRating(){
-        return ResponseEntity.ok(ratingRepository.findByRatedUser(sessionService.getCurrentUser()));
-    }
+
+
     
     
     @Role({User.Role.ADMIN, User.Role.USER})

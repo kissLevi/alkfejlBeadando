@@ -23,42 +23,7 @@ public class UserController {
     private SessionService sessionService;
     @Autowired
     private UserService userService;
-   
-    
-    @Role({User.Role.GUEST})
-    @PostMapping("/register")
-    public ResponseEntity registerUser(@RequestBody PostUser user){
-        try{
-            User newUser = new User(user);
-            userRepository.save(newUser);
-        }
-        catch(DataIntegrityViolationException ex){
-            return ResponseEntity.badRequest().build();
-        }
-        return ResponseEntity.ok().build();
-    }
 
-    @Role({User.Role.GUEST})
-    @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody PostUser user){
-        Optional<User> login = userRepository
-             .findByUsernameAndPassword(user.getUsername(),user.getPassword());
-        if(login.isPresent()){
-            sessionService.setCurrentUser(login.get());
-            //System.out.println(sessionService.getCurrentUser().getAds().get(0));
-            return ResponseEntity.ok().build();
-        }
-        else{
-            return ResponseEntity.badRequest().build();
-        }
-    }
-    
-    @Role({User.Role.USER, User.Role.ADMIN})
-    @RequestMapping("/logout")
-    public ResponseEntity logout() {
-        sessionService.setCurrentUser(null);
-        return ResponseEntity.ok().build();
-    }
     
     @Role({User.Role.ADMIN, User.Role.USER})
     @GetMapping("/users")
