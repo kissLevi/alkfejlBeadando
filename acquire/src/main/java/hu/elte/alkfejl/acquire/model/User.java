@@ -1,12 +1,14 @@
 package hu.elte.alkfejl.acquire.model;
 
 import hu.elte.alkfejl.acquire.model.post.PostUser;
+import java.util.HashSet;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "USERS")
@@ -61,9 +63,12 @@ public class User extends BaseEntity{
 //    private List<Payment> payments;
 //
 //    //@JoinColumn
-    @OneToMany(mappedBy = "rated_id",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Rating> ratings;
-
+    @ManyToMany(mappedBy = "rater_id")
+    private Set<Rating> pendingRatings = new HashSet<>();
+    
+    @ManyToMany(mappedBy = "rated_id")
+    private Set<Rating> ratings = new HashSet<>();
+    
     public void clone(PostUser u){
         this.username=u.getUsername();
         this.password=u.getPassword();

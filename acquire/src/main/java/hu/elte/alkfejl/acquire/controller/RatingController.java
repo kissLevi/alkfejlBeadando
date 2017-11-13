@@ -43,12 +43,12 @@ public class RatingController {
         }
     }
 
-    @Role({User.Role.ADMIN, User.Role.USER})
-    @PostMapping("")
-    private ResponseEntity postRating(@PathVariable int userID, @RequestBody NewRating rating){
-        User currentUser = sessionService.getCurrentUser();
-        User user = userRepository.findOne(new Long(userID));
-        Rating added = ratingService.addRating(user,currentUser,rating);
-        return ResponseEntity.ok(added);
-    }
+//    @Role({User.Role.ADMIN, User.Role.USER})
+//    @PostMapping("")
+//    private ResponseEntity postRating(@PathVariable int userID, @RequestBody NewRating rating){
+//        User currentUser = sessionService.getCurrentUser();
+//        User user = userRepository.findOne(new Long(userID));
+//        Rating added = ratingService.addRating(user,currentUser,rating);
+//        return ResponseEntity.ok(added);
+//    }
 }

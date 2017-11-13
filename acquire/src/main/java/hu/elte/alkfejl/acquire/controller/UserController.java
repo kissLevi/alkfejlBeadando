@@ -93,18 +93,18 @@ public class UserController {
         }
     }
     
-    @Role({User.Role.ADMIN, User.Role.USER})
-    @GetMapping("/users/{userID}/ratings")
-    public ResponseEntity getRatingsOfUser(@PathVariable int userID){
-        Optional<User> user = userRepository.findById(new Long(userID));
-        if(user.isPresent()){
-            return ResponseEntity
-                    .ok(userRepository.findOne(new Long(userID)).getRatings());
-        }
-        else{
-            return ResponseEntity.badRequest().build();
-        }
-    }
+//    @Role({User.Role.ADMIN, User.Role.USER})
+//    @GetMapping("/users/{userID}/ratings")
+//    public ResponseEntity getRatingsOfUser(@PathVariable int userID){
+//        Optional<User> user = userRepository.findById(new Long(userID));
+//        if(user.isPresent()){
+//            return ResponseEntity
+//                    .ok(userRepository.findOne(new Long(userID)).getRatings());
+//        }
+//        else{
+//            return ResponseEntity.badRequest().build();
+//        }
+//    }
 
     @Role({User.Role.ADMIN, User.Role.USER})
     @GetMapping("/users/{userID}/balance")

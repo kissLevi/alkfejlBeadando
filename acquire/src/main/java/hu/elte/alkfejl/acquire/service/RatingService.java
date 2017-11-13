@@ -14,8 +14,8 @@ public class RatingService {
     @Autowired
     private RatingRepository ratingRepository;
 
-    public Rating addRating(User rater, User rated, NewRating newRating){
-        Rating rating = new Rating(rater, rated, newRating);
-        return  ratingRepository.save(rating);
-    }
+//    public Rating addRating(User rater, User rated, NewRating newRating){
+//        Rating rating = new Rating(rater, rated, newRating);
+//        return  ratingRepository.save(rating);
+//    }
 }
