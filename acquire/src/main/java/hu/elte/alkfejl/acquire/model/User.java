@@ -1,14 +1,13 @@
 package hu.elte.alkfejl.acquire.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import hu.elte.alkfejl.acquire.model.post.PostUser;
-import java.util.HashSet;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "USERS")
@@ -49,25 +48,16 @@ public class User extends BaseEntity{
         ADMIN,USER,GUEST
     }
     
-    public String toString(){
-        return "{"+ "\"username\": \"" + username + "\",\"rating\": " + rating +"}";
-    }
 
-//    @JoinColumn
-//    @OneToMany(targetEntity = Ad.class,mappedBy = "costumer_id")
     @OneToMany(mappedBy = "costumer_id",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Ad> ads;
 
-//    //@JoinColumn
-//    @OneToMany(targetEntity = Payment.class,mappedBy = "payer_id")
-//    private List<Payment> payments;
-//
-//    //@JoinColumn
-    @ManyToMany(mappedBy = "rater_id")
-    private Set<Rating> pendingRatings = new HashSet<>();
-    
-    @ManyToMany(mappedBy = "rated_id")
-    private Set<Rating> ratings = new HashSet<>();
+    @JsonIgnore
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="PENDING_RATINGS",
+    joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+    inverseJoinColumns={@JoinColumn(name="rate_id", referencedColumnName="id")})
+    private List<Rating> pendigRatings;
     
     public void clone(PostUser u){
         this.username=u.getUsername();

@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class NewRating {
     private String description;
-    private int rating;
+    private float rating;
 }

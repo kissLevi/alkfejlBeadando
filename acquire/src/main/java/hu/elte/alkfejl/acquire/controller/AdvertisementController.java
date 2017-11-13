@@ -93,20 +93,15 @@ public class AdvertisementController {
         return ResponseEntity.ok(updated);
     }
 
-    //@Role({User.Role.USER, User.Role.ADMIN})
-//    @PutMapping("{adId}/done")
-//    public ResponseEntity doneAdvertisement(@PathVariable int adId){
-//        Ad ad = advertisments.findOne(new Long(adId));
-//        if(ad == null){
-//            return ResponseEntity.badRequest().build();
-//        }
-//        else{
-//           User deliver = ad.getDeliver();
-//           deliver.setBalance(deliver.getBalance()+ad.getPrice());
-//           ad.setStatus(Ad.Status.UNRATED);
-//           advertisments.save(ad);
-//           userRepository.save(deliver);
-//           return ResponseEntity.ok().build();
-//        }        
-//    }
+    @Role({User.Role.USER, User.Role.ADMIN})
+    @PutMapping("{adId}/complete")
+    public ResponseEntity doneAdvertisement(@PathVariable int adId){
+        if(adService.complete(new Long(adId), sessionService.getCurrentUser().getId()))
+        {
+            return ResponseEntity.ok().build();
+        }
+        else{
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }

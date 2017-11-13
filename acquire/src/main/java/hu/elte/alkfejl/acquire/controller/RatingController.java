@@ -4,19 +4,19 @@ import hu.elte.alkfejl.acquire.annotation.Role;
 import hu.elte.alkfejl.acquire.model.Rating;
 import hu.elte.alkfejl.acquire.model.User;
 import hu.elte.alkfejl.acquire.model.post.NewRating;
-import hu.elte.alkfejl.acquire.repository.AdvertisementRepository;
 import hu.elte.alkfejl.acquire.repository.RatingRepository;
 import hu.elte.alkfejl.acquire.repository.UserRepository;
 import hu.elte.alkfejl.acquire.service.RatingService;
 import hu.elte.alkfejl.acquire.service.SessionService;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/users/{userID}/rating")
+@RequestMapping("/ratings")
 public class RatingController {
     
     @Autowired
@@ -32,23 +32,40 @@ public class RatingController {
     private RatingService ratingService;
 
     @Role({User.Role.ADMIN, User.Role.USER})
-    @GetMapping("")
-    private ResponseEntity getReview(@PathVariable int userID){
-        Optional<User> rating = ratingRepository.findById(new Long(userID));
-        if(rating!=null){
-            return ResponseEntity.ok(rating);
-        }else{
-            System.out.println("teszt");
-            return ResponseEntity.badRequest().build();
-        }
-    }
+    @GetMapping("/available")
+    private ResponseEntity<List<Rating>> getAvaiableRatings(){
+        return ResponseEntity.ok(userRepository.findOne(sessionService.getCurrentUser().getId()).getPendigRatings());
 
-//    @Role({User.Role.ADMIN, User.Role.USER})
-//    @PostMapping("")
-//    private ResponseEntity postRating(@PathVariable int userID, @RequestBody NewRating rating){
-//        User currentUser = sessionService.getCurrentUser();
-//        User user = userRepository.findOne(new Long(userID));
-//        Rating added = ratingService.addRating(user,currentUser,rating);
-//        return ResponseEntity.ok(added);
-//    }
+    }
+//
+    @Role({User.Role.ADMIN, User.Role.USER})
+    @GetMapping("")
+    private ResponseEntity<List<Rating>> postRating(){
+        return ResponseEntity.ok(ratingRepository.findByRatedUser(sessionService.getCurrentUser()));
+    }
+    
+    
+    @Role({User.Role.ADMIN, User.Role.USER})
+    @PatchMapping("/available/{ratingId}")
+    private ResponseEntity<List<Rating>> postRating(@PathVariable int ratingId,@RequestBody NewRating rating){
+        User user = userRepository.findOne(sessionService.getCurrentUser().getId());
+        Optional<Rating> pendingRating = userRepository.getRating(user.getId(),new Long(ratingId));
+          if(pendingRating.isPresent()){
+              User rated = pendingRating.get().getRatedUser();
+              user.getPendigRatings().remove(pendingRating.get());
+              pendingRating.get().setRating(rating.getRating());
+              pendingRating.get().setDescription(rating.getDescription());
+              ratingRepository.save(pendingRating.get());
+              float numberOfRatings = ratingRepository.sum(rated);
+              rated.setRating((rated.getRating()+rating.getRating())/numberOfRatings);
+              userRepository.save(rated);
+              return ResponseEntity.ok().build();
+          }
+          else{
+              return ResponseEntity.badRequest().build();
+          }
+        
+        
+    }
+    
 }

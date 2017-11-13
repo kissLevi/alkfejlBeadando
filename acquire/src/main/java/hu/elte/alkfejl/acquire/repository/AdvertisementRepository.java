@@ -1,9 +1,6 @@
 package hu.elte.alkfejl.acquire.repository;
 
 import hu.elte.alkfejl.acquire.model.Ad;
-import hu.elte.alkfejl.acquire.model.Ad.Status;
-import java.util.List;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 
