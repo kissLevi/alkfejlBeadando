@@ -23,7 +23,7 @@ public class UserController {
     private SessionService sessionService;
     @Autowired
     private UserService userService;
-    
+
     
     @Role({User.Role.ADMIN, User.Role.USER})
     @GetMapping("/users")

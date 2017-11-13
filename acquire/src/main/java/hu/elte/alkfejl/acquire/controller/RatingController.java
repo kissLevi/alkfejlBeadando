@@ -38,7 +38,6 @@ public class RatingController {
         if(rating!=null){
             return ResponseEntity.ok(rating);
         }else{
-            System.out.println("teszt");
             return ResponseEntity.badRequest().build();
         }
     }
