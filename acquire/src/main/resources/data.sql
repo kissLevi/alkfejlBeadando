@@ -6,8 +6,8 @@ INSERT INTO USERS (ID, USERNAME, PASSWORD, RATING, ROLE, BALANCE)
 VALUES (2, 'Nagy Gábor','gaboo',  0.0, 'USER', 4000);
 
 INSERT INTO ADS VALUES(3,TO_TIMESTAMP('2017-12-02 06:14:00.742000000', 'YYYY-MM-DD HH24:MI:SS.FF'),'Kenyér','Budapest',200,'ACCEPTED',2,1);
-insert into RATING (ID,RATING,RATED_ID) values(0,0,1);
-insert into RATING (ID,RATING,RATED_ID) values(1,0,2);
+insert into RATINGS (ID,RATING,RATED_ID) values(0,0,1);
+insert into RATINGS (ID,RATING,RATED_ID) values(1,0,2);
 insert into PENDING_RATINGS values(1,0);
 insert into PENDING_RATINGS values(2,1);
 --insert into RATING values(0,NULL,0,'PENDING');
