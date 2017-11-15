@@ -22,7 +22,7 @@ public class RatingService {
     
     
     public boolean rate(User currenUser,NewRating rating,int ratingId){
-        
+
         Optional<Rating> pendingRating = userRepository.getRating(currenUser.getId(),new Long(ratingId)); 
         
         if(pendingRating.isPresent()){
@@ -48,7 +48,7 @@ public class RatingService {
     
     private float calculateNewRating(User rated,float newRatingValue){
         float numberOfRatings = ratingRepository.sum(rated);
-        float newRating = (rated.getRating() * (numberOfRatings - 1) + newRatingValue) / numberOfRatings==0?1:numberOfRatings;
+        float newRating = ((rated.getRating() * numberOfRatings) + newRatingValue) / (numberOfRatings==0?1:numberOfRatings+1);
         return newRating;
     }
 

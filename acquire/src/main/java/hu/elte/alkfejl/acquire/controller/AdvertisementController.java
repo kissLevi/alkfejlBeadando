@@ -68,7 +68,7 @@ public class AdvertisementController {
     @PutMapping("{adId}/accept")
     public ResponseEntity acceptAdvertisement(@PathVariable int adId){
         Ad ad = advertisments.findOne(new Long(adId));
-        if(ad == null){
+        if(ad == null || ad.getStatus().equals(Ad.Status.ACCEPTED) || ad.getCostumer_id().equals(sessionService.getCurrentUser())){
             return ResponseEntity.badRequest().build();
         }
         else{

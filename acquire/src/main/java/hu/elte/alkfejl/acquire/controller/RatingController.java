@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/ratings")
 public class RatingController {
-    
+
     @Autowired
     private SessionService sessionService;
-    
+
     @Autowired
     private UserRepository userRepository;
 
@@ -38,27 +38,19 @@ public class RatingController {
 
     @Role({User.Role.ADMIN, User.Role.USER})
     @GetMapping("/available")
-    private ResponseEntity<List<Rating>> getAvaiableRatings(){
+    private ResponseEntity<List<Rating>> getAvaiableRatings() {
         return ResponseEntity.ok(userRepository.findOne(sessionService.getCurrentUser().getId()).getPendigRatings());
-
     }
 
-
-    
-    
     @Role({User.Role.ADMIN, User.Role.USER})
     @PatchMapping("/available/{ratingId}")
-    private ResponseEntity rate(@PathVariable int ratingId,@RequestBody NewRating rating){
+    private ResponseEntity rate(@PathVariable int ratingId, @RequestBody NewRating rating) {
         boolean successfulRate = ratingService.rate(sessionService.getCurrentUser(), rating, ratingId);
-        if(successfulRate){
+        if (successfulRate) {
             return ResponseEntity.ok().build();
-        }
-        else{
+        } else {
             return ResponseEntity.badRequest().build();
         }
-        
-        
-        
     }
-    
+
 }
