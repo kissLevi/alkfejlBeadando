@@ -1,17 +1,16 @@
 package hu.elte.alkfejl.acquire.service;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import hu.elte.alkfejl.acquire.model.Ad;
 import hu.elte.alkfejl.acquire.model.Rating;
 import hu.elte.alkfejl.acquire.model.User;
 import hu.elte.alkfejl.acquire.model.post.NewAd;
-import hu.elte.alkfejl.acquire.model.post.NewRating;
 import hu.elte.alkfejl.acquire.repository.AdvertisementRepository;
 import hu.elte.alkfejl.acquire.repository.RatingRepository;
 import hu.elte.alkfejl.acquire.repository.UserRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 @Service
 @Data
@@ -42,8 +41,9 @@ public class AdService {
                 advertisementRepository.delete(currentAd);
                 User customer = users.findOne(currentAd.getCostumer_id());
                 User deliver = users.findOne(currentAd.getDeliver_id());
-                customer.getPendigRatings().add(new Rating(deliver, customer));
-                deliver.setBalance(deliver.getBalance()+currentAd.getPrice());
+                Rating newRating = new Rating(deliver, customer);
+                customer.getPendigRatings().add(newRating);
+                deliver.addBalance(currentAd.getPrice());
                 users.save(customer);
                 users.save(deliver);
                 return true;
@@ -53,8 +53,6 @@ public class AdService {
             }
         }catch(NullPointerException ex){
             return false;
-        }
-        
-        
+        }    
     }
 }

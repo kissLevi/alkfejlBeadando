@@ -22,9 +22,9 @@ public class Rating extends BaseEntity{
     
     @JsonIgnore
     @OneToOne(cascade=CascadeType.ALL)
-    @JoinTable(name="PENDING_RATINGS",
-    joinColumns={@JoinColumn(name="rate_id", referencedColumnName="id")},
-    inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id")})
+//    @JoinTable(name="PENDING_RATINGS",
+//    joinColumns={@JoinColumn(name="rate_id", referencedColumnName="id")},
+//    inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id")})
     private User user;
     
 
@@ -33,7 +33,7 @@ public class Rating extends BaseEntity{
 
     @Column
     private String description;
-    
+   
    
     @OneToOne (cascade=CascadeType.ALL)
     @JoinColumn(name="Rated_id", nullable=false)

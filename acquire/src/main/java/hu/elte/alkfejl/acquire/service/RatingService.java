@@ -4,6 +4,7 @@ import hu.elte.alkfejl.acquire.model.Rating;
 import hu.elte.alkfejl.acquire.model.User;
 import hu.elte.alkfejl.acquire.model.post.NewRating;
 import hu.elte.alkfejl.acquire.repository.RatingRepository;
+import hu.elte.alkfejl.acquire.repository.UserRepository;
 import java.util.Optional;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +17,39 @@ public class RatingService {
     @Autowired
     private RatingRepository ratingRepository;
     
+    @Autowired
+    private UserRepository userRepository;
     
-//    public Boolean rate(Long id, int UserId){
-//        Optional<Rating> rating = ratingRepository.findByIdandRaterId(id,new Long(UserId));
-//        if(rating.isPresent()){
-//            System.out.println(rating.get());
-//            return true;
-//        }    
-//        else{
-//            return false;
-//        }
-//    }
-//    public Rating addRating(User rater, User rated, NewRating newRating){
-//        Rating rating = new Rating(rater, rated, newRating);
-//        return  ratingRepository.save(rating);
-//    }
+    
+    public boolean rate(User currenUser,NewRating rating,int ratingId){
+        
+        Optional<Rating> pendingRating = userRepository.getRating(currenUser.getId(),new Long(ratingId)); 
+        
+        if(pendingRating.isPresent()){
+            Rating newRating = pendingRating.get();
+            User rater = newRating.getUser();
+            User rated = newRating.getRatedUser();
+            
+            rater.getPendigRatings().remove(pendingRating.get());
+            
+            newRating.setRating(rating.getRating());
+            newRating.setDescription(rating.getDescription());
+            
+            rated.setRating(calculateNewRating(rated, rating.getRating()));
+            
+            ratingRepository.save(newRating);
+            userRepository.save(rated);
+            return true;
+          }
+          else{
+            return false;
+          }
+    }
+    
+    private float calculateNewRating(User rated,float newRatingValue){
+        float numberOfRatings = ratingRepository.sum(rated);
+        float newRating = (rated.getRating() * (numberOfRatings - 1) + newRatingValue) / numberOfRatings==0?1:numberOfRatings;
+        return newRating;
+    }
+
 }

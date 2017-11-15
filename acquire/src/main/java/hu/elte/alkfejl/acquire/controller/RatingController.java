@@ -15,6 +15,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+//
+//GET ratings/avilable            visszaadja, hogy a jelenleg bejelentkezett felhsználó kiket tud értékelni
+//PATCH ratingns/available/id     adott értékelés megadása
+//
+
 @RestController
 @RequestMapping("/ratings")
 public class RatingController {
@@ -43,23 +48,15 @@ public class RatingController {
     
     @Role({User.Role.ADMIN, User.Role.USER})
     @PatchMapping("/available/{ratingId}")
-    private ResponseEntity<List<Rating>> postRating(@PathVariable int ratingId,@RequestBody NewRating rating){
-        User user = userRepository.findOne(sessionService.getCurrentUser().getId());
-        Optional<Rating> pendingRating = userRepository.getRating(user.getId(),new Long(ratingId));
-          if(pendingRating.isPresent()){
-              User rated = pendingRating.get().getRatedUser();
-              user.getPendigRatings().remove(pendingRating.get());
-              pendingRating.get().setRating(rating.getRating());
-              pendingRating.get().setDescription(rating.getDescription());
-              ratingRepository.save(pendingRating.get());
-              float numberOfRatings = ratingRepository.sum(rated);
-              rated.setRating((rated.getRating()+rating.getRating())/numberOfRatings);
-              userRepository.save(rated);
-              return ResponseEntity.ok().build();
-          }
-          else{
-              return ResponseEntity.badRequest().build();
-          }
+    private ResponseEntity rate(@PathVariable int ratingId,@RequestBody NewRating rating){
+        boolean successfulRate = ratingService.rate(sessionService.getCurrentUser(), rating, ratingId);
+        if(successfulRate){
+            return ResponseEntity.ok().build();
+        }
+        else{
+            return ResponseEntity.badRequest().build();
+        }
+        
         
         
     }
