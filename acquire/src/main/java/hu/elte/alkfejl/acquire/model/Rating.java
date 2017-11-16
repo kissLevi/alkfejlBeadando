@@ -14,18 +14,16 @@ import javax.persistence.*;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Rating extends BaseEntity{
-    public Rating(User rated,User user){
-        this.user = user;
+    public Rating(User rater,User rated,RateingType type){
+        this.rater = rater;
         this.rated = rated;
+        this.type = type;
     }
     
     
     @JsonIgnore
     @OneToOne(cascade=CascadeType.ALL)
-//    @JoinTable(name="PENDING_RATINGS",
-//    joinColumns={@JoinColumn(name="rate_id", referencedColumnName="id")},
-//    inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id")})
-    private User user;
+    private User rater;
     
 
     @Column(nullable = false)
@@ -38,6 +36,14 @@ public class Rating extends BaseEntity{
     @OneToOne (cascade=CascadeType.ALL)
     @JoinColumn(name="Rated_id", nullable=false)
     private User rated;
+    
+    @Enumerated(EnumType.STRING)
+    @Column
+    private RateingType type;
+
+    public enum RateingType{
+        DELIVER,CUSTOMER
+    }
     
     public String getRated(){
         return rated.getUsername();

@@ -39,11 +39,17 @@ public class AdService {
             Ad currentAd = advertisementRepository.findOne(id);
             if(currentAd.getCostumer_id().equals(userID) && currentAd.getStatus().equals(Ad.Status.ACCEPTED)){
                 advertisementRepository.delete(currentAd);
+                
                 User customer = users.findOne(currentAd.getCostumer_id());
                 User deliver = users.findOne(currentAd.getDeliver_id());
-                Rating newRating = new Rating(deliver, customer);
-                customer.getPendigRatings().add(newRating);
+                
+                Rating newDeliverRating = new Rating(customer, deliver,Rating.RateingType.DELIVER);
+                Rating newCustomerRating = new Rating(deliver, customer,Rating.RateingType.CUSTOMER);
+                customer.getPendigRatings().add(newDeliverRating);
+                deliver.getPendigRatings().add(newCustomerRating);
+                
                 deliver.addBalance(currentAd.getPrice());
+                
                 users.save(customer);
                 users.save(deliver);
                 return true;

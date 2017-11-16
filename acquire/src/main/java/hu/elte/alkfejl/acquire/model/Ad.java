@@ -47,7 +47,6 @@ public class Ad extends BaseEntity {
     private User costumer_id;
     
     
-
     @JoinColumn(name = "DELIVER_ID")
     @ManyToOne
     private User deliver_id;
@@ -66,17 +65,6 @@ public class Ad extends BaseEntity {
         this.deadline=ad.getDeadline();
         this.price=ad.getPrice();
     }
-
-//    @OneToOne(fetch=FetchType.LAZY, mappedBy="ad_id")
-//    private Payment payment;
-//
-
-//    @OneToOne(fetch=FetchType.LAZY, mappedBy="ad_id")
-//    private Rating rating_id;
-//    
-//    public Long getRating_id(){
-//        return rating_id.getId();
-//    }
     
     public String getDeadline(){
         SimpleDateFormat ft = 
@@ -90,7 +78,5 @@ public class Ad extends BaseEntity {
     public Long getDeliver_id(){
         return deliver_id.getId();
     }
-//    public User getDeliver(){
-//        return deliver_id;
-//    }
+
 }

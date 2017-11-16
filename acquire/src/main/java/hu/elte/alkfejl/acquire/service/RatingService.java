@@ -8,7 +8,6 @@ import hu.elte.alkfejl.acquire.repository.UserRepository;
 import java.util.Optional;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,7 +26,7 @@ public class RatingService {
         
         if(pendingRating.isPresent()){
             Rating newRating = pendingRating.get();
-            User rater = newRating.getUser();
+            User rater = newRating.getRater();
             User rated = newRating.getRatedUser();
             
             rater.getPendigRatings().remove(pendingRating.get());
