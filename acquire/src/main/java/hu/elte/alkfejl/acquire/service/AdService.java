@@ -22,26 +22,73 @@ public class AdService {
     private RatingRepository ratings;
     
     @Autowired
-    private UserRepository users;
-
-    public void delete(int id){
-        advertisementRepository.delete(new Long(id));
+    private UserRepository userRepository;
+    
+    public Ad getAd(int adId){
+        return advertisementRepository.findOne(new Long(adId));
+    }
+    
+    public Iterable<Ad> getAllAds(){
+        return advertisementRepository.findAll();
+    }
+    
+    
+    public boolean newAd(Long userId,NewAd ad){
+        User ownerOfAdd = userRepository.findOne(userId);
+        if(ownerOfAdd.getBalance()>=ad.getPrice()){
+            Ad newAd = new Ad(ad,ownerOfAdd);
+            ownerOfAdd.addBalance(-newAd.getPrice());
+            
+            advertisementRepository.save(newAd);
+            userRepository.save(ownerOfAdd);
+            
+            return true;
+        }
+        return false;
+    }
+    
+    
+    public boolean deleteAd(int id,Long userId){
+        Ad addToDelete = advertisementRepository.findOne(new Long(id));
+   
+        if(addToDelete.getCostumer_id().equals(userId)){
+            User adOwner = userRepository.findOne(userId);
+            adOwner.addBalance(addToDelete.getPrice());
+            advertisementRepository.delete(new Long(id));
+            return true;
+        }
+        return false;
+       
     }
 
-    public Ad update(int id, NewAd ad){
+    public Ad updateAd(int id, NewAd ad){
         Ad currAd = advertisementRepository.findOne(new Long(id));
         currAd.clone(ad);
         return advertisementRepository.save(currAd);
     }
     
-    public boolean complete(Long id, Long userID){
+    
+    public boolean acceptAd(Long userId,int adId){
+        Ad ad = advertisementRepository.findOne(new Long(adId));
+        if(ad == null || ad.getStatus().equals(Ad.Status.ACCEPTED) || ad.getCostumer_id().equals(userId)){
+            return false;
+        }
+        else{
+           ad.setDeliver_id(userRepository.findOne(userId));
+           ad.setStatus(Ad.Status.ACCEPTED);
+           advertisementRepository.save(ad);
+           return true;
+        }
+    }
+    
+    public boolean completeAd(Long id, Long userID){
         try{
             Ad currentAd = advertisementRepository.findOne(id);
             if(currentAd.getCostumer_id().equals(userID) && currentAd.getStatus().equals(Ad.Status.ACCEPTED)){
                 advertisementRepository.delete(currentAd);
                 
-                User customer = users.findOne(currentAd.getCostumer_id());
-                User deliver = users.findOne(currentAd.getDeliver_id());
+                User customer = userRepository.findOne(currentAd.getCostumer_id());
+                User deliver = userRepository.findOne(currentAd.getDeliver_id());
                 
                 Rating newDeliverRating = new Rating(customer, deliver,Rating.RateingType.DELIVER);
                 Rating newCustomerRating = new Rating(deliver, customer,Rating.RateingType.CUSTOMER);
@@ -50,8 +97,8 @@ public class AdService {
                 
                 deliver.addBalance(currentAd.getPrice());
                 
-                users.save(customer);
-                users.save(deliver);
+                userRepository.save(customer);
+                userRepository.save(deliver);
                 return true;
             }
             else{

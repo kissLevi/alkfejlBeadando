@@ -5,6 +5,7 @@ import hu.elte.alkfejl.acquire.model.User;
 import hu.elte.alkfejl.acquire.model.post.NewRating;
 import hu.elte.alkfejl.acquire.repository.RatingRepository;
 import hu.elte.alkfejl.acquire.repository.UserRepository;
+import java.util.List;
 import java.util.Optional;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class RatingService {
     @Autowired
     private UserRepository userRepository;
     
+    public List<Rating> getAvailableRating(Long id){
+        return userRepository.findOne(id).getPendigRatings();
+    }
     
     public boolean rate(User currenUser,NewRating rating,int ratingId){
 
