@@ -4,9 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor; 
+import lombok.NoArgsConstructor;
+import org.hibernate.engine.internal.Cascade;
+
 import javax.persistence.*;
- 
+import java.util.List;
+
 @Entity
 @Table(name = "RATINGS")
 @Data
@@ -19,9 +22,10 @@ public class Rating extends BaseEntity{
         this.rated = rated;
         this.type = type;
     }
-    
+
+    @JoinColumn(name="rater_id")
     @JsonIgnore
-    @OneToOne
+    @OneToOne(targetEntity = User.class)
     private User rater;
 
     @Column(nullable = false)
@@ -30,8 +34,9 @@ public class Rating extends BaseEntity{
     @Column
     private String description;
    
-    @OneToOne
-    @JoinColumn(name="Rated_id", nullable=false)
+
+    @JoinColumn(name="rated_id", nullable=false)
+    @OneToOne(targetEntity = User.class)
     private User rated;
     
     @Enumerated(EnumType.STRING)
@@ -48,4 +53,11 @@ public class Rating extends BaseEntity{
     public User getRatedUser(){
         return rated;
     }
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinTable(name="PENDING_RATINGS",
+            joinColumns={@JoinColumn(name="rate_id", referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id")})
+    private User pendingUser;
 }

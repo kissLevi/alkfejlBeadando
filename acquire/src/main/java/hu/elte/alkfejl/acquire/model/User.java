@@ -60,8 +60,12 @@ public class User extends BaseEntity{
     private List<Rating> pendigRatings;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rated")
-    private List<Rating> ratings;
+    @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "rated")
+    private Rating rating_id;
+
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "rater")
+    private Rating ratng_id;
     
     public void clone(PostUser u){
         this.username=u.getUsername();
