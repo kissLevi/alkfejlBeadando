@@ -7,6 +7,8 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Data
 public class UserService {
@@ -27,5 +29,18 @@ public class UserService {
         User currUser = userRepository.findOne(new Long(id));
         currUser.clone(user);
         return userRepository.save(currUser);
+    }
+
+    public Iterable<User> listAll(){
+        return userRepository.findAll();
+    }
+
+    public User listOne(Long id){
+        Optional<User> user = userRepository.findById(new Long(id));
+        if(user.isPresent()){
+            return userRepository.findOne(new Long(id));
+        }else{
+            return null;
+        }
     }
 }

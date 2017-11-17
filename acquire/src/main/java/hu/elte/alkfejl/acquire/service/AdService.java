@@ -90,8 +90,8 @@ public class AdService {
                 User customer = userRepository.findOne(currentAd.getCostumer_id());
                 User deliver = userRepository.findOne(currentAd.getDeliver_id());
                 
-                Rating newDeliverRating = new Rating(customer, deliver,Rating.RateingType.DELIVER);
-                Rating newCustomerRating = new Rating(deliver, customer,Rating.RateingType.CUSTOMER);
+                Rating newDeliverRating = new Rating(customer, deliver, Rating.RatingType.DELIVER);
+                Rating newCustomerRating = new Rating(deliver, customer, Rating.RatingType.CUSTOMER);
                 customer.getPendigRatings().add(newDeliverRating);
                 deliver.getPendigRatings().add(newCustomerRating);
                 

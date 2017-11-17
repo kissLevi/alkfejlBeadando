@@ -1,4 +1,4 @@
-package hu.elte.alkfejl.acquire.controller;
+package hu.elte.alkfejl.acquire.api;
 
 import hu.elte.alkfejl.acquire.annotation.Role;
 import hu.elte.alkfejl.acquire.model.Rating;
@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.*;
 
 
 //
-//GET ratings/avilable            visszaadja, hogy a jelenleg bejelentkezett felhsználó kiket tud értékelni
-//PUT ratingns/available/id     adott értékelés megadása
-//
+//GET /api/ratings/available        Shows the pending ratings of the logged in user, one can only rate COMPLETE-d ads
+//PUT /api/ratings/available/id     Write a review of the contact between the two parties,
+//                                  request a JSON body with NerRating type.
+
 
 @RestController
-@RequestMapping("/ratings")
+@RequestMapping("api/ratings")
 public class RatingController {
 
     @Autowired

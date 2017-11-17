@@ -58,6 +58,10 @@ public class User extends BaseEntity{
     joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
     inverseJoinColumns={@JoinColumn(name="rate_id", referencedColumnName="id")})
     private List<Rating> pendigRatings;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rated")
+    private List<Rating> ratings;
     
     public void clone(PostUser u){
         this.username=u.getUsername();

@@ -14,17 +14,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Rating extends BaseEntity{
-    public Rating(User rater,User rated,RateingType type){
+    public Rating(User rater,User rated,RatingType type){
         this.rater = rater;
         this.rated = rated;
         this.type = type;
     }
     
-    
     @JsonIgnore
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne
     private User rater;
-    
 
     @Column(nullable = false)
     private float rating;
@@ -32,16 +30,15 @@ public class Rating extends BaseEntity{
     @Column
     private String description;
    
-   
-    @OneToOne (cascade=CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name="Rated_id", nullable=false)
     private User rated;
     
     @Enumerated(EnumType.STRING)
     @Column
-    private RateingType type;
+    private RatingType type;
 
-    public enum RateingType{
+    public enum RatingType {
         DELIVER,CUSTOMER
     }
     
@@ -51,6 +48,4 @@ public class Rating extends BaseEntity{
     public User getRatedUser(){
         return rated;
     }
-    
-
 }

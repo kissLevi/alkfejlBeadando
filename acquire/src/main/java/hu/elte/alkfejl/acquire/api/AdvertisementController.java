@@ -1,4 +1,4 @@
-package hu.elte.alkfejl.acquire.controller;
+package hu.elte.alkfejl.acquire.api;
 
 import hu.elte.alkfejl.acquire.annotation.Role;
 import hu.elte.alkfejl.acquire.model.Ad;
@@ -10,18 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-//GET  /ads       List all uncompleted ads
-//POST /ads       Creating new ad request NewAd typed ad in requestbody
+//GET  /api/ads       List all uncompleted ads
+//POST /api/ads       Creating new ad request NewAd typed ad in requestbody
 //
-//GET /ads/id     List some additional information about ad 
-//PUT /ads/id     Update ad, request NewAd Typed ad in requestBody
-//DELETE /ads/id  Delete ad
+//GET /api/ads/id     List some additional information about ad
+//PUT /api/ads/id     Update ad, request NewAd Typed ad in requestBody
+//DELETE /api/ads/id  Delete ad
 
-//PUT ads/id/accept     Make an ad accepted if a deliver accepts it
-//PUT ads/id/complete   Remove the ad from database and making pendingratings for the customer and the deliver
+//PUT /api/ads/id/accept     Make an ad accepted if a deliver accepts it
+//PUT /api/ads/id/complete   Remove the ad from database and making pendingratings for the customer and the deliver
 
 @RestController
-@RequestMapping("/ads")
+@RequestMapping("api/ads")
 public class AdvertisementController {
     
     @Autowired
