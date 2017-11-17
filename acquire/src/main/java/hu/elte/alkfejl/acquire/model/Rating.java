@@ -24,7 +24,6 @@ public class Rating extends BaseEntity{
     }
 
     @JoinColumn(name="rater_id")
-    @JsonIgnore
     @OneToOne(targetEntity = User.class)
     private User rater;
 
@@ -33,8 +32,8 @@ public class Rating extends BaseEntity{
 
     @Column
     private String description;
-   
 
+    @JsonIgnore
     @JoinColumn(name="rated_id", nullable=false)
     @OneToOne(targetEntity = User.class)
     private User rated;
@@ -50,9 +49,7 @@ public class Rating extends BaseEntity{
     public String getRated(){
         return rated.getUsername();
     }
-    public User getRatedUser(){
-        return rated;
-    }
+    public User getRatedUser(){ return rated; }
 
     @JsonIgnore
     @ManyToOne

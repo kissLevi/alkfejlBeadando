@@ -1,15 +1,20 @@
 package hu.elte.alkfejl.acquire.service;
 
 import hu.elte.alkfejl.acquire.model.Ad;
+import hu.elte.alkfejl.acquire.model.Payment;
 import hu.elte.alkfejl.acquire.model.Rating;
 import hu.elte.alkfejl.acquire.model.User;
 import hu.elte.alkfejl.acquire.model.post.NewAd;
 import hu.elte.alkfejl.acquire.repository.AdvertisementRepository;
+import hu.elte.alkfejl.acquire.repository.PaymentRepository;
 import hu.elte.alkfejl.acquire.repository.RatingRepository;
 import hu.elte.alkfejl.acquire.repository.UserRepository;
 import lombok.Data;
+import org.hibernate.jpa.criteria.expression.function.CurrentTimestampFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.sql.Timestamp;
 
 
 @Service
@@ -17,6 +22,9 @@ import org.springframework.stereotype.Service;
 public class AdService {
     @Autowired
     private AdvertisementRepository advertisementRepository;
+
+    @Autowired
+    private PaymentRepository paymentRepository;
     
     @Autowired
     private RatingRepository ratings;
@@ -89,6 +97,9 @@ public class AdService {
                 
                 User customer = userRepository.findOne(currentAd.getCostumer_id());
                 User deliver = userRepository.findOne(currentAd.getDeliver_id());
+
+                int amount = currentAd.getPrice();
+                Payment payment = new Payment(customer,deliver,amount, new Timestamp(System.currentTimeMillis()));
                 
                 Rating newDeliverRating = new Rating(customer, deliver, Rating.RatingType.DELIVER);
                 Rating newCustomerRating = new Rating(deliver, customer, Rating.RatingType.CUSTOMER);
@@ -99,6 +110,7 @@ public class AdService {
                 
                 userRepository.save(customer);
                 userRepository.save(deliver);
+                paymentRepository.save(payment);
                 return true;
             }
             else{

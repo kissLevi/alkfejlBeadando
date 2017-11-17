@@ -6,26 +6,32 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "PAYMENTS")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Payment extends BaseEntity {
     @JoinColumn(name = "PAYER_ID")
     @ManyToOne(targetEntity = User.class,optional = false)
-    private int payer_id;
+    private User payer;
     
     @JoinColumn(name = "RECIEVER_ID")
     @ManyToOne(targetEntity = User.class,optional = false)
-    private int reciever_id;
- 
-    @OneToOne(fetch=FetchType.LAZY,optional = false)
-    @JoinColumn(name="AD_ID")
-    private Ad ad_id;
+    private User reciever;
  
     @Column(nullable = false)
     private int amount;
+
+    @Column(name = "PAYMENT_TIME")
+    private Timestamp ts;
+
+    public Payment(User payer, User reciever, int amount, Timestamp ts){
+        this.payer = payer;
+        this.reciever = reciever;
+        this.amount = amount;
+        this.ts = ts;
+    }
  }

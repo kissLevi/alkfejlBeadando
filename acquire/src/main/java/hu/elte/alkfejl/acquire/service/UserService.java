@@ -1,7 +1,9 @@
 package hu.elte.alkfejl.acquire.service;
 
+import hu.elte.alkfejl.acquire.model.Rating;
 import hu.elte.alkfejl.acquire.model.User;
 import hu.elte.alkfejl.acquire.model.post.PostUser;
+import hu.elte.alkfejl.acquire.repository.RatingRepository;
 import hu.elte.alkfejl.acquire.repository.UserRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RatingRepository ratingRepository;
 
     public User addBalance(int id, int balance){
         User user = userRepository.findOne(new Long(id));
@@ -42,5 +47,10 @@ public class UserService {
         }else{
             return null;
         }
+    }
+
+    public Iterable<Rating> listRatings(int id){
+        User user = userRepository.findOne(new Long(id));
+        return ratingRepository.findByRatedUser(user);
     }
 }
