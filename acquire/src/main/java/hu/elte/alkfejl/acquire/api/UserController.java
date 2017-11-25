@@ -83,7 +83,7 @@ public class UserController {
     }
 
     //admin -> felhasznalo torlese
-    @Role({User.Role.ADMIN})
+    //@Role({User.Role.ADMIN})
     @DeleteMapping("/{userID}")
     private ResponseEntity delete(@PathVariable int userID){
         if(userID!=0) {

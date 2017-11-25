@@ -48,7 +48,7 @@ public class Ad extends BaseEntity {
     
     
     @JoinColumn(name = "DELIVER_ID")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User deliver_id;
 
     @Enumerated(EnumType.STRING)

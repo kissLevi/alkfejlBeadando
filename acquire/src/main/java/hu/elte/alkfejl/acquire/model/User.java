@@ -48,15 +48,12 @@ public class User extends BaseEntity{
         ADMIN,USER,GUEST
     }
     
-
-    @OneToMany(mappedBy = "costumer_id",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "costumer_id",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Ad> ads;
 
     @JsonIgnore
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="PENDING_RATINGS",
-    joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
-    inverseJoinColumns={@JoinColumn(name="rate_id", referencedColumnName="id")})
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "rater")
     private List<Rating> pendigRatings;
 
     @JsonIgnore

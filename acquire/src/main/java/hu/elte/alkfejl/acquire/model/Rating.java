@@ -21,19 +21,23 @@ public class Rating extends BaseEntity{
     }
     
     @JsonIgnore
-    @OneToOne
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(name="Rater_id", nullable=false)
     private User rater;
+    
+    @JsonIgnore
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(name="Rated_id", nullable=false)
+    private User rated;
+    
 
     @Column(nullable = false)
     private float rating;
 
     @Column
     private String description;
-   
-    @OneToOne
-    @JoinColumn(name="Rated_id", nullable=false)
-    private User rated;
     
+   
     @Enumerated(EnumType.STRING)
     @Column
     private RatingType type;
