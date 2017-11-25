@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+mat-grid-tile {
+    background:beige;
+    text-align: center;
+  }
+  .loginform {
+    margin: 20px auto;
+    width: 700px;
+    height: 300px;
+
+  }
