@@ -2,10 +2,13 @@
 package hu.elte.alkfejl.acquire.api;
 
 import hu.elte.alkfejl.acquire.annotation.Role;
+import hu.elte.alkfejl.acquire.model.Rating;
 import hu.elte.alkfejl.acquire.model.User;
 import hu.elte.alkfejl.acquire.model.post.PostUser;
 import hu.elte.alkfejl.acquire.repository.UserRepository;
 import hu.elte.alkfejl.acquire.service.SessionService;
+
+import java.util.List;
 import java.util.Optional;
 
 import hu.elte.alkfejl.acquire.service.UserService;
@@ -99,5 +102,12 @@ public class UserController {
     private ResponseEntity update(@PathVariable int userID, @RequestBody PostUser user){
         User updated = userService.update(userID,user);
         return ResponseEntity.ok(updated);
+    }
+
+    @Role({User.Role.USER, User.Role.ADMIN})
+    @GetMapping("/{userID}/ratings")
+    private ResponseEntity<Iterable<Rating>> listRatings(@PathVariable int userID){
+        Iterable<Rating> userRatings = userService.listRatings(userID);
+        return ResponseEntity.ok(userRatings);
     }
 }

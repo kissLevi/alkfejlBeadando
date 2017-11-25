@@ -16,6 +16,7 @@ public interface RatingRepository extends CrudRepository<Rating, Long>{
     
     @Query("select count(r) from Rating r where r.rated = ?1 and r.rating != 0")
     int sum(User rated);
+
     
 //    @Query("select r from Rating r join r.rater_id ra where r.id =?1 and ra.id = ?2")
 //    Optional<Rating> findByIdandRaterId(Long id,Long user);
