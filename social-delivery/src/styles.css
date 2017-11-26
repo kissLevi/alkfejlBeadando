@@ -5,7 +5,7 @@ mat-grid-tile {
     background:beige;
     text-align: center;
   }
-  .loginform {
+ mat-card {
     margin: 20px auto;
     width: 700px;
     height: 300px;

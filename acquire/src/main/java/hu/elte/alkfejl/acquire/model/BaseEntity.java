@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Data
 @MappedSuperclass
 public class BaseEntity {
-    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("api")
@@ -56,5 +57,13 @@ public class LogApiController {
     public ResponseEntity logout() {
         sessionService.setCurrentUser(null);
         return ResponseEntity.ok().build();
+    }
+    @Role({User.Role.GUEST})
+    @GetMapping("/login")
+    public ResponseEntity<User> checkLog(){
+        if(this.sessionService.getCurrentUser() != null){
+           return ResponseEntity.ok(this.sessionService.getCurrentUser()); 
+        }
+        return ResponseEntity.badRequest().build();
     }
 }
