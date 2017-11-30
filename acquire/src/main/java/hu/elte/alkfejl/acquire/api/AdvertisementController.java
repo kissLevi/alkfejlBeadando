@@ -30,6 +30,7 @@ public class AdvertisementController {
     @Autowired
     private AdService adService;
     
+    @Role({User.Role.USER, User.Role.ADMIN})
     @GetMapping
     public ResponseEntity<Iterable<Ad>> getAvailableAds(){
         return ResponseEntity.ok(adService.getAllAds());

@@ -2,15 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { User } from '../../classes/user';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AdService } from '../../services/ad.service';
+import { Ad } from '../../classes/ad';
 
 @Component({
   selector: 'app-landingpage-view',
   templateUrl: './landingpage-view.component.html',
   styleUrls: ['./landingpage-view.component.css'],
-  providers : [LoginService]
+  providers : [LoginService,AdService]
 })
 export class LandingpageViewComponent implements OnInit {
   private user:User;
+  private _ads: Ad[];
 
   public tryLogin(user:User){
     this.user = user;
@@ -33,7 +36,8 @@ export class LandingpageViewComponent implements OnInit {
     )
   }
   constructor(
-     private loginService : LoginService
+     private loginService : LoginService,
+     private adService : AdService
   ) { }
 
   ngOnInit() {
@@ -42,7 +46,10 @@ export class LandingpageViewComponent implements OnInit {
         this.user = response;
         console.log(this.user);
       }
-    )
+    );
+    this.adService.getAds().subscribe((ads: Ad[]) => {
+      this._ads = ads;
+    });
   }
 
 }
