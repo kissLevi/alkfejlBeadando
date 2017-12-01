@@ -8,8 +8,14 @@ import { UserService } from '../../services/user.service';
   providers: [UserService]
 })
 export class RegisterformComponent implements OnInit {
+  public error: string = "";
 
   public clickRegistrate(name:string, password:string){
+    this.userService.registrate(name,password).subscribe((sucess:boolean)=>{
+      if(!sucess){
+        this.error = "Ilyen felhasználó már létezik";
+      }
+    });
   }
 
   constructor(
