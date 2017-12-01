@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LandingpageViewComponent } from '../../components/landingpage-view/landingpage-view.component';
+import { MainpageViewComponent } from '../../components/mainpage-view/mainpage-view.component';
 
 
 const appRoutes: Routes = [
-  { path: '', component: LandingpageViewComponent },
+  { path: '', component: MainpageViewComponent },
 ];
 
 @NgModule({

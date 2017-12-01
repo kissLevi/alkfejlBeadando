@@ -2,12 +2,12 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 mat-grid-tile {
-    background:beige;
+    background:rgb(142, 183, 228);
     text-align: center;
   }
  mat-card {
     margin: 20px auto;
-    width: 700px;
+    width: 200px;
     height: 300px;
 
   }
@@ -21,3 +21,5 @@ mat-grid-tile {
     width: 600px;
     height: 300px;
   }
+
+  
