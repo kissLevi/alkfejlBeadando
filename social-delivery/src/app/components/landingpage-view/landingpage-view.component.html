@@ -1,5 +1,5 @@
 
-<mat-grid-list cols="2" rowHeight="600px">
+<mat-grid-list cols="2" rowHeight="900px" gutterSize="0px">
     <!-- <mat-grid-tile ><app-loginform (userData)= "tryLogin($event)"></app-loginform></mat-grid-tile>
         <mat-grid-tile><app-registerform></app-registerform></mat-grid-tile> -->
     <mat-grid-tile >
@@ -8,7 +8,10 @@
             <mat-tab label="Regisztráció"><app-registerform></app-registerform></mat-tab>
         </mat-tab-group>
     </mat-grid-tile>
-    <mat-grid-tile ><app-introduction></app-introduction></mat-grid-tile>
+    <mat-grid-tile >
+        <app-introduction></app-introduction>
+    </mat-grid-tile>
+
 </mat-grid-list>
 
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
@@ -23,12 +24,16 @@ public class LogApiController {
     private UserRepository userRepository;
     @Autowired
     private SessionService sessionService;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Role({User.Role.GUEST})
     @PostMapping("/register")
     public ResponseEntity registerUser(@RequestBody PostUser user){
         try{
             User newUser = new User(user);
+            newUser.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(newUser);
         }
         catch(DataIntegrityViolationException ex){
@@ -40,15 +45,13 @@ public class LogApiController {
     @Role({User.Role.GUEST})
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody PostUser user){
-        Optional<User> login = userRepository
-                .findByUsernameAndPassword(user.getUsername(),user.getPassword());
-        if(login.isPresent()){
+        Optional<User> login = userRepository.findByUsername(user.getUsername());
+        if(login.isPresent() && passwordEncoder.matches(user.getPassword(), login.get().getPassword())){
             sessionService.setCurrentUser(login.get());
-            //System.out.println(sessionService.getCurrentUser().getAds().get(0));
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(login.get());
         }
         else{
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(403).build();
         }
     }
 
