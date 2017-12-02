@@ -63,10 +63,10 @@ public class LogApiController {
     }
     @Role({User.Role.GUEST})
     @GetMapping("/login")
-    public ResponseEntity<User> checkLog(){
+    public ResponseEntity checkLog(){
         if(this.sessionService.getCurrentUser() != null){
            return ResponseEntity.ok(this.sessionService.getCurrentUser()); 
         }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok(false);
     }
 }
