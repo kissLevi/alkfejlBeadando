@@ -2,24 +2,27 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 mat-grid-tile {
-    background:rgb(142, 183, 228);
+    background:rgba(78, 108, 143, 0.637);
     text-align: center;
   }
- mat-card {
-    margin: 20px auto;
-    width: 200px;
-    height: 300px;
+mat-card {
+  margin: 20px auto;
+  width: 200px;
+  height: 300px;
 
-  }
-
-  .loginform{
-    width: 275px;
-    height: 250px;
-  }
+}
+body{
+  margin:0;
+}
+.loginform{
+  width: 275px;
+  height: 250px;
+}
   
-  .intraductionImage{
-    width: 600px;
-    height: 300px;
-  }
-
-  
+.intraductionImage{
+  width: 800px;
+  height: 400px;
+}
+.filling {
+  flex: 1 1 auto;
+}
