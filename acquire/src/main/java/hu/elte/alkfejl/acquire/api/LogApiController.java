@@ -59,7 +59,7 @@ public class LogApiController {
     @RequestMapping("/logout")
     public ResponseEntity logout() {
         sessionService.setCurrentUser(null);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(false);
     }
     @Role({User.Role.GUEST})
     @GetMapping("/login")
