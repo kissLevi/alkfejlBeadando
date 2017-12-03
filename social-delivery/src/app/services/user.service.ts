@@ -20,12 +20,12 @@ export class UserService {
     return this.user;
   }
 
-  public registrate(username:string,password:string):Observable<boolean>{
-    const result = new Subject<boolean>();
+  public registrate(username:string,password:string):Observable<number>{
+    const result = new Subject<number>();
     this.httpClien.post(api + "register",{username,password}).subscribe(()=>{
-      result.next(true);
+      result.next(200);
     }, (error) => {
-      result.next(false);
+      result.next(400);
     });
     return result; 
   }

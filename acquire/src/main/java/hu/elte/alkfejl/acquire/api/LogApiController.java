@@ -37,7 +37,7 @@ public class LogApiController {
             userRepository.save(newUser);
         }
         catch(DataIntegrityViolationException ex){
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(400).build();
         }
         return ResponseEntity.ok().build();
     }
@@ -46,12 +46,17 @@ public class LogApiController {
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody PostUser user){
         Optional<User> login = userRepository.findByUsername(user.getUsername());
-        if(login.isPresent() && passwordEncoder.matches(user.getPassword(), login.get().getPassword())){
-            sessionService.setCurrentUser(login.get());
-            return ResponseEntity.ok(login.get());
+        if(login.isPresent()){
+            if(passwordEncoder.matches(user.getPassword(), login.get().getPassword())){
+                sessionService.setCurrentUser(login.get());
+                return ResponseEntity.ok(login.get());
+            }
+            else{
+                return ResponseEntity.status(401).build();
+            }
         }
         else{
-            return ResponseEntity.status(403).build();
+            return ResponseEntity.status(400).build();
         }
     }
 
@@ -59,7 +64,7 @@ public class LogApiController {
     @RequestMapping("/logout")
     public ResponseEntity logout() {
         sessionService.setCurrentUser(null);
-        return ResponseEntity.ok(false);
+        return ResponseEntity.ok(200);
     }
     @Role({User.Role.GUEST})
     @GetMapping("/login")

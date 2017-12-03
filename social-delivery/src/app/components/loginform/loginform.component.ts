@@ -1,8 +1,11 @@
 import { Component, OnInit ,EventEmitter,Output} from '@angular/core';
-import { User } from '../../classes/user';
+import { User } from '../../classes/User';
+import { FormChecker } from '../../classes/form-checker';
 import { AuthService } from '../../services/auth.service';
 import { ErrorStateMatcher } from '@angular/material';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+
+
 
 
 @Component({
@@ -12,18 +15,30 @@ import { FormControl } from '@angular/forms';
   providers: [AuthService]
 })
 export class LoginformComponent implements OnInit {
-  public error: string = "";  
   
-  public clickLogin(name:string, password:string){
-    this.authService.login(name, password).subscribe((success: boolean) => {
-      if (success) {
 
-      } else {
-        this.error = 'Hibás felhasnzálónév vagy jelszó';
+  userNameError = new FormChecker("Rossz felhasználónév!");
+  passwordError = new FormChecker("Hibás jelszó!");
+
+  public clickLogin(name:string, password:string){
+  this.authService.login(name, password).subscribe((status: number) => {
+      if (status != 200) {
+        if(status == 400){
+          this.userNameError.errorStatus = true;
+        }
+        else if( status == 401){
+          this.userNameError.errorStatus = false;
+          this.passwordError.errorStatus = true;
+        }
       }
     });
-  }
 
+  }
+  formControl = new FormControl('', [
+    Validators.required,
+  ]);
+  
+  
 
   constructor(
     private authService:AuthService

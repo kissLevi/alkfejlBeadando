@@ -1,7 +1,10 @@
 <mat-card class = "loginform">
     <h4>Regisztráció</h4>
     <mat-form-field>
-      <input matInput #userName type="text" placeholder="Felhasználónév">
+      <input matInput #userName type="text" placeholder="Felhasználónév" [errorStateMatcher]="userNameError" [formControl]="formControl">
+      <mat-error *ngIf="userNameError.errorStatus">
+          {{userNameError.errorMsg}}
+      </mat-error>
     </mat-form-field>
     <br>
     <mat-form-field>

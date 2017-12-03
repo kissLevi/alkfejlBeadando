@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { api } from '../config/api';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -13,14 +13,14 @@ export class AuthService {
     private httpClient: HttpClient
   ) { }
 
-  public login(username:string,password:string): Observable<boolean>{
-    const result = new Subject<boolean>();
+  public login(username:string,password:string): Observable<number>{
+    const result = new Subject<number>();
     this.httpClient.post(api + 'login', { username, password }).subscribe((user) => {
       UserService.setUser( user as User);
-      result.next(true);
-    }, (error) => {
+      result.next(200);
+    }, (error: HttpErrorResponse) => {
       UserService.setUser(null as User);
-      result.next(false);
+      result.next(error.status);
     });
     return result;
   }
