@@ -4,12 +4,13 @@ import { User } from '../classes/user';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { api } from '../config/api';
+import { $ } from 'protractor';
 
 @Injectable()
 export class UserService {
   private static user: User = null;
   constructor(
-    private httpClien: HttpClient
+    private httpClien: HttpClient,
   ) { }
 
   public static setUser(user:User){
@@ -28,6 +29,19 @@ export class UserService {
       result.next(400);
     });
     return result; 
+  }
+
+  public getUserProfile(id: number):Observable<any>{
+    return this.httpClien.get(api + 'users/' + id)
+  }
+
+  public updateUserProfile(id: number, un: string, pw: string):Observable<any>{
+    return this.httpClien.put(api + "users/" + id,
+    {
+      "username": un,
+      "password": pw
+   }
+);
   }
 
 }

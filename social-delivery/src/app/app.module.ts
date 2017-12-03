@@ -28,7 +28,7 @@ import { UserComponent } from './components/user/user.component';
     UiModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,8 +5,8 @@ import { UserComponent } from '../../components/user/user.component';
 
 
 const appRoutes: Routes = [
-  { path: '', component: MainpageViewComponent },
-  { path: 'user', component: UserComponent },
+  { path: '', component: MainpageViewComponent, pathMatch: 'full' },
+  { path: 'user', component: UserComponent }
 ];
 
 @NgModule({
