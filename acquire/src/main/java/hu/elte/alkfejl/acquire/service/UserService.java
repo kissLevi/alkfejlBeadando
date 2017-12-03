@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 @Data
@@ -19,6 +20,9 @@ public class UserService {
 
     @Autowired
     private RatingRepository ratingRepository;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public User addBalance(int id, int balance){
         User user = userRepository.findOne(new Long(id));
@@ -32,6 +36,7 @@ public class UserService {
 
     public User update(int id, PostUser user){
         User currUser = userRepository.findOne(new Long(id));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         currUser.clone(user);
         return userRepository.save(currUser);
     }
