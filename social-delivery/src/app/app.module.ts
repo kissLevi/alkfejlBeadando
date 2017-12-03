@@ -9,6 +9,7 @@ import { AppRouterModule } from './modules/app-router/app-router.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MainpageViewComponent } from './components/mainpage-view/mainpage-view.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { UserComponent } from './components/user/user.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     IntroductionComponent,
     MainpageViewComponent,
     ToolbarComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
