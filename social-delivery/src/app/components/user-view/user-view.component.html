@@ -1,0 +1,6 @@
+<div *ngIf="authService.isLoggedIn()">
+<app-user [user]="authService.getUser()"></app-user>
+</div>
+<div *ngIf="!authService.isLoggedIn()">
+  <mat-spinner></mat-spinner>
+</div>

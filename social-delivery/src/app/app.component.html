@@ -1,1 +1,2 @@
+<app-toolbar [loggedIn]="authService.isLoggedIn()" (hideEvent)="authService.logout()"></app-toolbar>
 <router-outlet></router-outlet>

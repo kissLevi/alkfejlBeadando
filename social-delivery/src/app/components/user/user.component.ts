@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../../classes/User';
 import {Router, ActivatedRoute} from '@angular/router';
 import { UserService } from '../../services/user.service';
@@ -11,7 +11,9 @@ import { AuthService } from '../../services/auth.service';
   providers: [UserService, AuthService]
 })
 export class UserComponent implements OnInit {
-  private user: User;
+  @Input()
+  public user: User;
+  
   private editable: boolean;
   constructor(
     private router: Router,
@@ -25,17 +27,17 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.user!=null){
-      this.user = UserService.getUser();
-      console.log(this.user); 
-      let user: User = this.user;        
-      this.userService.getUserProfile(user.id).subscribe((user) => {
-        this.user = user;
-      });
-    }else{
-      this.authService.syncLoginStatus();
-      this.user = UserService.getUser();
-    }   
+    // if(this.user!=null){
+    //   this.user = UserService.getUser();
+    //   console.log(this.user); 
+    //   let user: User = this.user;        
+    //   this.userService.getUserProfile(user.id).subscribe((user) => {
+    //     this.user = user;
+    //   });
+    // }else{
+    //   this.authService.syncLoginStatus();
+    //   this.user = UserService.getUser();
+    // }   
   }
 
   public clickEdit(username: string, pw:string): void{

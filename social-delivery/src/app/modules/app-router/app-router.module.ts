@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainpageViewComponent } from '../../components/mainpage-view/mainpage-view.component';
 import { UserComponent } from '../../components/user/user.component';
+import { UserViewComponent } from '../../components/user-view/user-view.component';
 
 
 const appRoutes: Routes = [
   { path: '', component: MainpageViewComponent, pathMatch: 'full' },
-  { path: 'user', component: UserComponent }
+  { path: 'user', component: UserViewComponent }
 ];
 
 @NgModule({

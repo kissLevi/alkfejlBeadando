@@ -1,5 +1,3 @@
-<app-toolbar [loggedIn]="authService.isLoggedIn()" (hideEvent)="logout($event)"></app-toolbar>
-
 <mat-grid-list class = "landingpage" *ngIf="!authService.isLoggedIn()" cols="3" rows = "7" rowHeight="100px" gutterSize="0px">
     <mat-grid-tile  colspan = "3">
     </mat-grid-tile>

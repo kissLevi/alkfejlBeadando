@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MainpageViewComponent } from './components/mainpage-view/mainpage-view.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { UserComponent } from './components/user/user.component';
+import { UserViewComponent } from './components/user-view/user-view.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { UserComponent } from './components/user/user.component';
     MainpageViewComponent,
     ToolbarComponent,
     UserComponent,
+    UserViewComponent,
   ],
   imports: [
     BrowserModule,

@@ -44,4 +44,8 @@ export class AuthService {
     return UserService.getUser() !== null;
   }
 
+  public getUser(): User{
+    return UserService.getUser();
+  }
+
 }
