@@ -8,6 +8,7 @@ import { IntroductionComponent } from './components/introduction/introduction.co
 import { AppRouterModule } from './modules/app-router/app-router.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MainpageViewComponent } from './components/mainpage-view/mainpage-view.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { MainpageViewComponent } from './components/mainpage-view/mainpage-view.
     RegisterformComponent,
     IntroductionComponent,
     MainpageViewComponent,
+    ToolbarComponent,
   ],
   imports: [
     BrowserModule,

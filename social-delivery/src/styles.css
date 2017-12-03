@@ -2,7 +2,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 mat-grid-tile {
-    background:rgba(78, 108, 143, 0.637);
+    background:rgba(191, 215, 243, 0.637);
     text-align: center;
   }
 mat-card {

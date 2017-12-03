@@ -1,0 +1,18 @@
+<mat-toolbar color = "primary">
+  <span>
+      <h2>NeedIt</h2>
+  </span>
+
+  <span *ngIf = "loggedIn" class="filling"></span>
+  <span *ngIf = "loggedIn">
+    <button mat-button>Hírdetések</button>
+    <button mat-button>Hírdetés feladás</button>
+    <button mat-button>Felhasználó értékelése</button>
+  </span>
+  <span *ngIf = "loggedIn" class="filling"></span>
+  <span *ngIf = "loggedIn">
+    <button mat-button>Adatlap</button>
+    <button mat-button (click)="logout()">Kijelentkezés</button>
+  </span>
+
+</mat-toolbar>

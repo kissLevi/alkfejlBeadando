@@ -1,6 +1,9 @@
 import { Component, OnInit ,EventEmitter,Output} from '@angular/core';
 import { User } from '../../classes/user';
 import { AuthService } from '../../services/auth.service';
+import { ErrorStateMatcher } from '@angular/material';
+import { FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-loginform',
@@ -20,6 +23,7 @@ export class LoginformComponent implements OnInit {
       }
     });
   }
+
 
   constructor(
     private authService:AuthService
