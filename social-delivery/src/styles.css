@@ -23,6 +23,20 @@ body{
   width: 800px;
   height: 400px;
 }
-.filling {
-  flex: 1 1 auto;
+.fillingRight {
+  
+  flex: 1.5 0 auto;
+}
+.fillingLeft {
+  
+  flex: 2 0 auto;
+}
+
+.adList{
+  text-align: middle;
+  margin: 20px auto;
+  width: 800px;
+}
+mat-list{
+  text-align: center;
 }

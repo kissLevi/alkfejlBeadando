@@ -11,6 +11,8 @@ import { MainpageViewComponent } from './components/mainpage-view/mainpage-view.
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { UserComponent } from './components/user/user.component';
 import { UserViewComponent } from './components/user-view/user-view.component';
+import { AdComponent } from './components/ad/ad.component';
+import { AdViewComponent } from './components/ad-view/ad-view.component';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { UserViewComponent } from './components/user-view/user-view.component';
     ToolbarComponent,
     UserComponent,
     UserViewComponent,
+    AdComponent,
+    AdViewComponent,
   ],
   imports: [
     BrowserModule,

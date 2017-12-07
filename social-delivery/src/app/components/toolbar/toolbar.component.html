@@ -3,13 +3,13 @@
       <h2>NeedIt</h2>
   </span>
 
-  <span *ngIf = "loggedIn" class="filling"></span>
+  <span *ngIf = "loggedIn" class="fillingLeft"></span>
   <span *ngIf = "loggedIn">
-    <button mat-button>Hírdetések</button>
+    <button mat-button routerLink="/ads">Hírdetések</button>
     <button mat-button>Hírdetés feladás</button>
     <button mat-button>Felhasználó értékelése</button>
   </span>
-  <span *ngIf = "loggedIn" class="filling"></span>
+  <span *ngIf = "loggedIn" class="fillingRight"></span>
   <span *ngIf = "loggedIn">
     <button mat-button routerLink="/user">Adatlap</button>
     <button mat-button routerLink="" (click)="logout()">Kijelentkezés</button>

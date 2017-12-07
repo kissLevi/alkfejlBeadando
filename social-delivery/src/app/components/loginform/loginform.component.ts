@@ -21,18 +21,17 @@ export class LoginformComponent implements OnInit {
   passwordError = new FormChecker("Hibás jelszó!");
 
   public clickLogin(name:string, password:string){
-  this.authService.login(name, password).subscribe((status: number) => {
-      if (status != 200) {
-        if(status == 400){
-          this.userNameError.errorStatus = true;
+    this.authService.login(name, password).subscribe((status: number) => {
+        if (status != 200) {
+          if(status == 400){
+            this.userNameError.errorStatus = true;
+          }
+          else if( status == 401){
+            this.userNameError.errorStatus = false;
+            this.passwordError.errorStatus = true;
+          }
         }
-        else if( status == 401){
-          this.userNameError.errorStatus = false;
-          this.passwordError.errorStatus = true;
-        }
-      }
-    });
-
+      });
   }
   formControl = new FormControl('', [
     Validators.required,

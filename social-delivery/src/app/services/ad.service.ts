@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Ad } from '../classes/ad';
 import { api } from '../config/api';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class AdService {
@@ -11,8 +12,23 @@ export class AdService {
     private httpClient: HttpClient
   ) {}
 
-  // public getAds(): Observable<Ad[]> {
-  //   return this.httpClient.get(api + 'ads');
-  // }
+  public getAds(): Observable<Ad[]> {
+    const result = new Subject<Ad[]>();
+    this.httpClient.get(api + "ads").subscribe((ads)=>{
+      result.next(ads as Ad[]);
+    })
+    return result;
+  }
 
 }
+
+
+// const result = new Subject<number>();
+// this.httpClient.post(api + 'login', { username, password }).subscribe((user) => {
+//   UserService.setUser( user as User);
+//   result.next(200);
+// }, (error: HttpErrorResponse) => {
+//   UserService.setUser(null as User);
+//   result.next(error.status);
+// });
+// return result;
