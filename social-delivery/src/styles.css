@@ -40,3 +40,8 @@ body{
 mat-list{
   text-align: center;
 }
+
+mat-list-item{
+  border: inset 1px;
+  margin-bottom : 10px;
+}

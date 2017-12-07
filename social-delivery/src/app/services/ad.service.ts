@@ -5,8 +5,10 @@ import { Ad } from '../classes/ad';
 import { api } from '../config/api';
 import { Subject } from 'rxjs/Subject';
 
+
 @Injectable()
 export class AdService {
+  
 
   constructor(
     private httpClient: HttpClient
@@ -15,9 +17,13 @@ export class AdService {
   public getAds(): Observable<Ad[]> {
     const result = new Subject<Ad[]>();
     this.httpClient.get(api + "ads").subscribe((ads)=>{
-      result.next(ads as Ad[]);
+      result.next((ads as Ad[]).filter(ad => ad.status == "PENDING"));
     })
     return result;
+  }
+
+  public acceptAd(id:number): void{
+    this.httpClient.put(api + "ads/"+id+"/complete",{});
   }
 
 }

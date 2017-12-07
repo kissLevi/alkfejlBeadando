@@ -1,3 +1,12 @@
+export enum Status{
+    PENDING = "PENDING",
+    ACCEPTED = "ACCEPTED",
+    DONE = "DONE",
+    UNRATED = "UNRATED"
+
+
+}
+
 export class Ad {
     private _id:number;
     
@@ -6,7 +15,7 @@ export class Ad {
         private _location:string,
         private _price:number,
         private _deadline:Date,
-        private _status:string,
+        private _status:Status,
     ) {}
     get id():number{
         return this._id;
@@ -35,10 +44,10 @@ export class Ad {
     set deadline(value:Date){
         this._deadline = value;
     }
-    get status():string{
+    get status():Status{
         return this._status;
     }
-    set status(value:string){
+    set status(value:Status){
         this._status = value;
     }
     

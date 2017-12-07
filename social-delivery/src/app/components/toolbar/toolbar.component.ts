@@ -12,6 +12,7 @@ export class ToolbarComponent implements OnInit {
 
   @Output() hideEvent= new EventEmitter();
   
+
   public logout(): void{
     this.hideEvent.emit(null);
   }
