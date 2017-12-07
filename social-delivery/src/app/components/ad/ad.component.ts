@@ -10,20 +10,10 @@ export class AdComponent implements OnInit {
   @Input()
   private ad:Ad;
 
-  @Output()
-  private _id:number
-  private _acceptEvent = new EventEmitter();
-  
-  public get event():EventEmitter<{}>{
-    return this._acceptEvent;
-  }
+  @Output() acceptEvent = new EventEmitter();
   
   public accept(): void{
-    this._acceptEvent.emit(null);
-  }
-
-  public id():number{
-    return this._id;
+    this.acceptEvent.emit(this.ad.id);
   }
 
   constructor() { }

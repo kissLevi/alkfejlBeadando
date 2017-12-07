@@ -22,8 +22,8 @@ export class AdService {
     return result;
   }
 
-  public acceptAd(id:number): void{
-    this.httpClient.put(api + "ads/"+id+"/complete",{});
+  public acceptAd(id:number): Observable<any>{
+    return this.httpClient.put(api + "ads/"+id+"/accept",{});
   }
 
 }

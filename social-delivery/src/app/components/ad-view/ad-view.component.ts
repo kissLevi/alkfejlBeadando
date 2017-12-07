@@ -13,6 +13,13 @@ export class AdViewComponent implements OnInit {
   private ads:Ad[];
 
  
+  public acceptAd(id:number):void{
+    this.adService.acceptAd(id).subscribe(()=>{
+      this.adService.getAds().subscribe((ads : Ad[])=>{
+        this.ads = ads;
+      });
+    })
+  }
 
   constructor(
     private userService:UserService,
