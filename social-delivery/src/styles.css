@@ -5,12 +5,7 @@ mat-grid-tile {
     background:rgba(191, 215, 243, 0.637);
     text-align: center;
   }
-mat-card {
-  margin: 20px auto;
-  width: 200px;
-  height: 300px;
 
-}
 body{
   margin:0;
 }
@@ -35,13 +30,23 @@ body{
 .adList{
   text-align: middle;
   margin: 20px auto;
-  width: 800px;
+  width: 1000px;
+  flex: 1,1 auto;
 }
 mat-list{
   text-align: center;
 }
 
 mat-list-item{
-  border: inset 1px;
+  border-left: 6px solid white;
+  background-color: rgba(191, 215, 243, 0.637);
   margin-bottom : 10px;
+}
+
+.ad{
+  width: 800px;
+  background: white;
+}
+mat-expansion-panel {
+  flex:auto
 }

@@ -13,6 +13,9 @@ import { UserComponent } from './components/user/user.component';
 import { UserViewComponent } from './components/user-view/user-view.component';
 import { AdComponent } from './components/ad/ad.component';
 import { AdViewComponent } from './components/ad-view/ad-view.component';
+import { NewadComponent } from './components/newad/newad.component';
+import { RateComponent } from './components/rate/rate.component';
+import { RateViewComponent } from './components/rate-view/rate-view.component';
 
 
 @NgModule({
@@ -27,6 +30,9 @@ import { AdViewComponent } from './components/ad-view/ad-view.component';
     UserViewComponent,
     AdComponent,
     AdViewComponent,
+    NewadComponent,
+    RateComponent,
+    RateViewComponent,
   ],
   imports: [
     BrowserModule,

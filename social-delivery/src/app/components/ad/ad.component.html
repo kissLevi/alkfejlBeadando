@@ -1,8 +1,48 @@
 <mat-list-item>
   <h3 mat-line>
-    {{ad.description}}
+    {{ad.name}}
   </h3>
   <p mat-line>
-      {{ad.price}} Ft {{ad.location}}  {{ad.deadline}} {{ad.status}} <button mat-raised-button color="primary" (click)="accept()" >Elfogadás</button>
+       {{ad.location}}   {{ad.price}} Ft {{ad.deadline}} 
   </p>
+  <p mat-line>
+    {{ad.description}} 
+  </p>
+  <p mat-line>
+      <button  mat-button color="primary" (click)="accept()" >Elfogadás</button>
+  </p>
+    
 </mat-list-item>
+<!-- <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          {{ad.name}}
+      </mat-panel-title>
+      <mat-panel-description>
+          {{ad.location}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <table class = "list">
+        <tr>
+          <th>Név:</th>
+          <td>{{ad.name}}</td> 
+        </tr>
+        <tr>
+          <th>Helyszín</th>
+          <td>{{ad.location}}</td> 
+        </tr>
+        <tr>
+          <th>Határidő</th>
+          <td>{{ad.deadline}}</td> 
+        </tr>
+        <tr>
+          <th>Leírás</th>
+          <td>{{ad.description}}</td> 
+        </tr>
+      </table>
+    <p mat-line>
+        {{ad.description}} Ft {{ad.location}}  {{ad.deadline}} <button mat-raised-button color="primary" (click)="accept()" >Elfogadás</button>
+    </p>
+  </mat-expansion-panel>
+
+   -->

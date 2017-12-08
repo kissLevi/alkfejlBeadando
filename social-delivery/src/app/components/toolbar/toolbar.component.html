@@ -6,8 +6,8 @@
   <span *ngIf = "loggedIn" class="fillingLeft"></span>
   <span *ngIf = "loggedIn">
     <button mat-button routerLink="/ads">Hírdetések</button>
-    <button mat-button>Hírdetés feladás</button>
-    <button mat-button>Felhasználó értékelése</button>
+    <button mat-button routerLink="/newAd">Hírdetés feladás</button>
+    <button mat-button routerLink="/rate">Felhasználó értékelése</button>
   </span>
   <span *ngIf = "loggedIn" class="fillingRight"></span>
   <span *ngIf = "loggedIn">

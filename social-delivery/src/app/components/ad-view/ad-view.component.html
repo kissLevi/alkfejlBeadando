@@ -1,5 +1,13 @@
 <mat-card class="adList">
-  <mat-list>
-    <app-ad *ngFor="let ad of ads" [ad]="ad" (acceptEvent) = "acceptAd($event)"></app-ad>
-  </mat-list>
+  <mat-tab-group>
+    <mat-tab label="Összes Hírdetés">
+      <mat-list>
+        <app-ad *ngFor="let ad of ads" [ad]="ad" (acceptEvent) = "acceptAd($event)"></app-ad>
+      </mat-list>
+    </mat-tab>
+    <mat-tab label="Saját hírdetéseim"> </mat-tab>
+    <mat-tab label="Hírdetés feladása">
+    </mat-tab>
+    <mat-tab label="Elválalt szálítások"> </mat-tab>
+  </mat-tab-group>
 </mat-card>

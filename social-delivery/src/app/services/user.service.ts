@@ -32,11 +32,11 @@ export class UserService {
   }
 
   public getUserProfile(id: number):Observable<any>{
-    return this.httpClien.get(api + 'users/' + id)
+    return this.httpClien.get(api + 'user/' + id)
   }
 
   public updateUserProfile(id: number, un: string, pw: string):Observable<any>{
-    return this.httpClien.put(api + "users/" + id,
+    return this.httpClien.put(api + "user/" + id,
     {
       "username": un,
       "password": pw

@@ -11,6 +11,7 @@ export class Ad {
     private _id:number;
     
     public constructor(
+        private _name:string,
         private _description:string,
         private _location:string,
         private _price:number,
@@ -20,6 +21,11 @@ export class Ad {
     get id():number{
         return this._id;
     }
+
+    get name():string{
+        return this._name;
+    }
+    
     get description(): string {
         return this._description;
     }

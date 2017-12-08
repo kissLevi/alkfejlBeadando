@@ -22,6 +22,14 @@ export class AdService {
     return result;
   }
 
+  public getAdsOfUser(): Observable<Ad[]> {
+    const result = new Subject<Ad[]>();
+    this.httpClient.get(api + "user/ads").subscribe((ads)=>{
+      result.next((ads as Ad[]));
+    })
+    return result;
+  }
+
   public acceptAd(id:number): Observable<any>{
     return this.httpClient.put(api + "ads/"+id+"/accept",{});
   }
