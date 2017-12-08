@@ -16,6 +16,7 @@ import { AdViewComponent } from './components/ad-view/ad-view.component';
 import { NewadComponent } from './components/newad/newad.component';
 import { RateComponent } from './components/rate/rate.component';
 import { RateViewComponent } from './components/rate-view/rate-view.component';
+import { AdExtendComponent } from './components/ad-extend/ad-extend.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { RateViewComponent } from './components/rate-view/rate-view.component';
     NewadComponent,
     RateComponent,
     RateViewComponent,
+    AdExtendComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,15 +9,25 @@ export enum Status{
 
 export class Ad {
     private _id:number;
-    
+
     public constructor(
         private _name:string,
         private _description:string,
         private _location:string,
         private _price:number,
-        private _deadline:Date,
+        private _deadline:number,
         private _status:Status,
+        private _costumer_id:number,
+        private _deliver_id:number
     ) {}
+    get deliver_id():number{
+        return this._deliver_id;
+    }
+
+    get costumer_id():number{
+        return this._costumer_id;
+    }
+
     get id():number{
         return this._id;
     }
@@ -44,10 +54,10 @@ export class Ad {
     set price(value:number){
         this._price = value;
     }
-    get deadline():Date{
+    get deadline():number{
         return this._deadline;
     }
-    set deadline(value:Date){
+    set deadline(value:number){
         this._deadline = value;
     }
     get status():Status{
@@ -56,5 +66,4 @@ export class Ad {
     set status(value:Status){
         this._status = value;
     }
-    
 }

@@ -7,13 +7,15 @@ import { AdViewComponent } from '../../components/ad-view/ad-view.component';
 import { NewadComponent } from '../../components/newad/newad.component';
 import { RateViewComponent } from '../../components/rate-view/rate-view.component';
 
+import { RateComponent } from '../../components/rate/rate.component';
+
 
 const appRoutes: Routes = [
   { path: '', component: MainpageViewComponent, pathMatch: 'full' },
   { path: 'user', component: UserViewComponent },
   { path: 'ads', component: AdViewComponent},
   { path: 'newAd', component : NewadComponent},
-  { path: 'rate', component : RateViewComponent}
+  { path: 'rate', component : RateComponent}
 ];
 
 @NgModule({

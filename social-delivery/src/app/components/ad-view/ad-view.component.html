@@ -1,11 +1,21 @@
-<mat-card class="adList">
-  <mat-tab-group>
-    <mat-tab label="Összes Hírdetés">
-      <mat-list>
-        <app-ad *ngFor="let ad of ads" [ad]="ad" (acceptEvent) = "acceptAd($event)"></app-ad>
-      </mat-list>
+<mat-progress-bar *ngIf="!authService.getUser()" mode="indeterminate"></mat-progress-bar>
+
+<mat-card *ngIf="authService.getUser()" class="adList">
+  <mat-tab-group >
+    <mat-tab  label="Összes Hírdetés">
+      <mat-card-content>
+        <mat-list>
+          <app-ad *ngFor="let ad of allAds" [owner]="false" [ad]="ad" (acceptEvent) = "acceptAd($event)"></app-ad>
+        </mat-list>
+      </mat-card-content>
     </mat-tab>
-    <mat-tab label="Saját hírdetéseim"> </mat-tab>
+    <mat-tab label="Saját hírdetéseim">
+      <mat-card-content>
+        <mat-list>
+            <app-ad *ngFor="let ad of ownAds" [owner]="true" [ad]="ad" (extend)="extend($event)" (delete)="delete($event)" (acceptEvent) = "acceptAd($event)"></app-ad>
+        </mat-list>
+      </mat-card-content>
+    </mat-tab>
     <mat-tab label="Hírdetés feladása">
     </mat-tab>
     <mat-tab label="Elválalt szálítások"> </mat-tab>

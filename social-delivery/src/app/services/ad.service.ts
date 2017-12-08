@@ -14,10 +14,10 @@ export class AdService {
     private httpClient: HttpClient
   ) {}
 
-  public getAds(): Observable<Ad[]> {
+  public getAllAvailableAds(): Observable<Ad[]> {
     const result = new Subject<Ad[]>();
     this.httpClient.get(api + "ads").subscribe((ads)=>{
-      result.next((ads as Ad[]).filter(ad => ad.status == "PENDING"));
+      result.next((ads as Ad[]).filter(ad => ad.status == "PENDING" && ad.deadline> new Date().getTime()));
     })
     return result;
   }
@@ -32,6 +32,14 @@ export class AdService {
 
   public acceptAd(id:number): Observable<any>{
     return this.httpClient.put(api + "ads/"+id+"/accept",{});
+  }
+
+  public deleteAd(id:number): Observable<any>{
+    return this.httpClient.delete(api+"/ads/"+id);
+  }
+
+  public updateAd(ad:Ad): Observable<any>{
+    return this.httpClient.put(api+"/ads/"+ad.id,ad);
   }
 
 }
