@@ -43,11 +43,26 @@ export class AdViewComponent implements OnInit {
   }
 
   public delete(adId:number){
+    let index:number = this.ownAds.findIndex(a=>a.id==adId);
     this.adService.deleteAd(adId).subscribe(()=>{
-      this.adService.getAdsOfUser().subscribe((ads : Ad[])=>{
-        this._ownerAds.next(ads);
-      });
+      this.ownAds.splice(index,1);
     })
+  }
+
+  public deliverAd(adData:{delivered:boolean,id:number}){
+    let index:number = this.ownAds.findIndex(a=>a.id==adData.id);
+    if(adData.delivered){
+      this.adService.completed(adData.id).subscribe((result)=>{
+        this.ownAds.splice(index,1);
+        console.log(result);
+      })
+    }
+    else if(!adData.delivered){
+      this.adService.failedToComplete(adData.id).subscribe((result)=>{
+        this.ownAds.splice(index,1);
+        console.log(result);
+      })
+    }
   }
 
   constructor(

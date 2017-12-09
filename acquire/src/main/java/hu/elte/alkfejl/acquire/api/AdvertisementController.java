@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 //PUT /api/ads/id/accept     Make an ad accepted if a deliver accepts it
 //PUT /api/ads/id/complete   Remove the ad from database and making pendingratings for the customer and the deliver
+//PUT /api/ads/id/complete   Remove the ad from database and add bad rating to deliver
 
 @RestController
 @RequestMapping("api/ads")
@@ -89,8 +90,18 @@ public class AdvertisementController {
     public ResponseEntity doneAdvertisement(@PathVariable int adId){
         if(adService.completeAd(new Long(adId), sessionService.getCurrentUser().getId()))
         {
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(200);
         }
-        return ResponseEntity.badRequest().build();   
+        return ResponseEntity.ok(400);   
+    }
+    
+    @Role({User.Role.USER, User.Role.ADMIN})
+    @PutMapping("{adId}/failedTocomplete")
+    public ResponseEntity failedToComplete(@PathVariable int adId){
+        if(adService.failAd(new Long(adId), sessionService.getCurrentUser().getId()))
+        {
+            return ResponseEntity.ok(200);
+        }
+        return ResponseEntity.ok(400);   
     }
 }

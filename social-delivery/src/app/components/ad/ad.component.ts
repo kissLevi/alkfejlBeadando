@@ -20,10 +20,16 @@ export class AdComponent implements OnInit {
   @Output() extend= new EventEmitter();
   
   @Output() delete= new EventEmitter();
+
+  @Output() delivered= new EventEmitter();
   
-  // public owner():boolean{
-  //   return this.ad.costumer_id == this.userId;
-  // }
+  public successfulyDelivered(delivered:boolean):void{
+    this.delivered.emit({delivered:delivered,id:this.ad.id});
+  }
+  public notDelivered():void{
+
+  }
+
 
   public deleteEvent():void{
     this.delete.emit(this.ad.id);

@@ -38,7 +38,7 @@ public class RatingService {
             newRating.setRating(rating.getRating());
             newRating.setDescription(rating.getDescription());
             
-            rated.setRating(calculateNewRating(rated, rating.getRating()));
+            rated.setRating(calculateNewRating(rated, rating.getRating(),this.ratingRepository));
             
             ratingRepository.save(newRating);
             userRepository.save(rated);
@@ -49,7 +49,7 @@ public class RatingService {
           }
     }
     
-    private float calculateNewRating(User rated,float newRatingValue){
+    public static float calculateNewRating(User rated,float newRatingValue, RatingRepository ratingRepository){
         float numberOfRatings = ratingRepository.sum(rated);
         float newRating = ((rated.getRating() * numberOfRatings) + newRatingValue) / (numberOfRatings==0?1:numberOfRatings+1);
         return newRating;
