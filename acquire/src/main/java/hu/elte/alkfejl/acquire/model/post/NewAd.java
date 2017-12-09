@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class NewAd {
+    private String name;
+    
     private String description;
 
     private String location;

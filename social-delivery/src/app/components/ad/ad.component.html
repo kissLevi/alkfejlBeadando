@@ -1,23 +1,25 @@
 <mat-list-item>
-  <h2 *ngIf="haveToUpdate()" mat-line style="color:rgb(187, 100, 100)">
-    {{ad.name}} LEJÁRT
-  </h2>
-  <h2 *ngIf="!haveToUpdate()" mat-line>
-      {{ad.name}}
+    <h2 *ngIf="haveToUpdate()" mat-line style="color:rgb(187, 100, 100)">
+      {{ad.name}} LEJÁRT
     </h2>
-  <p mat-line>
-       {{ad.location}} {{ad.price}} Ft 
-  </p>
-  <p mat-line>
-    {{ad.description}} 
-    {{ad.deliver_id}} 
-    {{getDate()}}
-  </p>
-  <p mat-line>
-      <button *ngIf="owner" mat-button color="primary" (click)="accept()" >Elfogadás</button>
-      <app-ad-extend *ngIf="haveToUpdate() && owner"(extendEvent)="extendEvent($event)"(deleteEvent)="deleteEvent()"></app-ad-extend>
-  </p> 
-</mat-list-item>
+    <h2 *ngIf="!haveToUpdate()" mat-line>
+        {{ad.name}}
+      </h2>
+    <p mat-line>
+         {{ad.location}} {{ad.price}} Ft 
+    </p>
+    <p mat-line>
+      {{ad.description}} 
+     
+    </p>
+    <p *ngIf="!haveToUpdate()" mat-line>
+      {{timeleft()}}
+    </p>
+    <div>
+        <button *ngIf="owner==false && !haveToUpdate()" mat-button color="primary" (click)="accept()" >Elfogadás</button>
+        <app-ad-extend *ngIf="owner && haveToUpdate()" (extendEvent)="extendEvent($event)"(deleteEvent)="deleteEvent()"></app-ad-extend>
+    </div>
+  </mat-list-item>
 <!-- <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>

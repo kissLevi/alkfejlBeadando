@@ -21,6 +21,7 @@ public class Ad extends BaseEntity {
    
     
     public Ad(NewAd ad,User costumer){
+        name = ad.getName();
         description = ad.getDescription();
         location = ad.getLocation();
         price = ad.getPrice();
@@ -29,6 +30,10 @@ public class Ad extends BaseEntity {
         deliver_id = costumer;
         status = status.PENDING;
     }
+    
+    @Column(nullable = false)
+    private String name;
+    
     
     @Column(nullable = false)
     private String description;
@@ -66,11 +71,11 @@ public class Ad extends BaseEntity {
         this.price=ad.getPrice();
     }
     
-    public String getDeadline(){
-        SimpleDateFormat ft = 
-                new SimpleDateFormat ("E yyyy.MM.dd hh:mm:ss ");
-        return ft.format(deadline);
-    }
+//    public String getDeadline(){
+//        SimpleDateFormat ft = 
+//                new SimpleDateFormat ("E yyyy.MM.dd hh:mm:ss ");
+//        return ft.format(deadline);
+//    }
 //    
     public Long getCostumer_id(){
         return costumer_id.getId();

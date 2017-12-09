@@ -10,19 +10,28 @@ export class AdExtendComponent implements OnInit {
   @Output() extendEvent = new EventEmitter();
   @Output() deleteEvent = new EventEmitter();
   
-  private inputDate:string;
+
+  private timeInMilliseconds:number;
+
+  private timeInHoursMinutes:string;
 
   public extend():void{
-    this.extendEvent.emit(this.inputDate);
+    this.extendEvent.emit(this.timeInMilliseconds);
   }
 
   public remove():void{
     this.deleteEvent.emit(null);
   }
 
-  setDate(event: MatDatepickerInputEvent<Date>) {
-    this.inputDate = `${event.value}`;
+  public valueChanged(change){
+
+    this.timeInMilliseconds = (change.value as number)*3600000;
+    const timeLeft: Date = new Date(this.timeInMilliseconds);
+    // const h:string = (timeLeft.getHours()-1)+"";
+    // const m:string = timeLeft.getMinutes().toString();
+    // this.timeInHoursMinutes = h+"óra"+m+"perc"
   }
+
 
   constructor() { }
 

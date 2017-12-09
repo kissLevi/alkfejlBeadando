@@ -50,3 +50,11 @@ mat-list-item{
 mat-expansion-panel {
   flex:auto
 }
+
+mat-slider {
+  width: 300px;
+}
+
+app-ad-extend{
+  margin-top:20px;
+}

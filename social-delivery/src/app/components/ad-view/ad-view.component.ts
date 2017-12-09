@@ -16,10 +16,13 @@ export class AdViewComponent implements OnInit {
   private allAds:Ad[];
   private ownAds:Ad[];
   private deliveries:Ad[];
-  private user:User;
 
   private _ownerAds = new BehaviorSubject<Ad[]>([]);
 
+
+  public ownerOfAd(ad:Ad):boolean{
+    return this.authService.getUser().id == ad.costumer_id;
+  }
   
   public acceptAd(id:number):void{
     this.adService.acceptAd(id).subscribe(()=>{
@@ -30,13 +33,15 @@ export class AdViewComponent implements OnInit {
   }
 
   public extend(date){
-    const newDate: number = date.date as number;
+    const newDate: number = new Date().getTime()+ date.date as number;
     const id:number = date.id;
     let newAd:Ad = this.ownAds.find(a=>a.id == id);
-    newAd.deadline = newDate
-    console.log(newDate);
-    
+    this.allAds.push(newAd);
+    newAd.deadline =  parseInt((newDate as number).toFixed(0))
+    this.adService.updateAd(newAd).subscribe((newAd)=>{
+    }); 
   }
+
   public delete(adId:number){
     this.adService.deleteAd(adId).subscribe(()=>{
       this.adService.getAdsOfUser().subscribe((ads : Ad[])=>{
@@ -52,14 +57,12 @@ export class AdViewComponent implements OnInit {
 
   ngOnInit() {
     this.authService.syncLoginStatus();
-    this.user = UserService.getUser();
     this._ownerAds.subscribe((ads :Ad[])=>{
       this.ownAds = ads.filter(ad => ad.costumer_id == UserService.getUser().id);
       this.deliveries = this.ownAds
     })
 
     this.adService.getAllAvailableAds().subscribe((ads : Ad[])=>{
-      console.log(ads)
       this.allAds = ads;
     });
     this.adService.getAdsOfUser().subscribe((ads:Ad[])=>{

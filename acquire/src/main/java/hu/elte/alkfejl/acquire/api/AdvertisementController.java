@@ -70,7 +70,7 @@ public class AdvertisementController {
     @DeleteMapping("/{adID}")
     private ResponseEntity deleteAd(@PathVariable int adID){
         if(adService.deleteAd(adID,sessionService.getCurrentUser().getId())){
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(200);
         }
         return ResponseEntity.badRequest().build();    
     }
@@ -79,9 +79,9 @@ public class AdvertisementController {
     @PutMapping("{adId}/accept")
     public ResponseEntity acceptAdvertisement(@PathVariable int adId){
         if(adService.acceptAd(sessionService.getCurrentUser().getId(), adId)){
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(200);
         }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok(400);
     }
 
     @Role({User.Role.USER, User.Role.ADMIN})

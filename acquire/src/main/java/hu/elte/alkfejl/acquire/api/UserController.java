@@ -17,27 +17,30 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-//GET   /api/users                List all users
+//GET   /api/user/users                List all users
 
 //GET   /api/user/:id             List one user with {id}
 //DELETE /api/user/:id            Delete one user with all his other info in tables.
 //PUT   /api/user/:id             Update a user, request a PostUser model type body.
 
-//GET   /api/users/:id/ads        List one specific user's ads
+//GET   /api/user/ads        List logged user's ads
 
-//GET   /api/users/:id/balance    Show one user's available balance
-//POST  /api/users/:id/balance    ADMIN can credit a payment to one user's balance, requests a JSON with one number
+//GET   /api/user/:id/balance    Show one user's available balance
+//POST  /api/user/:id/balance    ADMIN can credit a payment to one user's balance, requests a JSON with one number
 
 //
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class UserController {
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private SessionService sessionService;
 
     @Role({User.Role.ADMIN, User.Role.USER})
-    @GetMapping
+    @GetMapping("/users")
     private ResponseEntity<Iterable<User>> listUsers(){
         Iterable<User> users = userService.listAll();
         return ResponseEntity.ok(users);
@@ -56,9 +59,9 @@ public class UserController {
     }
 
     @Role({User.Role.ADMIN, User.Role.USER})
-    @GetMapping("/{userID}/ads")
-    public ResponseEntity getAdsOfUser(@PathVariable int userID){
-        User user = userService.listOne(new Long(userID));
+    @GetMapping("/ads")
+    public ResponseEntity getAdsOfUser(){
+        User user = userService.listOne(this.sessionService.getCurrentUser().getId());
         if(user != null){
             return ResponseEntity.ok(user.getAds());
         }else{

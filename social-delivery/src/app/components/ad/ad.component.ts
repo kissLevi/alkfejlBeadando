@@ -16,7 +16,7 @@ export class AdComponent implements OnInit {
   private owner:boolean;
 
   @Output() acceptEvent = new EventEmitter();
-  
+
   @Output() extend= new EventEmitter();
   
   @Output() delete= new EventEmitter();
@@ -33,13 +33,17 @@ export class AdComponent implements OnInit {
     this.extend.emit({date:date,id:this.ad.id});
   }
 
+
   public haveToUpdate():boolean{
     return this.ad.deadline < new Date().getTime();
   }
 
-  public getDate():Date{
-    const d: Date = new Date(this.ad.deadline);
-    return d;
+  public timeleft():string{
+    const timeLeft: Date = new Date(this.ad.deadline - new Date().getTime());
+    const d:string = ((this.ad.deadline - new Date().getTime())/86400000).toFixed(0);
+    const h:string = (timeLeft.getHours()-1).toString();
+    const m:string = timeLeft.getMinutes().toString();
+    return  (d == "0"?"" : d + " nap ")+ (h=="0"?"":h + " óra ") + (m=="0"? "":m +" perc")
   }
   public accept(): void{
     this.acceptEvent.emit(this.ad.id);

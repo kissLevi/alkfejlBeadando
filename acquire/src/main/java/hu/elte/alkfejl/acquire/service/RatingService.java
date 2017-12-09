@@ -31,7 +31,7 @@ public class RatingService {
         if(pendingRating.isPresent()){
             Rating newRating = pendingRating.get();
             User rater = newRating.getRater();
-            User rated = newRating.getRatedUser();
+            User rated = newRating.getRatedUserData();
             
             rater.getPendigRatings().remove(pendingRating.get());
             
