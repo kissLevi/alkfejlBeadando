@@ -89,6 +89,38 @@ public class AdService {
         }
     }
     
+    public boolean failAd(Long id, Long userID){
+        try{
+            Ad currentAd = advertisementRepository.findOne(id);
+            if(currentAd.getCostumer_id().equals(userID) && currentAd.getStatus().equals(Ad.Status.ACCEPTED)){
+                advertisementRepository.delete(currentAd);
+                
+                User customer = userRepository.findOne(currentAd.getCostumer_id());
+                User deliver = userRepository.findOne(currentAd.getDeliver_id());
+
+                int amount = currentAd.getPrice();
+                
+                Rating newDeliverRating = new Rating(customer, deliver, Rating.RatingType.DELIVER);
+                newDeliverRating.setRating(1);
+                newDeliverRating.setDescription("Nem ért célba a megadott időn belül");
+                
+                customer.addBalance(currentAd.getPrice());
+                deliver.setRating(RatingService.calculateNewRating(deliver, 1, ratings));
+                
+                ratings.save(newDeliverRating);
+                userRepository.save(customer);
+                userRepository.save(deliver);
+                return true;
+            }
+            else{
+                return false;
+            }
+        }catch(NullPointerException ex){
+            return false;
+        }   
+        
+    }
+    
     public boolean completeAd(Long id, Long userID){
         try{
             Ad currentAd = advertisementRepository.findOne(id);

@@ -12,7 +12,15 @@
     <mat-tab label="Saját hírdetéseim">
       <mat-card-content>
         <mat-list>
-            <app-ad *ngFor="let ad of ownAds" [owner]="ownerOfAd(ad)" [ad]="ad" (extend)="extend($event)" (delete)="delete($event)" (acceptEvent) = "acceptAd($event)"></app-ad>
+          <app-ad *ngFor="let ad of ownAds" 
+            [owner]="ownerOfAd(ad)" 
+            [ad]="ad" 
+            (extend)="extend($event)" 
+            (delete)="delete($event)" 
+            (acceptEvent) = "acceptAd($event)"
+            (delivered) = "deliverAd($event)"
+            >
+          </app-ad>
         </mat-list>
       </mat-card-content>
     </mat-tab>

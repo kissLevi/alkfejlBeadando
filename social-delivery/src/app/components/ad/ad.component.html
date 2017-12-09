@@ -15,9 +15,13 @@
     <p *ngIf="!haveToUpdate()" mat-line>
       {{timeleft()}}
     </p>
+    <p mat-line>
+      <button *ngIf="owner==false && !haveToUpdate()" mat-button color="primary" (click)="accept()" >Elfogadás</button>
+      <button *ngIf="ad.status=='ACCEPTED'" mat-button color="primary" (click)="successfulyDelivered(true)">Megérkezett</button>
+      <button *ngIf="ad.status=='ACCEPTED'" mat-button color="primary"(click)="successfulyDelivered(false)">Nem érkezett meg</button>
+    </p>
     <div>
-        <button *ngIf="owner==false && !haveToUpdate()" mat-button color="primary" (click)="accept()" >Elfogadás</button>
-        <app-ad-extend *ngIf="owner && haveToUpdate()" (extendEvent)="extendEvent($event)"(deleteEvent)="deleteEvent()"></app-ad-extend>
+        <app-ad-extend *ngIf="owner && haveToUpdate() && ad.status!='ACCEPTED'" (extendEvent)="extendEvent($event)"(deleteEvent)="deleteEvent()"></app-ad-extend>
     </div>
   </mat-list-item>
 <!-- <mat-expansion-panel>

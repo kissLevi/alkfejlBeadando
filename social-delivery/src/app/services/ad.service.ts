@@ -42,6 +42,14 @@ export class AdService {
     return this.httpClient.put(api+"/ads/"+ad.id,ad);
   }
 
+  public completed(id:number):Observable<any>{
+    return this.httpClient.put(api + "/ads/"+id+"/complete",{})
+  }
+
+  public failedToComplete(id:number):Observable<any>{
+    return this.httpClient.put(api + "/ads/"+id+"/failedTocomplete",{})
+  }
+
 }
 
 
