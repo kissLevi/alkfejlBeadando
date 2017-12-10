@@ -4,6 +4,7 @@ import { FormChecker } from '../../classes/form-checker';
 import { AuthService } from '../../services/auth.service';
 import { ErrorStateMatcher } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 
@@ -31,6 +32,9 @@ export class LoginformComponent implements OnInit {
             this.passwordError.errorStatus = true;
           }
         }
+        else{
+          this.router.navigate(['/ads']);
+        }
       });
   }
   formControl = new FormControl('', [
@@ -40,7 +44,8 @@ export class LoginformComponent implements OnInit {
   
 
   constructor(
-    private authService:AuthService
+    private authService:AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {

@@ -28,6 +28,7 @@ export class MainpageViewComponent implements OnInit {
   ngOnInit() {
     this.authService.syncLoginStatus();
 
+
     // this.adService.getAds().subscribe((ads: Ad[]) => {
     //   this._ads = ads;
     // });
