@@ -41,7 +41,7 @@ public class AdService {
     }
     
     
-    public boolean newAd(Long userId,NewAd ad){
+    public Ad newAd(Long userId,NewAd ad){
         User ownerOfAdd = userRepository.findOne(userId);
         if(ownerOfAdd.getBalance()>=ad.getPrice()){
             Ad newAd = new Ad(ad,ownerOfAdd);
@@ -50,9 +50,9 @@ public class AdService {
             advertisementRepository.save(newAd);
             userRepository.save(ownerOfAdd);
             
-            return true;
+            return newAd;
         }
-        return false;
+        return null;
     }
     
     
@@ -106,7 +106,8 @@ public class AdService {
                 
                 customer.addBalance(currentAd.getPrice());
                 deliver.setRating(RatingService.calculateNewRating(deliver, 1, ratings));
-                
+                System.out.println(deliver.getPendigRatings());
+                System.out.println(customer.getPendigRatings());
                 ratings.save(newDeliverRating);
                 userRepository.save(customer);
                 userRepository.save(deliver);

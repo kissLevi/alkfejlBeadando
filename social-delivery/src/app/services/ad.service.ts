@@ -14,18 +14,18 @@ export class AdService {
     private httpClient: HttpClient
   ) {}
 
-  public getAllAvailableAds(): Observable<Ad[]> {
-    const result = new Subject<Ad[]>();
-    this.httpClient.get(api + "ads").subscribe((ads)=>{
-      result.next((ads as Ad[]).filter(ad => ad.status == "PENDING" && ad.deadline> new Date().getTime()));
-    })
-    return result;
-  }
-
   public getAdsOfUser(): Observable<Ad[]> {
     const result = new Subject<Ad[]>();
     this.httpClient.get(api + "user/ads").subscribe((ads)=>{
       result.next((ads as Ad[]));
+    })
+    return result;
+  }
+
+  public getAllAds():Observable<Ad[]>{
+    const result = new Subject<Ad[]>();
+    this.httpClient.get(api + "ads").subscribe((ads)=>{
+      result.next(ads as Ad[]);
     })
     return result;
   }
@@ -50,15 +50,13 @@ export class AdService {
     return this.httpClient.put(api + "/ads/"+id+"/failedTocomplete",{})
   }
 
+  public addAd(ad:Ad):Observable<Ad>{
+    const result = new Subject<Ad>();
+    this.httpClient.post(api + "ads",{name:ad.name,description:ad.description,location:ad.location,price:ad.price,deadline:ad.deadline}).subscribe((newAd)=>{
+      result.next(newAd as Ad);
+    })
+    return result;
+
+  }
+
 }
-
-
-// const result = new Subject<number>();
-// this.httpClient.post(api + 'login', { username, password }).subscribe((user) => {
-//   UserService.setUser( user as User);
-//   result.next(200);
-// }, (error: HttpErrorResponse) => {
-//   UserService.setUser(null as User);
-//   result.next(error.status);
-// });
-// return result;

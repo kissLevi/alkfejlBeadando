@@ -11,12 +11,12 @@ import { MainpageViewComponent } from './components/mainpage-view/mainpage-view.
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { UserComponent } from './components/user/user.component';
 import { UserViewComponent } from './components/user-view/user-view.component';
-import { AdComponent } from './components/ad/ad.component';
-import { AdViewComponent } from './components/ad-view/ad-view.component';
-import { NewadComponent } from './components/newad/newad.component';
+import { AdComponent } from './components/adComponents/ad/ad.component';
+import { AdViewComponent } from './components/adComponents/ad-view/ad-view.component';
+import { NewadComponent } from './components/adComponents/newad/newad.component';
 import { RateComponent } from './components/rate/rate.component';
 import { RateViewComponent } from './components/rate-view/rate-view.component';
-import { AdExtendComponent } from './components/ad-extend/ad-extend.component';
+import { AdExtendComponent } from './components/adComponents/ad-extend/ad-extend.component';
 
 
 @NgModule({

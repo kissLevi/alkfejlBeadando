@@ -41,10 +41,11 @@ public class AdvertisementController {
     @PostMapping
     public ResponseEntity addAdvertisement(@RequestBody NewAd ad)
     {
-        if(adService.newAd(sessionService.getCurrentUser().getId(), ad)){
-            return ResponseEntity.ok().build();  
+        Ad newAd = adService.newAd(sessionService.getCurrentUser().getId(), ad);
+        if(newAd != null){
+            return ResponseEntity.ok(newAd);  
         }   
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok(400);
     }
     
     @Role({User.Role.USER, User.Role.ADMIN})

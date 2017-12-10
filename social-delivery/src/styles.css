@@ -58,3 +58,11 @@ mat-slider {
 app-ad-extend{
   margin-top:20px;
 }
+
+mat-form-field.addAd{
+  width: 300px;
+}
+
+.mat-tab-labels{
+  justify-content: center; /* align items in Main Axis */
+}

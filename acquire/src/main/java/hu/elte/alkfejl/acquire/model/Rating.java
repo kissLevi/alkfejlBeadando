@@ -25,7 +25,7 @@ public class Rating extends BaseEntity{
 
     @JsonIgnore
     @JoinColumn(name="rater_id")
-    @OneToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class,fetch=FetchType.LAZY)
     private User rater;
    
     @Column(nullable = false)
@@ -37,7 +37,7 @@ public class Rating extends BaseEntity{
 
     @JsonIgnore
     @JoinColumn(name="rated_id", nullable=false)
-    @OneToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class,fetch=FetchType.LAZY)
     private User rated;
 
    
