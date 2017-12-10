@@ -22,4 +22,16 @@ export class RatingService {
     return result;
   }
 
+  public getOwnRatings():Observable<any>{
+    return this.httpClient.get(api+"/ratings");
+  }
+
+  public getPendingRatings():Observable<any>{
+    return this.httpClient.get(api+"/ratings/available");
+  }
+
+  public rate({rating,description,id}):Observable<any>{
+    return this.httpClient.put(api + "ratings/available/"+id,{description,rating})
+  }
+
 }

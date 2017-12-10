@@ -1,7 +1,7 @@
 <mat-progress-bar *ngIf="!authService.getUser()" mode="indeterminate"></mat-progress-bar>
 
 <mat-card *ngIf="authService.getUser()" class="adList">
-  <mat-tab-group align="center">
+  <mat-tab-group>
     <mat-tab  label="Összes Hírdetés">
       <mat-card-content>
         <mat-list>

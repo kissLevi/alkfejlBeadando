@@ -1,19 +1,21 @@
-<mat-list-item>
+<mat-list-item class="adListItem">
     <h2 *ngIf="haveToUpdate()" mat-line style="color:rgb(187, 100, 100)">
       {{ad.name}} LEJÁRT
     </h2>
     <h2 *ngIf="!haveToUpdate()" mat-line>
-        {{ad.name}}
-      </h2>
+        Hírdetés neve: {{ad.name}}
+    </h2>
     <p mat-line>
-         {{ad.location}} {{ad.price}} Ft 
+        Célpont: {{ad.location}} 
     </p>
     <p mat-line>
-      {{ad.description}} 
-     
+        Jutalom: {{ad.price}} Ft 
+    </p>
+    <p mat-line>
+      Megjegyzés: {{ad.description}} 
     </p>
     <p *ngIf="!haveToUpdate()" mat-line>
-      {{timeleft()}}
+      Hátralévő idő: {{timeleft()}}
     </p>
     <p mat-line>
       <button *ngIf="ad.status!='ACCEPTED' && owner==false && !haveToUpdate()" mat-button color="primary" (click)="accept()" >Elfogadás</button>
@@ -24,36 +26,3 @@
         <app-ad-extend *ngIf="owner && haveToUpdate() && ad.status!='ACCEPTED'" (extendEvent)="extendEvent($event)"(deleteEvent)="deleteEvent()"></app-ad-extend>
     </div>
   </mat-list-item>
-<!-- <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-          {{ad.name}}
-      </mat-panel-title>
-      <mat-panel-description>
-          {{ad.location}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <table class = "list">
-        <tr>
-          <th>Név:</th>
-          <td>{{ad.name}}</td> 
-        </tr>
-        <tr>
-          <th>Helyszín</th>
-          <td>{{ad.location}}</td> 
-        </tr>
-        <tr>
-          <th>Határidő</th>
-          <td>{{ad.deadline}}</td> 
-        </tr>
-        <tr>
-          <th>Leírás</th>
-          <td>{{ad.description}}</td> 
-        </tr>
-      </table>
-    <p mat-line>
-        {{ad.description}} Ft {{ad.location}}  {{ad.deadline}} <button mat-raised-button color="primary" (click)="accept()" >Elfogadás</button>
-    </p>
-  </mat-expansion-panel>
-
-   -->

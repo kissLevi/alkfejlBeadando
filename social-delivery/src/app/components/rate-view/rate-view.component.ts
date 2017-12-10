@@ -9,17 +9,32 @@ import { Rating } from '../../classes/rating';
   providers: [RatingService]
 })
 export class RateViewComponent implements OnInit {
+  
+
+  private pendingRatings:Rating[];
+  private ownRatings:Rating[];
+
+  public rate({rating,description,id}){
+    this.ratingService.rate({rating,description,id}).subscribe((result)=>{
+      let index:number = this.pendingRatings.findIndex(a=>a.id==id);
+      this.pendingRatings.splice(index,1);
+    })
+    
+  }
+
+
 
   constructor(
     private ratingService:RatingService,
-    private ratings:Rating[]
   ) { }
 
   ngOnInit() {
-    this.ratingService.getRatings().subscribe((ratings)=>{
-      console.log(ratings as Rating[])
-      // this.ratings = ratings as Rating[];
-      // console.log(this.ratings);
+    this.ratingService.getOwnRatings().subscribe((ratings)=>{
+      this.ownRatings = (ratings as Rating[]);
+    })
+
+    this.ratingService.getPendingRatings().subscribe((ratings)=>{
+      this.pendingRatings = (ratings as Rating[]);
     })
   }
 

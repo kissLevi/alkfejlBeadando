@@ -1,3 +1,21 @@
-<p>
-  rate-view works!
-</p>
+<!-- <mat-progress-bar *ngIf="!authService.getUser()" mode="indeterminate"></mat-progress-bar> -->
+
+<mat-card class="rateList">
+  <mat-tab-group>
+    <mat-tab  label="Értékelés írása">
+      <mat-card-content>
+        <mat-list>
+          <app-rate *ngFor="let rating of pendingRatings" (newRating)="rate($event)" [rating]="rating"></app-rate>
+        </mat-list>
+      </mat-card-content>
+    </mat-tab>
+    <mat-tab label="Értékeléseim">
+      <mat-card-content>
+        <mat-list>
+          <app-rate *ngFor="let rating of ownRatings" [rating]="rating"></app-rate>
+        </mat-list>
+      </mat-card-content>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
+

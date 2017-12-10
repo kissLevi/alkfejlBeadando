@@ -1,15 +1,23 @@
+
+
 export enum RatingType{
     DELIVER = "DELIVER",
     CUSTOMER = "CUSTOMER"
 }
+export enum Status{
+    PENDING = "PENDING",
+    DONE = "DONE"
+}
 
 export class Rating {
     constructor(
-        private _id:number,
         private _rating:number,
-        private _description:String,
+        private _description:string,
+        private _status:Status,
         private _type:RatingType,
-        private _ratedUser:String
+        private _id:number,
+        private _ratedUser:string,
+        private _raterUser:string
     ) {}
 
     public get id():number{
@@ -20,7 +28,7 @@ export class Rating {
         return this._rating;
     }
 
-    public get description():String{
+    public get description():string{
         return this._description;
     }
 
@@ -28,7 +36,16 @@ export class Rating {
         return this._type;
     }
 
-    public get ratedUser():String{
+    public get ratedUser():string{
         return this._ratedUser;
     }
+
+    public get raterUser():string{
+        return this._raterUser;
+    }
+
+    public get status():Status{
+        return this._status;
+    }
+
 }

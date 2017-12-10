@@ -1,1 +1,22 @@
-<mat-card>asd</mat-card>
+<mat-list-item *ngIf="rating.status == 'DONE'">
+    
+    
+    <p mat-line>Értékelő: {{rating.raterUser}}</p>
+    <p mat-line>Értékelés: {{rating.rating}}</p>
+    <p mat-line *ngIf="rating.description!=''">Megjegyzés: {{rating.description}}</p>
+
+</mat-list-item>
+
+<mat-expansion-panel *ngIf="rating.status == 'PENDING'">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+            {{rating.ratedUser}}
+      </mat-panel-title>
+      <mat-panel-description>
+            {{rating.type}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-write-rating (rating)="ratingHappened($event)"></app-write-rating>
+  </mat-expansion-panel>
+
+  

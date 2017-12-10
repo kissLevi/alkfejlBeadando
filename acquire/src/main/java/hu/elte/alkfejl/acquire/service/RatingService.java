@@ -20,23 +20,35 @@ public class RatingService {
     @Autowired
     private UserRepository userRepository;
     
-    public List<Rating> getAvailableRating(Long id){
-        return userRepository.findOne(id).getPendigRatings();
+    
+    public List<Rating> getOwnRatings(User user){
+        return ratingRepository.findByRatedUser(user);
+    }
+    
+    
+    public List<Rating> getAvailableRating(User user) throws Exception{
+        Optional<List<Rating>> pendingRatings = this.ratingRepository.listPendingRatings(user);
+        if(pendingRatings.isPresent()){
+            return pendingRatings.get();
+        }
+        else{
+            throw new Exception("The given user has no pending ratings");
+        }
     }
     
     public boolean rate(User currenUser,NewRating rating,int ratingId){
 
-        Optional<Rating> pendingRating = userRepository.getRating(currenUser.getId(),new Long(ratingId)); 
+        Optional<Rating> pendingRating = ratingRepository.getPendingRating(currenUser,new Long(ratingId)); 
         
         if(pendingRating.isPresent()){
             Rating newRating = pendingRating.get();
             User rater = newRating.getRater();
             User rated = newRating.getRatedUserData();
             
-            rater.getPendigRatings().remove(pendingRating.get());
             
             newRating.setRating(rating.getRating());
             newRating.setDescription(rating.getDescription());
+            newRating.setStatus(Rating.RatingStatus.DONE);
             
             rated.setRating(calculateNewRating(rated, rating.getRating(),this.ratingRepository));
             

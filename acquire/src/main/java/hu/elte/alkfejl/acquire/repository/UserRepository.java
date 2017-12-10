@@ -18,8 +18,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
     
     Optional<User> findById(Long id);
     
-    @Query("select pr from User u join u.pendigRatings pr where u.id = ?1 and pr.id = ?2")
-    Optional<Rating> getRating(Long userId,Long ratingId);
+//    @Query("select pr from User u join u.pendigRatings pr where u.id = ?1 and pr.id = ?2")
+//    Optional<Rating> getRating(Long userId,Long ratingId);
 //    @Query("SELECT USERNAME,RATING FROM USER")
 //    List<User> listPublicUserData();
 }

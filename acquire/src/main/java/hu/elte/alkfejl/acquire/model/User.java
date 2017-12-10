@@ -56,9 +56,6 @@ public class User extends BaseEntity{
     @OneToMany(mappedBy = "costumer_id",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Ad> ads;
 
-    @JsonIgnore
-    @OneToMany(cascade=CascadeType.ALL, mappedBy = "rater")
-    private List<Rating> pendigRatings;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "rated")
