@@ -37,7 +37,7 @@ Az oldal célja hogy a hírdetés feladója utánajárás nélkül, biztonságos
 
 ## Adatbázis diagram
 
-![alt text](https://github.com/kissLevi/alkfejlBeadando/blob/master/Entity%20Relationship%20Diagram2.png "adatbazis uml")
+![alt text](https://github.com/kissLevi/alkfejlBeadando/blob/master/diagram/Entity%20Relationship%20Diagram1.png "adatbazis uml")
 
 ## Szerepkörök
 
