@@ -1,3 +1,7 @@
+# INFO:
+Sok változtatás a codeImp branchen található jelenleg!!
+
+
 # Termék beszerző oldal
 
 2017 alkalmazások fejlesztése beadandó projekt.
@@ -103,3 +107,19 @@ Az oldal célja hogy a hírdetés feladója utánajárás nélkül, biztonságos
 
 ## Végpont szekvenciadiagram
 ![alt text](https://github.com/kissLevi/alkfejlBeadando/blob/master/sequencdiagram.png "vegpont szekv diagram")
+
+## Use-case diagram:
+
+![alt text](https://github.com/kissLevi/alkfejlBeadando/blob/master/alkfejl%20(2).png "use-case uml")
+
+## Fejlesztői környezet:
+Visual studio code
+Használata:
+* git klónozása
+* npm install: node-modules telepítése
+* npm start: angular szerver indítása
+* localhost:4200: böngészőben alkalmazás használata
+
+## Alkalmazott könyvtárstruktúra:
+... to be made ...
+
