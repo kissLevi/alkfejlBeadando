@@ -121,5 +121,37 @@ Használata:
 * localhost:4200: böngészőben alkalmazás használata
 
 ## Alkalmazott könyvtárstruktúra:
-... to be made ...
+Az alkalmazás szempontjából legfontosabb könyvtárak, app alatt találhatóak:
+* classes
+  * ad - Hirdetés osztály
+  * form checker - Formokhoz
+  * payment - payment táblához
+  * rating - értékelés osztály
+  * user - felhasználó osztály
+* components
+  * adComponents - hírdetésekhez
+    * ad - alap hirdetés komponens
+    * ad-extend - hirdetés lejárati idejének meghosszabbítása
+    * ad-view - hirdetések megjelenítése
+    * newad - új hirdetés hozzáadsa
+  * introduction - oldal bemutatására szolgáló komponens
+  * loginform - bejelentkezést kezelő
+  * mainpage-view - Főoldal, ahova megérkeznek az oldalt felkeresők
+  * rate - értékelések komponense
+  * rate-view - értékelések megjelenítése
+  * registerform - regisztrációs ürlap
+  * toolbar - navigáció
+  * user - felhasználó komponens
+  * user-view - felhasználó megjelenítése
+  * write-rating - értékelés írása
+* config
+  * api.ts - api belépési pontját definiálja
+* modules
+  * app-router - path végpontok definiálása
+  * ui - felhasználói felületet segítő modulok
+* services
+  * ad - hirdetéseket kiszolgáló service
+  * auth - hitelesítés service
+  * rating - értékeléseket kiszolgáló
+  * user - felhasználókat kiszolgáló
 
