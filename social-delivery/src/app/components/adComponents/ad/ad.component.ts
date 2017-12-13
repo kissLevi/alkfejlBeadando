@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
-import { Ad } from '../../classes/ad';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Ad } from '../../../classes/ad';
 
 @Component({
   selector: 'app-ad',

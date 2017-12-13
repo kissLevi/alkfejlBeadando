@@ -1,13 +1,15 @@
 <div *ngIf="user">
-  <h1>Adatlap</h1>
-  <h2>Felhasznalonev: {{user.username}}</h2>
-  <h2>Egyenleg: {{user.balance}}</h2>
+  <mat-card class="userView">
+  <h2>Adatok</h2>
+  <p mat-line>Felhasznalónév: {{user.username}}</p>
+  <p mat-line>Egyenleg: {{user.balance}}</p>
   <span *ngIf="user.rating!==0">
-    <h2>Értékelés: {{user.rating}}</h2>
+      <p mat-line>Értékelés: {{user.rating}}</p>
   </span>
   <span *ngIf="user.rating===0">
-    <h2>Még nem írtak értékelést</h2>
+      <p mat-line>Még nem írtak értékelést</p>
   </span>
+  </mat-card>
   <button mat-button (click)="edit()">Profil módosítása</button>
   <span *ngIf="editable">
       <mat-card>

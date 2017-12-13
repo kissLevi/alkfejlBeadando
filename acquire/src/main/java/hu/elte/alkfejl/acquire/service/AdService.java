@@ -41,7 +41,7 @@ public class AdService {
     }
     
     
-    public boolean newAd(Long userId,NewAd ad){
+    public Ad newAd(Long userId,NewAd ad){
         User ownerOfAdd = userRepository.findOne(userId);
         if(ownerOfAdd.getBalance()>=ad.getPrice()){
             Ad newAd = new Ad(ad,ownerOfAdd);
@@ -50,9 +50,9 @@ public class AdService {
             advertisementRepository.save(newAd);
             userRepository.save(ownerOfAdd);
             
-            return true;
+            return newAd;
         }
-        return false;
+        return null;
     }
     
     
@@ -100,13 +100,15 @@ public class AdService {
 
                 int amount = currentAd.getPrice();
                 
-                Rating newDeliverRating = new Rating(customer, deliver, Rating.RatingType.DELIVER);
+
+                Rating newDeliverRating = new Rating(customer, deliver, Rating.RatingType.DELIVER,Rating.RatingStatus.DONE);
+                
                 newDeliverRating.setRating(1);
                 newDeliverRating.setDescription("Nem ért célba a megadott időn belül");
                 
                 customer.addBalance(currentAd.getPrice());
                 deliver.setRating(RatingService.calculateNewRating(deliver, 1, ratings));
-                
+
                 ratings.save(newDeliverRating);
                 userRepository.save(customer);
                 userRepository.save(deliver);
@@ -133,13 +135,17 @@ public class AdService {
                 int amount = currentAd.getPrice();
                 Payment payment = new Payment(customer,deliver,amount, new Timestamp(System.currentTimeMillis()));
                 
-                Rating newDeliverRating = new Rating(customer, deliver, Rating.RatingType.DELIVER);
-                Rating newCustomerRating = new Rating(deliver, customer, Rating.RatingType.CUSTOMER);
-                customer.getPendigRatings().add(newDeliverRating);
-                deliver.getPendigRatings().add(newCustomerRating);
+                Rating newDeliverRating = new Rating(customer, deliver, Rating.RatingType.DELIVER,Rating.RatingStatus.PENDING);
+                Rating newCustomerRating = new Rating(deliver, customer, Rating.RatingType.CUSTOMER,Rating.RatingStatus.PENDING);
+                
+                customer.getRatingsAsCustomer().add(newCustomerRating);
+                deliver.getRatingsAsCustomer().add(newDeliverRating);
                 
                 deliver.addBalance(currentAd.getPrice());
                 
+                
+                ratings.save(newCustomerRating);
+                ratings.save(newDeliverRating);
                 userRepository.save(customer);
                 userRepository.save(deliver);
                 paymentRepository.save(payment);

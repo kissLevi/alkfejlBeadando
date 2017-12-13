@@ -1,0 +1,32 @@
+<!-- <h2 mat-line>Új hírdetés hozzáadása</h2>
+<mat-form-field class="addAd">
+    <input matInput #productName placeholder="Termék neve">
+</mat-form-field>
+<br>
+<mat-form-field class="addAd">
+    <input matInput #productLocation  placeholder="Cím">
+</mat-form-field>
+<br>
+<mat-form-field class="addAd">
+    <input matInput #price type ="number" placeholder="Ár">
+</mat-form-field>
+<br> -->
+<mat-form-field class="addAd">
+    <textarea matInput #description placeholder="Értékelés szövege"></textarea>
+</mat-form-field>
+
+<p mat-line>Mennyire Volt elégedett?</p>
+<mat-slider
+    #rating
+    class="example-margin"
+    [max]="10"
+    [min]="0"
+    [step]="1"
+    [thumb-label]="true"
+    [vertical]="vertical"
+    color="primary">
+</mat-slider>
+<br>
+<button mat-button color="primary"
+    (click)="rate(rating.value,description.value)">Értékel
+</button>

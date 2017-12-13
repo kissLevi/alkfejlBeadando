@@ -17,15 +17,16 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Rating extends BaseEntity{
-    public Rating(User rater,User rated,RatingType type){
+    public Rating(User rater,User rated,RatingType type,RatingStatus status){
         this.rater = rater;
         this.rated = rated;
         this.type = type;
+        this.status = status;
     }
 
     @JsonIgnore
     @JoinColumn(name="rater_id")
-    @OneToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class,fetch=FetchType.LAZY)
     private User rater;
    
     @Column(nullable = false)
@@ -37,16 +38,25 @@ public class Rating extends BaseEntity{
 
     @JsonIgnore
     @JoinColumn(name="rated_id", nullable=false)
-    @OneToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class,fetch=FetchType.LAZY)
     private User rated;
 
    
     @Enumerated(EnumType.STRING)
-    @Column
+    @Column(nullable = false)
+    private RatingStatus status;
+    
+    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private RatingType type;
 
     public enum RatingType {
         DELIVER,CUSTOMER
+    }
+    
+    public enum RatingStatus{
+        PENDING,DONE
     }
     
     public String getRated(){
@@ -59,11 +69,9 @@ public class Rating extends BaseEntity{
     public String getRatedUser(){ 
         return rated.getUsername(); 
     }
+    
+    public String getRaterUser(){
+        return rater.getUsername();
+    }
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinTable(name="PENDING_RATINGS",
-            joinColumns={@JoinColumn(name="rate_id", referencedColumnName="id")},
-            inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id")})
-    private User pendingUser;
 }

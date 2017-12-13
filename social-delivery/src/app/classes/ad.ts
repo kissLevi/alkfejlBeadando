@@ -9,6 +9,9 @@ export enum Status{
 
 export class Ad {
     private _id:number;
+    private _status:Status;
+    private _costumer_id:number;
+    private _deliver_id:number;
 
     public constructor(
         private _name:string,
@@ -16,9 +19,6 @@ export class Ad {
         private _location:string,
         private _price:number,
         private _deadline:number,
-        private _status:Status,
-        private _costumer_id:number,
-        private _deliver_id:number
     ) {}
     get deliver_id():number{
         return this._deliver_id;

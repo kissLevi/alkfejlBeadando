@@ -56,17 +56,14 @@ public class User extends BaseEntity{
     @OneToMany(mappedBy = "costumer_id",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Ad> ads;
 
-    @JsonIgnore
-    @OneToMany(cascade=CascadeType.ALL, mappedBy = "rater")
-    private List<Rating> pendigRatings;
 
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "rated")
-    private Rating rating_id;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "rated")
+    private List<Rating> ratingsAsDeliver;
 
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "rater")
-    private Rating ratng_id;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "rater")
+    private List<Rating> ratingsAsCustomer;
     
     public void clone(PostUser u){
         this.username=u.getUsername();

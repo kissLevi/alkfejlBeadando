@@ -1,0 +1,28 @@
+<mat-list-item class="adListItem">
+    <h2 *ngIf="haveToUpdate()" mat-line style="color:rgb(187, 100, 100)">
+      {{ad.name}} LEJÁRT
+    </h2>
+    <h2 *ngIf="!haveToUpdate()" mat-line>
+        Hírdetés neve: {{ad.name}}
+    </h2>
+    <p mat-line>
+        Célpont: {{ad.location}} 
+    </p>
+    <p mat-line>
+        Jutalom: {{ad.price}} Ft 
+    </p>
+    <p mat-line>
+      Megjegyzés: {{ad.description}} 
+    </p>
+    <p *ngIf="!haveToUpdate()" mat-line>
+      Hátralévő idő: {{timeleft()}}
+    </p>
+    <p mat-line>
+      <button *ngIf="ad.status!='ACCEPTED' && owner==false && !haveToUpdate()" mat-button color="primary" (click)="accept()" >Elfogadás</button>
+      <button *ngIf="ad.status=='ACCEPTED' && owner" mat-button color="primary" (click)="successfulyDelivered(true)">Megérkezett</button>
+      <button *ngIf="ad.status=='ACCEPTED' && owner && haveToUpdate()" mat-button color="primary"(click)="successfulyDelivered(false)">Nem érkezett meg</button>
+    </p>
+    <div>
+        <app-ad-extend *ngIf="owner && haveToUpdate() && ad.status!='ACCEPTED'" (extendEvent)="extendEvent($event)"(deleteEvent)="deleteEvent()"></app-ad-extend>
+    </div>
+  </mat-list-item>
