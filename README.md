@@ -1,7 +1,3 @@
-# INFO:
-Sok változtatás a codeImp branchen található jelenleg!!
-
-
 # Termék beszerző oldal
 
 2017 alkalmazások fejlesztése beadandó projekt.
