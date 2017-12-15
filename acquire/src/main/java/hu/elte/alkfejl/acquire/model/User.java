@@ -1,7 +1,7 @@
 package hu.elte.alkfejl.acquire.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import hu.elte.alkfejl.acquire.model.post.PostUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,7 +35,7 @@ public class User extends BaseEntity{
     @Column
     private float rating;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;

@@ -9,8 +9,9 @@
   <span *ngIf="user.rating===0">
       <p mat-line>Még nem írtak értékelést</p>
   </span>
-  </mat-card>
   <button mat-button (click)="edit()">Profil módosítása</button>
+  </mat-card>
+  
   <span *ngIf="editable">
       <mat-card>
       <mat-card-title>Profil módosítása</mat-card-title>

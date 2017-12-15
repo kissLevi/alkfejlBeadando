@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { FormControl, Validators } from '@angular/forms';
 import { FormChecker } from '../../classes/form-checker';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-registerform',
@@ -14,7 +14,9 @@ export class RegisterformComponent implements OnInit {
 
   userNameError = new FormChecker("Ilyen felhasználónév már létezik!");
 
-  formControl = new FormControl('');
+  formControl = new FormControl('', [
+    Validators.required,
+  ]);
 
   public clickRegistrate(name:string, password:string){
     this.userService.registrate(name,password).subscribe((status:number)=>{

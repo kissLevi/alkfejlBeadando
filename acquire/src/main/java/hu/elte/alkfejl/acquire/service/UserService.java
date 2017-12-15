@@ -36,7 +36,7 @@ public class UserService {
 
     public User update(int id, PostUser user){
         User currUser = userRepository.findOne(new Long(id));
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(user.getPassword().isEmpty()?currUser.getPassword():passwordEncoder.encode(user.getPassword() ));
         currUser.clone(user);
         return userRepository.save(currUser);
     }

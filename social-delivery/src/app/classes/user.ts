@@ -1,18 +1,28 @@
+export enum Role{
+    ADMIN ="ADMIN",
+    USER ="USER",
+    GUEST="GUEST"
+}
+
 export class User {
-    public id:number;
+    public _id:number;
 
     public constructor(
-        private username:string,
-        private password:string
+        private _username:string,
+        private _password:string,
+        private _role:Role
     ) {}
 
-    public getId():number{
-        return this.id;
+    public get id():number{
+        return this._id;
     }
-    public getName():string{
-        return this.username;
+    public get username():string{
+        return this._username;
     }
-    public getPassword():string{
-        return this.password;
+    public get password():string{
+        return this._password;
+    }
+    public get role():Role{
+        return this._role;
     }
 }

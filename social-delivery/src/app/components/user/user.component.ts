@@ -42,6 +42,7 @@ export class UserComponent implements OnInit {
   }
 
   public clickEdit(username: string, pw:string): void{
+    username = username == "" ? this.user.username : username;
     this.userService.updateUserProfile(this.user.id,username,pw).subscribe((user) =>{
       this.user = user;
     });

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
+import { User } from '../../classes/user';
 
 
 @Component({
@@ -9,6 +10,8 @@ import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 export class ToolbarComponent implements OnInit {
   @Input()
   public loggedIn:boolean;
+  @Input()
+  public user:User;
 
   @Output() hideEvent= new EventEmitter();
   

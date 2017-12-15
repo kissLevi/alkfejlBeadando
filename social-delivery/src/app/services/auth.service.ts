@@ -35,6 +35,7 @@ export class AuthService {
     this.httpClient.get(api + 'login').subscribe((user) => {
       if (user) {
         UserService.setUser(user as User);
+        console.log(user);
       } else {
         UserService.setUser(null);
       }
