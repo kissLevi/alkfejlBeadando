@@ -22,20 +22,43 @@ export class LoginformComponent implements OnInit {
   passwordError = new FormChecker("Hibás jelszó!");
 
   public clickLogin(name:string, password:string){
-    this.authService.login(name, password).subscribe((status: number) => {
+    if(name == "" || password =="")
+    {
+      this.userNameError.errorStatus = false;
+      this.passwordError.errorStatus = false;
+      if(name == "")
+      {
+        this.userNameError.errorStatus = true;
+        this.userNameError.errorMsg = "A felhasználónév megadása kötelező";
+      }
+      if(password == "")
+      {
+        this.passwordError.errorStatus = true;
+        this.passwordError.errorMsg = "A jelszó megadása kötelező"; 
+      }
+    }
+    else
+    {
+      console.log("asd");
+      this.authService.login(name, password).subscribe((status: number) => {
         if (status != 200) {
           if(status == 400){
             this.userNameError.errorStatus = true;
+            this.userNameError.errorMsg = "Rossz felhasználónév!";
+            this.passwordError.errorStatus = false;
           }
           else if( status == 401){
             this.userNameError.errorStatus = false;
             this.passwordError.errorStatus = true;
+            this.passwordError.errorMsg = "Hibás jelszó!";
           }
         }
         else{
           this.router.navigate(['/ads']);
         }
       });
+    }
+    
   }
   formControl = new FormControl('', [
     Validators.required,

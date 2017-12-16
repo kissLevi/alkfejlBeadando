@@ -39,7 +39,7 @@ public class LogApiController {
         catch(DataIntegrityViolationException ex){
             return ResponseEntity.status(400).build();
         }
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(200);
     }
 
     @Role({User.Role.GUEST})

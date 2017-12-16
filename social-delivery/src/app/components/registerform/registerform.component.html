@@ -8,7 +8,10 @@
     </mat-form-field>
     <br>
     <mat-form-field>
-      <input matInput #userPassword type="password" placeholder="Jelszó">
+      <input matInput #userPassword type="password" placeholder="Jelszó" [errorStateMatcher]="passwordError" [formControl]="formControl">
+      <mat-error *ngIf="passwordError.errorStatus">
+          {{passwordError.errorMsg}}
+      </mat-error>
     </mat-form-field>
     <br>
     <button mat-button (click)= "clickRegistrate(userName.value,userPassword.value)">
