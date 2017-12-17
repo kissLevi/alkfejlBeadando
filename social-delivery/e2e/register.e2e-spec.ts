@@ -1,7 +1,7 @@
 import { browser, by, element } from 'protractor';
 import { getPath } from './getpath';
 
-describe('Login functionality', () => {
+describe('Register functionality', () => {
 
     beforeEach(() => {
         browser.get('');
@@ -36,7 +36,6 @@ describe('Login functionality', () => {
          expect(getPath()).toEqual('');
          browser.sleep(1000);
          expect(element(by.className("success")).getText).toEqual("Sikeres regisztráció");
-         browser.sleep(100000);
      });*/
 
 });
