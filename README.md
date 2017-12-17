@@ -39,9 +39,9 @@ Az oldal célja hogy a hírdetés feladója utánajárás nélkül, biztonságos
 
 | Szereplő |                            |
 |----------|----------------------------|
-| Látogató | Böngészheti a kirakott hirdetéseket |
-| Felhasználó | Hirdetést adhat fel, vagy kirakott ajánlatot fogadhat el. Pénzt tud befizetni, vagy kivenni. Sikeres kézbesítés után értékelést írnak egymásról a felek. |
-| Admin    | Egy kitüntetett szerepkörrel rendelkező felhasználó aki látja az összes megrendelést, és tudja törölni azokat.Ha jogosulatlan kifizetés történt lehetősége van visszaállítani azt. Törölhet felhasználót, egyenlegüket tölti fel. |
+| Látogató | Bejelentkezhet, illetve ha nincs még fiókja és szeretne regisztrálhat. |
+| Felhasználó | Hirdetést adhat fel, vagy kirakott ajánlatot fogadhat el. Sikeres kézbesítés után értékelést írnak egymásról a felek. |
+| Admin    | Egy kitüntetett szerepkörrel rendelkező felhasználó aki látja az összes megrendelést. A felhasználók egyenlegét töltheti fel. |
 
 ## Könyvtárstruktúra (backend)
 * `model` Adatbázis entitások és kapcsolataik
@@ -151,3 +151,39 @@ Az alkalmazás szempontjából legfontosabb könyvtárak, app alatt találhatóa
   * rating - értékeléseket kiszolgáló
   * user - felhasználókat kiszolgáló
 
+## Kliensoldali szolgáltatások listája
+* Regisztáció
+* Bejelentkezés
+* Hirdetés feladása
+* Hirdetések böngészése
+* Hirdetés elfogadása - Ha talál egy olyan hirdetést amiről úgy gondolja hogy meg tudja szerezni a kért terméket és le tudja szállítani a megadott helyszínre akkor ezt a hirdetést elvállalhatja az illető és ezzel kiszállítóvá válik.
+* Hirdetés feladása - Itt adhat fel egy felhasznaló hirdetést, ha van elegendő egyenlege. A form kitöltésével a hirdetés bekerül az összes hirdetes közé és mások kiszállíthatják a megrendelőnek a kért terméket.
+* Saját hirdetések megtekintése - Törölheti illetve meghosszabbíthatja a kiszállításra megengedett időt a felhasználó aki a hirdetés tulajdonosa.
+* Elvállalt szállítások - Megtekintheti milyen hirdetéseket fogadott el a jelenlegi bejelentkezett felhasznaló, vagyis milyen kiszállítási kötelezettségei vannak.
+* Adatlap menüpont - Itt tekinthető meg az adatlap, lehet módosítani a fekhasználónevet illetve jelszót, valamint az értékeléseket is itt lehet kezelni
+* Értékelések - Értékelés írása illetve kapott értékelések megtekintése
+* Admin egyenlegfeltöltés - Ha az Admin van bejelentkezve fel tudja tölteni a felhasználók egyenlegét az egyenleg feltöltése menüpont alatt.
+* Kijelentkezés
+
+## Funkció folyamat leírás - Hírdetés feladás
+A hírdetés feladásához először be kell jelentkezni a bejelentkezési form kitöltésével, majd a Bejelentkezés gomb megnyomásával. Ekkor sikeres bejelentkezés esetén át leszünk irányítva a hirdetések oldalára. A "Hirdetés feladása" gombra kattintva nézetet váltunk, és megjelenik egy form melyben az adatok kitöltésével és a "Megrendelem" gomb megnyomásával valid adatok esetén már fel is raktunk egy hirdetést. Persze ha van rá elég egyenlegünk.
+
+## Tesztelés:
+
+A tesztelést az oldal készítésekor folyamatosan végeztük, minden komponenst és oldalt alaposan átvizsgálva, rossz adatokkal és különböző szerepkörökkel. 
+
+Az automatizált tesztelést Protractor végzi. Ezzel a módszerrel tesztelt funkcionalitások:
+* Belépés
+* Regisztráció
+
+## Felhasználói dokumentáció:
+1) git klónozása
+2) acquire projekt betöltése intellij-be vagy netbeansbe.
+3) szerver futtatása
+  * Netbeans: pom.xml jobb-klikk: Run maven/Goals/spring-boot:run
+  * Intellij: Maven-configuration -> Command-line: spring-boot:run
+4) angular futtatása
+  * visual studio code-ba social-delivery projekt megnyitása
+  * node_modules telepítése első klónozáskor: npm install
+  * npm start
+5) böngésző megnyitása a localhost:4200 oldalon
