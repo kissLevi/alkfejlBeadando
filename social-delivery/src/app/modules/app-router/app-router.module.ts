@@ -9,6 +9,7 @@ import { RateComponent } from '../../components/rate/rate.component';
 import { AdViewComponent } from '../../components/adComponents/ad-view/ad-view.component';
 import { RouteGuardService } from '../../services/route-guard.service';
 import { AuthService } from '../../services/auth.service';
+import { BalanceComponent } from '../../components/balance/balance.component';
 
 
 const appRoutes: Routes = [
@@ -16,9 +17,21 @@ const appRoutes: Routes = [
     { path: '', component: MainpageViewComponent, pathMatch: 'full' },
     { path: 'user', component: UserViewComponent,data: { roles: ['USER', 'ADMIN'] } },
     { path: 'ads', component: AdViewComponent,data: { roles: ['USER', 'ADMIN'] }},
+    { path: 'balance', component : BalanceComponent,data: { roles: ['ADMIN'] }}
     // { path: 'rate', component : RateComponent,data: { roles: ['USER', 'ADMIN'] }}
   ]}
-];
+// =======
+// import { BalanceComponent } from '../../components/balance/balance.component';
+
+
+// const appRoutes: Routes = [
+//   { path: '', component: MainpageViewComponent, pathMatch: 'full' },
+//   { path: 'user', component: UserViewComponent },
+//   { path: 'ads', component: AdViewComponent},
+//   { path: 'rate', component : RateComponent},
+//   { path: 'balance', component : BalanceComponent}
+// >>>>>>> 92bed5993071034a0f536396fda51922bbce0ac8
+// ];
 
 @NgModule({
   imports: [

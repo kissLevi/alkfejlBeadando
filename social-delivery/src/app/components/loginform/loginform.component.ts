@@ -56,7 +56,7 @@ export class LoginformComponent implements OnInit {
           }
         }
         else{
-          const redirectTo: string = this.route.snapshot.queryParamMap.get('from') || '';
+          const redirectTo: string = this.route.snapshot.queryParamMap.get('from') || '/ads';
           this.router.navigate([redirectTo]);
         }
       });
