@@ -175,7 +175,6 @@ A tesztelést az oldal készítésekor folyamatosan végeztük, minden komponens
 Az automatizált tesztelést Protractor végzi. Ezzel a módszerrel tesztelt funkcionalitások:
 * Belépés
 * Regisztráció
-* Adatmódosítás
 
 ## Felhasználói dokumentáció:
 1) git klónozása
