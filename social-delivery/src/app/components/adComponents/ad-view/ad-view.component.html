@@ -1,22 +1,23 @@
 <mat-progress-bar *ngIf="!authService.getUser()" mode="indeterminate"></mat-progress-bar>
 
 <mat-card *ngIf="authService.getUser()" class="adList">
-  <mat-tab-group (selectedTabChange)="changed($event)"[selectedIndex] = "selectedIndex">
-    <mat-tab  label="Összes Hírdetés">
+  <mat-tab-group (selectedTabChange)="changed($event)"[selectedIndex] = "selectedIndex" >
+    <mat-tab label="Összes Hírdetés">
       <mat-card-content>
-        <mat-list>
+        <mat-list *ngIf = "authService.getUser().role == 'USER'">
           <app-ad *ngFor="let ad of avaliableAds" [owner]="ownerOfAd(ad)" [ad]="ad" (acceptEvent) = "acceptAd($event)"></app-ad>
         </mat-list>
-      </mat-card-content>
-    </mat-tab>
-    <mat-tab label="Hírdetés feladása">
-      <mat-card-content>
-        <mat-list>
-          <app-newad [user]="getUser()" (newAd)="newAd($event)" ></app-newad>
+        <mat-list *ngIf = "authService.getUser().role == 'ADMIN'">
+          <app-ad *ngFor="let ad of allAds" [ad]="ad"></app-ad>
         </mat-list>
       </mat-card-content>
     </mat-tab>
-    <mat-tab label="Saját hírdetéseim">
+    <mat-tab *ngIf = "authService.getUser().role == 'USER'" label="Hírdetés feladása" >
+      <mat-card-content align="center">
+          <app-newad [user]="getUser()" (newAd)="newAd($event)"></app-newad>
+      </mat-card-content>
+    </mat-tab>
+    <mat-tab *ngIf = "authService.getUser().role == 'USER'" label="Saját hírdetéseim">
       <mat-card-content>
         <mat-list>
           <app-ad *ngFor="let ad of ownAds" 
@@ -31,7 +32,7 @@
         </mat-list>
       </mat-card-content>
     </mat-tab>
-    <mat-tab label="Elválalt szálítások">
+    <mat-tab *ngIf = "authService.getUser().role == 'USER'" label="Elválalt szálítások">
       <mat-card-content>
         <mat-list>
           <app-ad *ngFor="let ad of deliveries" [owner]="ownerOfAd(ad)" [ad]="ad"></app-ad>

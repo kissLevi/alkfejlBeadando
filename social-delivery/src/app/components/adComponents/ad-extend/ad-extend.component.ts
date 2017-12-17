@@ -13,10 +13,17 @@ export class AdExtendComponent implements OnInit {
 
   private timeInMilliseconds:number;
 
-  private timeInHoursMinutes:string;
+  private error:string = "";
 
   public extend():void{
-    this.extendEvent.emit(this.timeInMilliseconds);
+    if(this.timeInMilliseconds == undefined)
+    {
+      this.error = "A csúszka segítségével adja meg mennyi ideig legyen aktív a hírdetés!"
+    }
+    else
+    {
+      this.extendEvent.emit(this.timeInMilliseconds);
+    }
   }
 
   public remove():void{
@@ -24,12 +31,9 @@ export class AdExtendComponent implements OnInit {
   }
 
   public valueChanged(change){
-
+    this.error = "";
     this.timeInMilliseconds = (change.value as number)*3600000;
     const timeLeft: Date = new Date(this.timeInMilliseconds);
-    // const h:string = (timeLeft.getHours()-1)+"";
-    // const m:string = timeLeft.getMinutes().toString();
-    // this.timeInHoursMinutes = h+"óra"+m+"perc"
   }
 
 

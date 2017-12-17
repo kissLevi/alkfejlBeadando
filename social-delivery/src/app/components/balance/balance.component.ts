@@ -12,6 +12,8 @@ export class BalanceComponent implements OnInit {
   user : User;
   users: User[];
 
+  private errors:string[] =[];
+
   constructor(
     private balanceService: BalanceService
   ) {}
@@ -23,9 +25,18 @@ export class BalanceComponent implements OnInit {
     })
   }
 
-  public addBalance(id:number,sum:number):void{
-    if(id != null && sum>0){
-      this.balanceService.addBalance(id,sum).subscribe();
+  public addBalance(selected,sum:number):void{
+    this.errors = [];
+    if(sum==0)
+    {
+      this.errors.push("Adja meg mennyit szeretne befizetni!");
+    }
+    if(selected == null)
+    {
+      this.errors.push("Válasszon ki egy felhasználót!");
+    }
+    if(selected != null && sum>0){
+      this.balanceService.addBalance(selected.id,sum).subscribe();
     }
   }
 

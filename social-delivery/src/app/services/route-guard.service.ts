@@ -14,8 +14,8 @@ export class RouteGuardService {
     if (!data.roles) {
       return true;
     }
-    if (this.authService.isLoggedIn() && 
-        data.roles.includes(this.authService.getRole())) {
+    if (this.authService.isLoggedIn() && data.roles.includes(this.authService.getRole())) 
+    {
       return true;
     }
     this.router.navigate([''], { queryParams: { from: route.url } });
@@ -25,4 +25,5 @@ export class RouteGuardService {
   public canActivateChild(route: ActivatedRouteSnapshot): boolean {
     return this.canActivate(route);
   }
+
 }

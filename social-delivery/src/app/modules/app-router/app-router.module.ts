@@ -15,11 +15,16 @@ import { BalanceComponent } from '../../components/balance/balance.component';
 const appRoutes: Routes = [
   { path: '', canActivateChild: [RouteGuardService], children: [
     { path: '', component: MainpageViewComponent, pathMatch: 'full' },
-    { path: 'user', component: UserViewComponent,data: { roles: ['USER', 'ADMIN'] } },
+    { path: 'user', component: UserViewComponent,data: { roles: ['USER', 'ADMIN'] }},
     { path: 'ads', component: AdViewComponent,data: { roles: ['USER', 'ADMIN'] }},
+    { path: 'ads/:id', component: AdViewComponent,data: { roles: ['USER', 'ADMIN'] }},
+    { path: 'ads/extend', component: AdViewComponent,data: { roles: ['USER', 'ADMIN'] }},
+    { path: 'ads/own', component: AdViewComponent,data: { roles: ['USER', 'ADMIN'] }},
+    { path: 'ads/accepted', component: AdViewComponent,data: { roles: ['USER', 'ADMIN'] }},
     { path: 'balance', component : BalanceComponent,data: { roles: ['ADMIN'] }}
     // { path: 'rate', component : RateComponent,data: { roles: ['USER', 'ADMIN'] }}
-  ]}]
+  ]}
+];
 // =======
 // import { BalanceComponent } from '../../components/balance/balance.component';
 

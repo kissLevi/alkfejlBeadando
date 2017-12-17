@@ -11,4 +11,5 @@
     </mat-slider>
     <button mat-button color="primary" (click)="extend()" > Hosszabítás</button>
     <button mat-button color="primary" (click)="remove()" >Töröl</button>
+    <p *ngIf="error !=''"class="errormsg">Hiba : {{error}}</p>
 </div>
