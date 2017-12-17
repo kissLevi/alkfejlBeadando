@@ -15,9 +15,9 @@ body{
 }
   
 .intraductionImage{
-  font-size: 20pt;
+  font-size: 15pt;
   width: 800px;
-  height: 400px;
+  height: 450px;
 }
 .fillingRight {
   
@@ -71,4 +71,9 @@ mat-card{
 {
   font-size: 20px;
   color: red;
+}
+
+.form 
+{
+  align: center;
 }

@@ -1,7 +1,7 @@
 <mat-progress-bar *ngIf="!authService.getUser()" mode="indeterminate"></mat-progress-bar>
 
 <mat-card *ngIf="authService.getUser()" class="adList">
-  <mat-tab-group (selectedTabChange)="changed($event)"[selectedIndex] = "selectedIndex">
+  <mat-tab-group (selectedTabChange)="changed($event)"[selectedIndex] = "selectedIndex" >
     <mat-tab label="Összes Hírdetés">
       <mat-card-content>
         <mat-list *ngIf = "authService.getUser().role == 'USER'">
@@ -12,8 +12,8 @@
         </mat-list>
       </mat-card-content>
     </mat-tab>
-    <mat-tab *ngIf = "authService.getUser().role == 'USER'" label="Hírdetés feladása">
-      <mat-card-content>
+    <mat-tab *ngIf = "authService.getUser().role == 'USER'" label="Hírdetés feladása" >
+      <mat-card-content align="center">
           <app-newad [user]="getUser()" (newAd)="newAd($event)"></app-newad>
       </mat-card-content>
     </mat-tab>

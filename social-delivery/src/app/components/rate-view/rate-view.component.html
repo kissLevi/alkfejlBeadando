@@ -3,7 +3,7 @@
 <mat-card class="rateList">
   <mat-tab-group>
     <mat-tab  label="Értékelés írása">
-      <mat-card-content>
+      <mat-card-content align="center">
         <mat-list>
           <app-rate *ngFor="let rating of pendingRatings" (newRating)="rate($event)" [rating]="rating"></app-rate>
         </mat-list>

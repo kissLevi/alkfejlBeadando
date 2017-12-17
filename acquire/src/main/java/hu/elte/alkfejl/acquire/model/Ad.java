@@ -83,5 +83,4 @@ public class Ad extends BaseEntity {
     public Long getDeliver_id(){
         return deliver_id.getId();
     }
-
 }
