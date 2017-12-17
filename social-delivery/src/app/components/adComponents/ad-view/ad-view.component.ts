@@ -13,6 +13,8 @@ import { User } from '../../../classes/user';
   providers: [UserService,AdService]
 })
 export class AdViewComponent implements OnInit {
+  private allAds:Ad[];
+
   private avaliableAds:Ad[];
   private ownAds:Ad[];
   private deliveries:Ad[];
@@ -22,6 +24,7 @@ export class AdViewComponent implements OnInit {
   private selectedIndex = 0;
 
   public changed(change):void{
+    
     this.selectedIndex = change.index as number;
   }
 
@@ -93,6 +96,8 @@ export class AdViewComponent implements OnInit {
       this.ownAds = ads.filter(ad => ad.costumer_id == UserService.getUser().id);
     })
     this.adService.getAllAds().subscribe((ads:Ad[])=>{
+      this.allAds = ads;
+      console.log(ads);
       this.avaliableAds = ads.filter(ad => ad.status == "PENDING" && ad.deadline> new Date().getTime());
       this.deliveries = ads.filter(ad =>ad.status == "ACCEPTED" && ad.deliver_id == UserService.getUser().id) ;
     })

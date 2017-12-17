@@ -19,6 +19,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.authService.syncLoginStatus();
+    console.log("jó")
   }
 }
 
