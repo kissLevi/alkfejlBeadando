@@ -30,7 +30,6 @@ export class NewadComponent implements OnInit {
 
   public makeOrder(name:string,description:string,location:string,price:number,deadline:number):void{
     this.errors = [];
-    console.log(deadline);
     if(name == "")
     {
       this.errors.push("A termék nevének megadása kötelező!")
@@ -51,7 +50,8 @@ export class NewadComponent implements OnInit {
     {
       this.errors.push("Az ár nem lehet magasabb mint a rendelkezésre álló pénze!")
     }
-    else{
+
+    else if (price < this.user.balance && deadline != 0 && price != 0 && location != "" && name != ""){
       let deadl:number =  new Date().getTime()+ (deadline *3600000);
       let newAd:Ad = new Ad(name,description,location,price,deadl);
       this._newAd.emit(newAd);
