@@ -95,8 +95,8 @@ public class AdService {
             if(currentAd.getCostumer_id().equals(userID) && currentAd.getStatus().equals(Ad.Status.ACCEPTED)){
                 advertisementRepository.delete(currentAd);
                 
-                User customer = userRepository.findOne(currentAd.getCostumer_id());
-                User deliver = userRepository.findOne(currentAd.getDeliver_id());
+                User customer = userRepository.findOne(currentAd.getCostumer_id().getId());
+                User deliver = userRepository.findOne(currentAd.getDeliver_id().getId());
 
                 int amount = currentAd.getPrice();
                 
@@ -126,8 +126,8 @@ public class AdService {
             if(currentAd.getCostumer_id().equals(userID) && currentAd.getStatus().equals(Ad.Status.ACCEPTED)){
                 advertisementRepository.delete(currentAd);
                 
-                User customer = userRepository.findOne(currentAd.getCostumer_id());
-                User deliver = userRepository.findOne(currentAd.getDeliver_id());
+                User customer = userRepository.findOne(currentAd.getCostumer_id().getId());
+                User deliver = userRepository.findOne(currentAd.getDeliver_id().getId());
 
                 int amount = currentAd.getPrice();
                 Payment payment = new Payment(customer,deliver,amount, new Timestamp(System.currentTimeMillis()));

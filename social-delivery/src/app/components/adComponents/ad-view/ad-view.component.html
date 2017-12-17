@@ -5,7 +5,7 @@
     <mat-tab label="Összes Hírdetés">
       <mat-card-content>
         <mat-list *ngIf = "authService.getUser().role == 'USER'">
-          <app-ad *ngFor="let ad of avaliableAds" [owner]="ownerOfAd(ad)" [ad]="ad" (acceptEvent) = "acceptAd($event)"></app-ad>
+          <app-ad *ngFor="let ad of avaliableAds" [showRating]="ad.costumer_id"[owner]="ownerOfAd(ad)" [ad]="ad" (acceptEvent) = "acceptAd($event)"></app-ad>
         </mat-list>
         <mat-list *ngIf = "authService.getUser().role == 'ADMIN'">
           <app-ad *ngFor="let ad of allAds" [ad]="ad"></app-ad>

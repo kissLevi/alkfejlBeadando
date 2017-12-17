@@ -11,6 +11,7 @@ export class User {
         private _username:string,
         private _password:string,
         private _balance:number,
+        private _rating:number,
         private _role:Role
     ) {}
 
@@ -28,5 +29,8 @@ export class User {
     }
     public get balance():number{
         return this._balance;
+    }
+    public get rating():number{
+        return this._rating;
     }
 }

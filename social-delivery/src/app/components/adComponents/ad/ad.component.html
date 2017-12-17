@@ -17,6 +17,12 @@
     <p *ngIf="!haveToUpdate()" mat-line>
       Hátralévő idő: {{timeleft()}}
     </p>
+    <span *ngIf="showRating">
+      <p mat-line>Hírdető neve: {{showRating.username}}</p>
+      <p mat-line>Értékelése:</p>
+      <mat-progress-bar mode="determinate" value={{showRating.rating*10}} width="10px">asd</mat-progress-bar>
+    </span>
+    
     <p mat-line>
       <button *ngIf="ad.status!='ACCEPTED' && owner==false && !haveToUpdate()" mat-button color="primary" (click)="accept()" >Elfogadás</button>
       <button *ngIf="ad.status=='ACCEPTED' && owner" mat-button color="primary" (click)="successfulyDelivered(true)">Megérkezett</button>

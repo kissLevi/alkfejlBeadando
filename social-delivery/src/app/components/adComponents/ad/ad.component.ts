@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Ad } from '../../../classes/ad';
+import { User } from '../../../classes/user';
 
 @Component({
   selector: 'app-ad',
@@ -14,6 +15,9 @@ export class AdComponent implements OnInit {
 
   @Input()
   private owner:boolean;
+
+  @Input()
+  private showRating:User;
 
   @Output() acceptEvent = new EventEmitter();
 

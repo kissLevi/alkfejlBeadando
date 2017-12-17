@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export enum Status{
     PENDING = "PENDING",
     ACCEPTED = "ACCEPTED",
@@ -10,8 +12,8 @@ export enum Status{
 export class Ad {
     private _id:number;
     private _status:Status;
-    private _costumer_id:number;
-    private _deliver_id:number;
+    private _costumer_id:User;
+    private _deliver_id:User;
 
     public constructor(
         private _name:string,
@@ -20,11 +22,11 @@ export class Ad {
         private _price:number,
         private _deadline:number,
     ) {}
-    get deliver_id():number{
+    get deliver_id():User{
         return this._deliver_id;
     }
 
-    get costumer_id():number{
+    get costumer_id():User{
         return this._costumer_id;
     }
 

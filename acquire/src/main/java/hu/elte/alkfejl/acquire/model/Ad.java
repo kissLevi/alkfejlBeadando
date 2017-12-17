@@ -47,13 +47,14 @@ public class Ad extends BaseEntity {
     @Column(nullable = false)
     private Date deadline;
 
+    
     @JoinColumn(name = "COSTUMER_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User costumer_id;
     
     
     @JoinColumn(name = "DELIVER_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User deliver_id;
 
     @Enumerated(EnumType.STRING)
@@ -77,10 +78,10 @@ public class Ad extends BaseEntity {
 //        return ft.format(deadline);
 //    }
 //    
-    public Long getCostumer_id(){
-        return costumer_id.getId();
-    }
-    public Long getDeliver_id(){
-        return deliver_id.getId();
-    }
+//    public Long getCostumer_id(){
+//        return costumer_id.getId();
+//    }
+//    public Long getDeliver_id(){
+//        return deliver_id.getId();
+//    }
 }

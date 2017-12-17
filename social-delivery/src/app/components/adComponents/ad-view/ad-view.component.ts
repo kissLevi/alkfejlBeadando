@@ -29,7 +29,7 @@ export class AdViewComponent implements OnInit {
   }
 
   public ownerOfAd(ad:Ad):boolean{
-    return this.authService.getUser().id == ad.costumer_id;
+    return this.authService.getUser().id == ad.costumer_id.id;
   }
 
   public getUser():User{
@@ -51,6 +51,7 @@ export class AdViewComponent implements OnInit {
     this.adService.addAd(ad).subscribe((newAd)=>{
       this.avaliableAds.push(newAd);
       this.ownAds.push(newAd);
+      this.selectedIndex = 0;
     })
   }
 
@@ -94,10 +95,10 @@ export class AdViewComponent implements OnInit {
     this.adService.getAllAds().subscribe((ads:Ad[])=>{
       this.allAds = ads;
       this.avaliableAds = ads.filter(ad => ad.status == "PENDING" && ad.deadline> new Date().getTime());
-      this.deliveries = ads.filter(ad =>ad.status == "ACCEPTED" && ad.deliver_id == UserService.getUser().id) ;
+      this.deliveries = ads.filter(ad =>ad.status == "ACCEPTED" && ad.deliver_id.id == UserService.getUser().id) ;
     })
     this.adService.getAdsOfUser().subscribe((ads:Ad[])=>{
-      this.ownAds = ads.filter(ad => ad.costumer_id == UserService.getUser().id);
+      this.ownAds = ads.filter(ad => ad.costumer_id.id == UserService.getUser().id);
     });
     
   }
