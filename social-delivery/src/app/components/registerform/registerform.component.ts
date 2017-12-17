@@ -13,20 +13,41 @@ export class RegisterformComponent implements OnInit {
   public error: string = "";
 
   userNameError = new FormChecker("Ilyen felhasználónév már létezik!");
+  passwordError = new FormChecker("Hibás jelszó!");
 
   formControl = new FormControl('', [
     Validators.required,
   ]);
 
   public clickRegistrate(name:string, password:string){
-    this.userService.registrate(name,password).subscribe((status:number)=>{
-      if(status == 400){
+    if(name == "" || password =="")
+    {
+      this.userNameError.errorStatus = false;
+      this.passwordError.errorStatus = false;
+      if(name == "")
+      {
         this.userNameError.errorStatus = true;
+        this.userNameError.errorMsg = "A felhasználónév megadása kötelező";
       }
-      else if(status == 200){
-        this.userNameError.errorStatus = false;
+      if(password == "")
+      {
+        this.passwordError.errorStatus = true;
+        this.passwordError.errorMsg = "A jelszó megadása kötelező";
       }
-    });
+    }
+    else
+    {
+      this.userService.registrate(name,password).subscribe((status:number)=>{
+        if(status == 400){
+          this.userNameError.errorStatus = true;
+        }
+        else if(status == 200){
+          this.userNameError.errorStatus = false;
+          this.passwordError.errorStatus = false;
+          console.log("ASD");
+        }
+      });
+    }
   }
   
   constructor(
