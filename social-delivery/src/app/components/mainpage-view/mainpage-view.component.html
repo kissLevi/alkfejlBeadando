@@ -7,7 +7,7 @@
     <mat-grid-tile rowspan = "5">
             <mat-tab-group>
                 <mat-tab label="Bejelentkezés"><app-loginform (userData)= "tryLogin($event)"></app-loginform></mat-tab>
-                <mat-tab label="Regisztráció"><app-registerform></app-registerform></mat-tab>
+                <mat-tab label="Regisztráció" id="reg" ng-model="first"><app-registerform></app-registerform></mat-tab>
             </mat-tab-group>
     </mat-grid-tile>
             <mat-grid-tile  colspan = "3">

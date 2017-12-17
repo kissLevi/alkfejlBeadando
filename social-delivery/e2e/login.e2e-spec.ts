@@ -7,7 +7,7 @@ describe('Login functionality', () => {
         browser.get('');
     });
 
-    it('should fail to login for empty credentials and write error message', () => {
+    it('should fail to login for empty credentials and write error messages', () => {
         element(by.buttonText('Bejelentkezés')).click();
         expect(element(by.id('mat-error-0')).isDisplayed()).toBe(true);
         expect(element(by.id('mat-error-1')).isDisplayed()).toBe(true);

@@ -11,6 +11,7 @@ import { FormChecker } from '../../classes/form-checker';
 })
 export class RegisterformComponent implements OnInit {
   public error: string = "";
+  public success: boolean = false;
 
   userNameError = new FormChecker("Ilyen felhasználónév már létezik!");
   passwordError = new FormChecker("Hibás jelszó!");
@@ -20,6 +21,7 @@ export class RegisterformComponent implements OnInit {
   ]);
 
   public clickRegistrate(name:string, password:string){
+    this.success=false;
     if(name == "" || password =="")
     {
       this.userNameError.errorStatus = false;
@@ -44,6 +46,7 @@ export class RegisterformComponent implements OnInit {
         else if(status == 200){
           this.userNameError.errorStatus = false;
           this.passwordError.errorStatus = false;
+          this.success = true;
           console.log("ASD");
         }
       });

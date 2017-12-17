@@ -17,5 +17,8 @@
     <button mat-button (click)= "clickRegistrate(userName.value,userPassword.value)">
     Regisztráció
     </button>
+    <div *ngIf="success==true">
+      <h3 class="success">Sikeres regisztráció</h3>
+    </div>
   
   </mat-card>
