@@ -1,2 +1,5 @@
-<app-toolbar [loggedIn]="authService.isLoggedIn()" [user]="authService.getUser()" (hideEvent)="authService.logout()"></app-toolbar>
-<router-outlet></router-outlet>
+<mat-progress-bar *ngIf="!loginChecked" mode="indeterminate"></mat-progress-bar>
+<span *ngIf="loginChecked">
+        <app-toolbar [loggedIn]="authService.isLoggedIn()" [user]="authService.getUser()" (hideEvent)="authService.logout()"></app-toolbar>
+        <router-outlet></router-outlet>
+</span>

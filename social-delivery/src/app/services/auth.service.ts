@@ -31,14 +31,18 @@ export class AuthService {
     });
   }
 
-  public syncLoginStatus(): void {
+  public syncLoginStatus(): Observable<boolean> {
+    const result = new Subject<boolean>();
     this.httpClient.get(api + 'login').subscribe((user) => {
       if (user) {
         UserService.setUser(user as User);
+        result.next(true);
       } else {
         UserService.setUser(null);
+        result.next(false);
       }
     });
+    return result;
   }
   public isLoggedIn(): boolean {
     return UserService.getUser() !== null;

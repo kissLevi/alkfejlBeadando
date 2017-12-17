@@ -17,7 +17,7 @@ const appRoutes: Routes = [
     { path: '', component: MainpageViewComponent, pathMatch: 'full' },
     { path: 'user', component: UserViewComponent,data: { roles: ['USER', 'ADMIN'] }},
     { path: 'ads', component: AdViewComponent,data: { roles: ['USER', 'ADMIN'] }},
-    { path: 'ads/add', component: AdViewComponent,data: { roles: ['USER', 'ADMIN'] }},
+    { path: 'ads/:id', component: AdViewComponent,data: { roles: ['USER', 'ADMIN'] }},
     { path: 'ads/extend', component: AdViewComponent,data: { roles: ['USER', 'ADMIN'] }},
     { path: 'ads/own', component: AdViewComponent,data: { roles: ['USER', 'ADMIN'] }},
     { path: 'ads/accepted', component: AdViewComponent,data: { roles: ['USER', 'ADMIN'] }},
