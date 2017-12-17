@@ -19,7 +19,7 @@ const appRoutes: Routes = [
     { path: 'ads', component: AdViewComponent,data: { roles: ['USER', 'ADMIN'] }},
     { path: 'balance', component : BalanceComponent,data: { roles: ['ADMIN'] }}
     // { path: 'rate', component : RateComponent,data: { roles: ['USER', 'ADMIN'] }}
-  ]}
+  ]}]
 // =======
 // import { BalanceComponent } from '../../components/balance/balance.component';
 
