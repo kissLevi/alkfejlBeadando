@@ -1,0 +1,28 @@
+<!-- <mat-progress-bar *ngIf="!authService.getUser()" mode="indeterminate"></mat-progress-bar> -->
+
+<body>
+<div *ngIf="users">
+<mat-card>
+  <mat-card-title>
+    Egyenleg feltöltése
+  </mat-card-title>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-select placeholder="Felhasználó választása" [(value)]="selected">
+          <mat-option *ngFor= "let user of users" [value]="user">{{user.username}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="balance">
+        <input matInput #sum type ="number" placeholder="Összeg">
+    </mat-form-field>
+    <br>
+    <button mat-button color="primary"
+    (click)="addBalance(
+                    selected.id,
+                    sum.value)
+                    ">Feltöltés
+  </button>
+  </mat-card-content>
+</mat-card>
+</div>
+</body>

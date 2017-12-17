@@ -9,7 +9,7 @@
   </span>
   <span *ngIf = "loggedIn" class="fillingRight"></span>
   <span *ngIf = "loggedIn">
-    <button *ngIf= "user.role == 'ADMIN'"mat-button routerLink="/user">Egyenleg feltöltése</button>
+    <button *ngIf= "user.role == 'ADMIN'"mat-button routerLink="/balance">Egyenleg feltöltése</button>
     <button mat-button routerLink="/user">Adatlap</button>
     <button mat-button routerLink="" (click)="logout()">Kijelentkezés</button>
   </span>
