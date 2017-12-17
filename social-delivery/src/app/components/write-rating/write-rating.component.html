@@ -27,6 +27,9 @@
     color="primary">
 </mat-slider>
 <br>
+<span *ngIf="error != ''" class="errormsg">
+        Hiba : {{error}}
+</span>
 <button mat-button color="primary"
     (click)="rate(rating.value,description.value)">Értékel
 </button>

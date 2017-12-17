@@ -34,11 +34,20 @@ public class UserService {
         userRepository.delete(new Long(id));
     }
 
-    public User update(int id, PostUser user){
+    public User update(int id, PostUser user) throws Exception{
         User currUser = userRepository.findOne(new Long(id));
         user.setPassword(user.getPassword().isEmpty()?currUser.getPassword():passwordEncoder.encode(user.getPassword() ));
         currUser.clone(user);
-        return userRepository.save(currUser);
+        try
+        {
+            userRepository.save(currUser);
+        }
+        catch(Exception ex)
+        {
+            throw new Exception("Folgalt felhasználónév!");
+        }
+        
+        return currUser;
     }
 
     public Iterable<User> listAll(){

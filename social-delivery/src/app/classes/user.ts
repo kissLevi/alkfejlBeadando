@@ -10,6 +10,7 @@ export class User {
     public constructor(
         private _username:string,
         private _password:string,
+        private _balance:number,
         private _role:Role
     ) {}
 
@@ -24,5 +25,8 @@ export class User {
     }
     public get role():Role{
         return this._role;
+    }
+    public get balance():number{
+        return this._balance;
     }
 }

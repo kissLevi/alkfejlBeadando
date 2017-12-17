@@ -14,6 +14,8 @@ import { AuthService } from '../../services/auth.service';
 export class UserComponent implements OnInit {
   @Input()
   public user: User;
+
+  private errors:string[] =[];
   
   private editable: boolean;
   constructor(
@@ -27,25 +29,35 @@ export class UserComponent implements OnInit {
     this.editable = !this.editable;
   }
 
-  ngOnInit() {
-    // if(this.user!=null){
-    //   this.user = UserService.getUser();
-    //   console.log(this.user); 
-    //   let user: User = this.user;        
-    //   this.userService.getUserProfile(user.id).subscribe((user) => {
-    //     this.user = user;
-    //   });
-    // }else{
-    //   this.authService.syncLoginStatus();
-    //   this.user = UserService.getUser();
-    // }   
+  ngOnInit() {  
   }
 
   public clickEdit(username: string, pw:string): void{
-    username = username == "" ? this.user.username : username;
-    this.userService.updateUserProfile(this.user.id,username,pw).subscribe((user) =>{
-      this.user = user;
-    });
+    if(username == "" && pw == "")
+    {
+      this.errors = [];
+      this.errors.push("Új jelszó vagy felhasználónév megadása kötelező!");
+    }
+    else
+    {
+      username = username == "" ? this.user.username : username;
+      this.userService.updateUserProfile(this.user.id,username,pw).subscribe((user) =>{
+        if (user == "400")
+        {
+          this.errors = [];
+          this.errors.push("Ilyen felhasználónévvel már létezik felhasználó!")
+        }
+        else
+        {
+          this.errors = [];
+          this.user = user;
+          this.editable = false;
+        }
+
+      });
+
+    }
+    
   }
 
 }

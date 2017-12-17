@@ -7,13 +7,17 @@ import { RateViewComponent } from '../../components/rate-view/rate-view.componen
 
 import { RateComponent } from '../../components/rate/rate.component';
 import { AdViewComponent } from '../../components/adComponents/ad-view/ad-view.component';
+import { RouteGuardService } from '../../services/route-guard.service';
+import { AuthService } from '../../services/auth.service';
 
 
 const appRoutes: Routes = [
-  { path: '', component: MainpageViewComponent, pathMatch: 'full' },
-  { path: 'user', component: UserViewComponent },
-  { path: 'ads', component: AdViewComponent},
-  { path: 'rate', component : RateComponent}
+  { path: '', canActivateChild: [RouteGuardService], children: [
+    { path: '', component: MainpageViewComponent, pathMatch: 'full' },
+    { path: 'user', component: UserViewComponent,data: { roles: ['USER', 'ADMIN'] } },
+    { path: 'ads', component: AdViewComponent,data: { roles: ['USER', 'ADMIN'] }},
+    // { path: 'rate', component : RateComponent,data: { roles: ['USER', 'ADMIN'] }}
+  ]}
 ];
 
 @NgModule({
@@ -23,6 +27,7 @@ const appRoutes: Routes = [
   exports: [
     RouterModule
   ],
-  declarations: []
+  declarations: [],
+  providers: [RouteGuardService, AuthService]
 })
 export class AppRouterModule { }

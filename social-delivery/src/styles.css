@@ -11,7 +11,7 @@ body{
 }
 .loginform{
   width: 275px;
-  height: 250px;
+  height: 290px;
 }
   
 .intraductionImage{
@@ -65,4 +65,10 @@ mat-card{
   width: 1000px;
   flex: 1,1 auto;
 
+}
+
+.errormsg
+{
+  font-size: 20px;
+  color: red;
 }

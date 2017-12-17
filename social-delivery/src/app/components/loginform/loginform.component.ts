@@ -4,7 +4,7 @@ import { FormChecker } from '../../classes/form-checker';
 import { AuthService } from '../../services/auth.service';
 import { ErrorStateMatcher } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 
@@ -18,8 +18,10 @@ import { Router } from '@angular/router';
 export class LoginformComponent implements OnInit {
   
 
-  userNameError = new FormChecker("Rossz felhasználónév!");
-  passwordError = new FormChecker("Hibás jelszó!");
+  private userNameError = new FormChecker("Rossz felhasználónév!");
+  private passwordError = new FormChecker("Hibás jelszó!");
+
+  private error:string;
 
   public clickLogin(name:string, password:string){
     if(name == "" || password =="")
@@ -54,7 +56,8 @@ export class LoginformComponent implements OnInit {
           }
         }
         else{
-          this.router.navigate(['/ads']);
+          const redirectTo: string = this.route.snapshot.queryParamMap.get('from') || '';
+          this.router.navigate([redirectTo]);
         }
       });
     }
@@ -68,10 +71,14 @@ export class LoginformComponent implements OnInit {
 
   constructor(
     private authService:AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    if (this.route.snapshot.queryParamMap.get('from')) {
+      this.error = 'Az adott oldal eléréséhez bejelentkezés szükséges!';
+    }
   }
 
 }

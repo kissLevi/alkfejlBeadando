@@ -22,6 +22,11 @@
             <mat-form-field>
                 <input matInput #userPassword type="password" placeholder="Új jelszó">
             </mat-form-field>
+            <span *ngIf="errors.length != 0"class="errormsg">
+                <p *ngFor="let error of errors">
+                    Hiba: {{error}}
+                </p>
+            </span>
             <button mat-button (click)="clickEdit(userName.value,userPassword.value)">
                 Változtat
             </button>

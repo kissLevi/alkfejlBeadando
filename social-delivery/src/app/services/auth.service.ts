@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { api } from '../config/api';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { User } from '../classes/user';
+import { User, Role } from '../classes/user';
 import { UserService } from './user.service';
 
 @Injectable()
@@ -35,7 +35,6 @@ export class AuthService {
     this.httpClient.get(api + 'login').subscribe((user) => {
       if (user) {
         UserService.setUser(user as User);
-        console.log(user);
       } else {
         UserService.setUser(null);
       }
@@ -47,6 +46,13 @@ export class AuthService {
 
   public getUser(): User{
     return UserService.getUser();
+  }
+
+  public getRole(): Role {
+    if (this.isLoggedIn()) {
+      return UserService.getUser().role;
+    }
+    return undefined;
   }
 
 }

@@ -103,8 +103,15 @@ public class UserController {
     @Role({User.Role.USER, User.Role.ADMIN})
     @PutMapping("/{userID}")
     private ResponseEntity update(@PathVariable int userID, @RequestBody PostUser user){
-        User updated = userService.update(userID,user);
-        return ResponseEntity.ok(updated);
+        User updated;
+        try{
+            updated = userService.update(userID,user);
+            sessionService.setCurrentUser(userService.listOne(sessionService.getCurrentUser().getId()));
+            return ResponseEntity.ok(updated);
+        }
+        catch(Exception ex){
+            return ResponseEntity.ok(400);
+        }   
     }
 
     @Role({User.Role.USER, User.Role.ADMIN})

@@ -4,6 +4,7 @@ import { UserService } from '../../../services/user.service';
 import { AdService } from '../../../services/ad.service';
 import { Ad,Status } from '../../../classes/ad';
 import { AuthService } from '../../../services/auth.service';
+import { User } from '../../../classes/user';
 
 @Component({
   selector: 'app-ad-view',
@@ -18,10 +19,19 @@ export class AdViewComponent implements OnInit {
 
   private _ownerAds = new BehaviorSubject<Ad[]>([]);
 
+  private selectedIndex = 0;
+
+  public changed(change):void{
+    this.selectedIndex = change.index as number;
+  }
 
   public ownerOfAd(ad:Ad):boolean{
     return this.authService.getUser().id == ad.costumer_id;
   }
+
+  public getUser():User{
+    return this.authService.getUser();
+  } 
   
   public acceptAd(adId:number):void{
     this.adService.acceptAd(adId).subscribe(()=>{

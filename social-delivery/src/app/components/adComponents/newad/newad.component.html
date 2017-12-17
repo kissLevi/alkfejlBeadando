@@ -28,6 +28,11 @@
     color="primary">
 </mat-slider>
 <br>
+<span *ngIf="errors.length != 0"class="errormsg">
+        <p *ngFor="let error of errors">
+            Hiba: {{error}}
+        </p>
+</span>
 <button mat-button color="primary"
     (click)="makeOrder(
                     productName.value
@@ -36,9 +41,3 @@
                     ,price.value
                     ,deadline.value)">Megrendelem
 </button>
-<!-- {
-    "description": "Kenyér",
-    "location": "Budapest",
-    "price": 200,
-    "deadline": 1512191640742
-} -->
