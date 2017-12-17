@@ -176,3 +176,15 @@ Az automatizált tesztelést Protractor végzi. Ezzel a módszerrel tesztelt fun
 * Belépés
 * Regisztráció
 * Adatmódosítás
+
+## Felhasználói dokumentáció:
+1) git klónozása
+2) acquire projekt betöltése intellij-be vagy netbeansbe.
+3) szerver futtatása
+  * Netbeans: pom.xml jobb-klikk: Run maven/Goals/spring-boot:run
+  * Intellij: Maven-configuration -> Command-line: spring-boot:run
+4) angular futtatása
+  * visual studio code-ba social-delivery projekt megnyitása
+  * node_modules telepítése első klónozáskor: npm install
+  * npm start
+5) böngésző megnyitása a localhost:4200 oldalon
