@@ -1,0 +1,3 @@
+[1217/202041.082:ERROR:process_reader_win.cc(123)] NtOpenThread: {Hozzáférés megtagadva} A folyamat hozzáférést kért egy objektumhoz, de ehhez nem volt engedélye.  (0xc0000022)
+[1217/202041.132:ERROR:exception_snapshot_win.cc(87)] thread ID 6604 not found in process
+[1217/202041.132:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
