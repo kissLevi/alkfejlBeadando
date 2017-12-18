@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../classes/user';
 import { BalanceService } from '../../services/balance.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-balance',
   templateUrl: './balance.component.html',
   styleUrls: ['./balance.component.css'],
-  providers: [BalanceService]
+  providers: [BalanceService,UserService]
 })
 export class BalanceComponent implements OnInit {
   user : User;
@@ -15,13 +16,13 @@ export class BalanceComponent implements OnInit {
   private errors:string[] =[];
 
   constructor(
-    private balanceService: BalanceService
+    private balanceService: BalanceService,
+    private userService:UserService
   ) {}
 
   ngOnInit() {
-    this.balanceService.getUsers().subscribe((users)=>{
+    this.userService.getAllUsers().subscribe((users)=>{
       this.users = (users as User[]);
-      console.log(this.users);
     })
   }
 

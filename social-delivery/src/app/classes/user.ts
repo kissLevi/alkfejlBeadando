@@ -5,7 +5,7 @@ export enum Role{
 }
 
 export class User {
-    public _id:number;
+    private _id:number;
 
     public constructor(
         private _username:string,

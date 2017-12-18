@@ -10,7 +10,7 @@ import { $ } from 'protractor';
 export class UserService {
   private static user: User = null;
   constructor(
-    private httpClien: HttpClient,
+    private httpClient: HttpClient,
   ) { }
 
   public static setUser(user:User){
@@ -23,7 +23,7 @@ export class UserService {
 
   public registrate(username:string,password:string):Observable<number>{
     const result = new Subject<number>();
-    this.httpClien.post(api + "register",{username,password}).subscribe(()=>{
+    this.httpClient.post(api + "register",{username,password}).subscribe(()=>{
       result.next(200);
     }, (error) => {
       result.next(400);
@@ -32,16 +32,25 @@ export class UserService {
   }
 
   public getUserProfile(id: number):Observable<any>{
-    return this.httpClien.get(api + 'user/' + id)
+    return this.httpClient.get(api + 'user/' + id)
   }
 
   public updateUserProfile(id: number, un: string, pw: string):Observable<any>{
-    return this.httpClien.put(api + "user/" + id,
+    return this.httpClient.put(api + "user/" + id,
     {
       "username": un,
       "password": pw
-   }
-);
+   });
+  }
+
+  public getAllUsers():Observable<any>
+  {
+    return this.httpClient.get(api + "user/users");
+  }
+
+  public deleteUser(id:number):Observable<any>
+  {
+    return this.httpClient.delete(api+"user/"+id);
   }
 
 }

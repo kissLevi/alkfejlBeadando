@@ -10,10 +10,6 @@ export class BalanceService {
     private httpClient: HttpClient
   ) { }
 
-  public getUsers():Observable<any>{
-    return this.httpClient.get(api+"/user/users")
-  }
-
   public addBalance(id: number, sum: number):Observable<any>{
     return this.httpClient.post(api+"user/"+id+"/balance", sum);
   }

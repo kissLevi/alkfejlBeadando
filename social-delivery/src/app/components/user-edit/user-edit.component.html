@@ -1,0 +1,11 @@
+<mat-card class="users">
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let user of users">
+          <p mat-line>Felhasználó neve: {{user.username}}</p>
+          <mat-progress-bar mode="determinate" value={{user.rating*10}} width="10px">asd</mat-progress-bar>
+          <button mat-button (click)=delete(user.id)>Törlés</button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

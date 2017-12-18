@@ -19,6 +19,7 @@ import { RateViewComponent } from './components/rate-view/rate-view.component';
 import { AdExtendComponent } from './components/adComponents/ad-extend/ad-extend.component';
 import { WriteRatingComponent } from './components/write-rating/write-rating.component';
 import { BalanceComponent } from './components/balance/balance.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { BalanceComponent } from './components/balance/balance.component';
     AdExtendComponent,
     WriteRatingComponent,
     BalanceComponent,
+    UserEditComponent,
   ],
   imports: [
     BrowserModule,

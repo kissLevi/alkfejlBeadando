@@ -10,6 +10,7 @@ import { AdViewComponent } from '../../components/adComponents/ad-view/ad-view.c
 import { RouteGuardService } from '../../services/route-guard.service';
 import { AuthService } from '../../services/auth.service';
 import { BalanceComponent } from '../../components/balance/balance.component';
+import { UserEditComponent } from '../../components/user-edit/user-edit.component';
 
 
 const appRoutes: Routes = [
@@ -21,7 +22,8 @@ const appRoutes: Routes = [
     { path: 'ads/extend', component: AdViewComponent,data: { roles: ['USER', 'ADMIN'] }},
     { path: 'ads/own', component: AdViewComponent,data: { roles: ['USER', 'ADMIN'] }},
     { path: 'ads/accepted', component: AdViewComponent,data: { roles: ['USER', 'ADMIN'] }},
-    { path: 'balance', component : BalanceComponent,data: { roles: ['ADMIN'] }}
+    { path: 'balance', component : BalanceComponent,data: { roles: ['ADMIN'] }},
+    { path: 'users', component : UserEditComponent,data: { roles: ['ADMIN'] }}
     // { path: 'rate', component : RateComponent,data: { roles: ['USER', 'ADMIN'] }}
   ]}
 ];

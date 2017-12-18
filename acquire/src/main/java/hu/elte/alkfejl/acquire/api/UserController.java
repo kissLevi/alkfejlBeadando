@@ -92,11 +92,12 @@ public class UserController {
     //@Role({User.Role.ADMIN})
     @DeleteMapping("/{userID}")
     private ResponseEntity delete(@PathVariable int userID){
-        if(userID!=0) {
+        User user = sessionService.getCurrentUser();
+        if(user.getRole() == User.Role.ADMIN) {
             userService.delete(userID);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(200);
         }else{
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.ok(400);
         }
     }
 
