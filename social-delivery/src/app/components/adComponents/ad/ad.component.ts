@@ -19,6 +19,9 @@ export class AdComponent implements OnInit {
   @Input()
   private showRating:User;
 
+  @Input()
+  private showExtend:boolean;
+
   @Output() acceptEvent = new EventEmitter();
 
   @Output() extend= new EventEmitter();

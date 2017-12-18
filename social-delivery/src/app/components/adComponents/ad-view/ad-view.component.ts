@@ -4,7 +4,7 @@ import { UserService } from '../../../services/user.service';
 import { AdService } from '../../../services/ad.service';
 import { Ad,Status } from '../../../classes/ad';
 import { AuthService } from '../../../services/auth.service';
-import { User } from '../../../classes/user';
+import { User, Role } from '../../../classes/user';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -29,7 +29,11 @@ export class AdViewComponent implements OnInit {
   }
 
   public ownerOfAd(ad:Ad):boolean{
-    return this.authService.getUser().id == ad.costumer_id.id;
+    if(this.authService.getUser().id == ad.costumer_id.id || this.authService.getUser().role == Role.ADMIN)
+    {
+      return true;
+    }
+    return false;
   }
 
   public getUser():User{
@@ -68,6 +72,16 @@ export class AdViewComponent implements OnInit {
   public delete(adId:number){
     this.adService.deleteAd(adId).subscribe(()=>{
       let index:number = this.ownAds.findIndex(a=>a.id==adId);
+      let index2:number = this.avaliableAds.findIndex(a=>a.id==adId);
+      let index3:number = this.allAds.findIndex(a=>a.id==adId);
+      if(index2 != -1)
+      {
+        this.avaliableAds.splice(index2,1);
+      }
+      if(index3 != -1)
+      {
+        this.allAds.splice(index3,1);
+      }
       this.ownAds.splice(index,1);
     })
   }

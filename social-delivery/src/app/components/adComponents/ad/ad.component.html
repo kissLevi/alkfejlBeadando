@@ -25,10 +25,10 @@
     
     <p mat-line>
       <button *ngIf="ad.status!='ACCEPTED' && owner==false && !haveToUpdate()" mat-button color="primary" (click)="accept()" >Elfogadás</button>
-      <button *ngIf="ad.status=='ACCEPTED' && owner" mat-button color="primary" (click)="successfulyDelivered(true)">Megérkezett</button>
-      <button *ngIf="ad.status=='ACCEPTED' && owner && haveToUpdate()" mat-button color="primary"(click)="successfulyDelivered(false)">Nem érkezett meg</button>
+      <button *ngIf="ad.status=='ACCEPTED' && owner " mat-button color="primary" (click)="successfulyDelivered(true)">Megérkezett</button>
+      <button *ngIf="ad.status=='ACCEPTED' && owner  &&haveToUpdate()" mat-button color="primary"(click)="successfulyDelivered(false)">Nem érkezett meg</button>
     </p>
     <div>
-        <app-ad-extend *ngIf="owner && haveToUpdate() && ad.status!='ACCEPTED'" (extendEvent)="extendEvent($event)"(deleteEvent)="deleteEvent()"></app-ad-extend>
+        <app-ad-extend *ngIf="owner && showExtend && ad.status!='ACCEPTED'" (extendEvent)="extendEvent($event)"(deleteEvent)="deleteEvent()"></app-ad-extend>
     </div>
   </mat-list-item>

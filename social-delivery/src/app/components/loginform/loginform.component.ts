@@ -41,7 +41,6 @@ export class LoginformComponent implements OnInit {
     }
     else
     {
-      console.log("asd");
       this.authService.login(name, password).subscribe((status: number) => {
         if (status != 200) {
           if(status == 400){

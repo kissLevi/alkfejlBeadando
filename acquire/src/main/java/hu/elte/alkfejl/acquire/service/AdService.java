@@ -32,6 +32,9 @@ public class AdService {
     @Autowired
     private UserRepository userRepository;
     
+    @Autowired
+    private SessionService session;
+    
     public Ad getAd(int adId){
         return advertisementRepository.findOne(new Long(adId));
     }
@@ -58,12 +61,24 @@ public class AdService {
     
     public boolean deleteAd(int id,Long userId){
         Ad addToDelete = advertisementRepository.findOne(new Long(id));
-   
-        if(addToDelete.getCostumer_id().equals(userId)){
+        
+        if(addToDelete.getCostumer_id().getId().equals(userId)&& addToDelete.getStatus() != Ad.Status.ACCEPTED)
+        {
             User adOwner = userRepository.findOne(userId);
             adOwner.addBalance(addToDelete.getPrice());
+            userRepository.save(adOwner);
             advertisementRepository.delete(new Long(id));
+            this.session.setCurrentUser(adOwner);
             return true;
+        }
+        User possibleAdmin = userRepository.findOne(userId);
+        if(possibleAdmin.getRole()==User.Role.ADMIN)
+        {
+           User adOwner = userRepository.findOne(userId);
+           adOwner.addBalance(addToDelete.getPrice());
+           userRepository.save(adOwner);
+           advertisementRepository.delete(new Long(id));
+           return true; 
         }
         return false;
        
