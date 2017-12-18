@@ -176,6 +176,8 @@ Az automatizált tesztelést Protractor végzi. Ezzel a módszerrel tesztelt fun
 * Belépés
 * Regisztráció
 
+![alt text](https://github.com/kissLevi/alkfejlBeadando/blob/master/teszt.png "teszt kép")
+
 ## Felhasználói dokumentáció:
 1) git klónozása
 2) acquire projekt betöltése intellij-be vagy netbeansbe.
